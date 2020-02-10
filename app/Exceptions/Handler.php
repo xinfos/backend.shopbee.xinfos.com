@@ -2,8 +2,17 @@
 
 namespace App\Exceptions;
 
+use App\Common\ErrorDef;
+use DomainException;
 use Exception;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -50,6 +59,9 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        return parent::render($request, $exception);
+      if (!($exception instanceof AuthenticationException)) {
+        return response()->view('errors.error', ['code'=> $exception->getCode(), 'msg' => $exception->getMessage()]);
+      }
+      return parent::render($request, $exception);
     }
 }

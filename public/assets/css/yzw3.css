@@ -1,0 +1,383 @@
+.zent-loading-container-static {
+	position: relative
+}
+
+.zent-loading-container-static .zent-page-mask {
+	background: rgba(0,0,0,.2)
+}
+
+.zent-loading-container-static.zent-loading-container--empty .zent-page-mask {
+	background: transparent
+}
+
+@-moz-keyframes loading {
+	0% {
+		-webkit-transform: rotate(0deg);
+		-moz-transform: rotate(0deg);
+		transform: rotate(0deg)
+	}
+
+	to {
+		-webkit-transform: rotate(1turn);
+		-moz-transform: rotate(1turn);
+		transform: rotate(1turn)
+	}
+}
+
+.zent-steps-breadcrumb {
+	overflow: hidden
+}
+
+.zent-steps-breadcrumb .zent-steps-item {
+	padding: 0 8px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box
+}
+
+.zent-steps-breadcrumb .zent-steps-item.is-clicked {
+	cursor: pointer
+}
+
+.zent-steps-breadcrumb .zent-steps-item:first-child {
+	padding-left: 0
+}
+
+.zent-steps-breadcrumb .zent-steps-item:first-child .zent-steps-step:before {
+	display: none
+}
+
+.zent-steps-breadcrumb .zent-steps-item:last-child {
+	padding-right: 0
+}
+
+.zent-steps-breadcrumb .zent-steps-item:last-child .zent-steps-step:after {
+	display: none
+}
+
+.zent-steps-breadcrumb .zent-steps-item .zent-steps-step {
+	height: 44px;
+	line-height: 44px;
+	font-size: 14px;
+	background: #f8f8f8;
+	color: #666;
+	text-align: center;
+	padding: 0 10px
+}
+
+.zent-steps-breadcrumb .zent-steps-item .zent-steps-step:after {
+	content: " ";
+	display: block;
+	width: 0;
+	height: 0;
+	border-top: 22px solid transparent;
+	border-bottom: 22px solid transparent;
+	border-left: 12px solid #f8f8f8;
+	position: absolute;
+	top: 50%;
+	margin-top: -22px;
+	right: -12px
+}
+
+.zent-steps-breadcrumb .zent-steps-item .zent-steps-step:before {
+	content: " ";
+	display: block;
+	width: 0;
+	height: 0;
+	border-top: 22px solid #f8f8f8;
+	border-bottom: 22px solid #f8f8f8;
+	border-left: 12px solid transparent;
+	position: absolute;
+	top: 50%;
+	margin-top: -22px;
+	left: -12px
+}
+
+.zent-steps-breadcrumb .zent-steps-item.is-finish .zent-steps-step {
+	background: #727cf5;
+	color: #fff
+}
+
+.zent-steps-breadcrumb .zent-steps-item.is-finish .zent-steps-step:after {
+	border-left-color: #727cf5
+}
+
+.zent-steps-breadcrumb .zent-steps-item.is-finish .zent-steps-step:before {
+	border-top-color: #727cf5;
+	border-bottom-color: #727cf5
+}
+.zent-steps {
+	line-height: 1.5;
+	font-size: 0;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: -moz-box;
+	display: flex
+}
+
+.zent-steps,.zent-steps-tail {
+	width: 100%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box
+}
+
+.zent-steps-tail {
+	position: absolute;
+	left: 0;
+	top: 10px;
+	margin-left: 55px
+}
+
+.zent-steps-tail i {
+	display: inline-block;
+	position: relative;
+	width: 100%;
+	border-radius: 1px;
+	height: 3px;
+	vertical-align: top;
+	background: #cacaca
+}
+
+.zent-steps-tail i:after {
+	content: "";
+	position: absolute;
+	top: 0;
+	width: 0;
+	background: #999;
+	height: 100%;
+	opacity: 0
+}
+
+.zent-steps-step {
+	position: relative
+}
+
+.zent-steps-step .zent-step-head {
+	position: relative;
+	display: inline-block;
+	vertical-align: top;
+	background: #fff;
+	margin-left: 45px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box
+}
+
+.zent-steps-step .zent-step-main {
+	position: relative;
+	vertical-align: top;
+	width: 120px;
+	color: #999;
+	text-align: center
+}
+
+.zent-steps-step .zent-step-main .zent-step-title {
+	font-size: 14px;
+	max-width: 120px;
+	line-height: 14px;
+	margin-top: 10px;
+	word-wrap: break-word;
+	word-break: break-all
+}
+
+.zent-steps-step .zent-step-main .zent-step-description {
+	max-width: 120px;
+	font-size: 12px;
+	line-height: 16px;
+	margin-top: 5px;
+	word-wrap: break-word;
+	word-break: break-all
+}
+
+.zent-step-head-inner {
+	margin: 0 5px;
+	font-size: 20px;
+	color: #cacaca;
+	line-height: 20px
+}
+
+.zent-step-head-inner .zent-icon {
+	display: inline-block;
+	vertical-align: middle;
+	width: 20px;
+	height: 20px;
+	line-height: 20px;
+	border-radius: 50%;
+	text-align: center;
+	background: #cacaca;
+	color: #fff;
+	font-size: 12px
+}
+
+.zent-step-head-inner .zenticon {
+	vertical-align: middle
+}
+
+.zent-steps-item {
+	position: relative;
+	display: inline-block;
+	vertical-align: top;
+	overflow: visible;
+	-webkit-box-flex: 1;
+	-ms-flex: 1;
+	-webkit-flex: 1;
+	-moz-box-flex: 1;
+	flex: 1
+}
+
+.zent-steps-item.zent-steps-status-finish.is-current .zent-steps-tail i:after {
+	width: 0
+}
+
+.zent-steps-item.zent-steps-status-finish.is-last-finish .zent-steps-tail i:after {
+	width: 100%
+}
+
+.zent-steps-item.zent-steps-status-finish .zent-step-head-inner {
+	color: #38f
+}
+
+.zent-steps-item.zent-steps-status-finish .zent-step-head-inner .zent-icon {
+	background: #38f
+}
+
+.zent-steps-item.zent-steps-status-finish .zent-step-main .zent-step-title {
+	color: #333
+}
+
+.zent-steps-item.zent-steps-status-finish .zent-steps-tail i:after {
+	width: 100%;
+	background: #38f;
+	-webkit-transition: all .2s ease;
+	-moz-transition: all .2s ease;
+	transition: all .2s ease;
+	opacity: 1
+}
+
+.zent-steps-item.zent-steps-status-error .zent-step-head-inner,.zent-steps-item.zent-steps-status-error .zent-step-main .zent-step-title {
+	color: #f44
+}
+
+.zent-steps-item.zent-steps-status-process .zent-step-head-inner .zent-icon {
+	background: #38f
+}
+
+.zent-steps-item:last-child {
+	-webkit-box-flex: 0;
+	-ms-flex: none;
+	-webkit-flex: none;
+	-moz-box-flex: 0;
+	flex: none
+}
+
+.zent-steps-item:last-child .zent-steps-tail {
+	display: none
+}
+
+.zent-steps__vertical {
+	display: block
+}
+
+.zent-steps__vertical .zent-steps-item {
+	display: block;
+	overflow: visible
+}
+
+.zent-steps__vertical .zent-steps-item.zent-steps-status-finish.is-current .zent-steps-tail i:after {
+	width: 100%;
+	height: 0
+}
+
+.zent-steps__vertical .zent-steps-item.zent-steps-status-finish.is-last-finish .zent-steps-tail i:after {
+	width: 100%
+}
+
+.zent-steps__vertical .zent-steps-item.zent-steps-status-finish .zent-steps-tail i:after {
+	width: 100%
+}
+
+.zent-steps__vertical .zent-steps-tail {
+	position: absolute;
+	margin-left: 0;
+	width: 2px;
+	left: 14px;
+	top: 0;
+	height: 100%;
+	padding: 30px 0 4px
+}
+
+.zent-steps__vertical .zent-steps-tail i {
+	height: 100%;
+	width: 2px
+}
+
+.zent-steps__vertical .zent-steps-tail i:after {
+	width: 100%
+}
+
+.zent-steps__vertical .zent-steps-step .zent-step-head {
+	float: left;
+	margin-left: 0
+}
+
+.zent-steps__vertical .zent-steps-step .zent-step-main {
+	display: block;
+	overflow: hidden;
+	min-height: 48px;
+	text-align: left;
+	width: inherit
+}
+
+.zent-steps__vertical .zent-steps-step .zent-step-main .zent-step-title {
+	margin-top: 0;
+	line-height: 22px;
+	max-width: none
+}
+
+.zent-steps__vertical .zent-steps-step .zent-step-main .zent-step-description {
+	padding-bottom: 15px;
+	max-width: none
+}
+
+.zent-steps__vertical .zent-step-head-inner {
+	margin-right: 8px
+}
+
+.zent-steps-card .zent-steps-item {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 0 1px
+}
+
+.zent-steps-card .zent-steps-item.is-clicked {
+	cursor: pointer
+}
+
+.zent-steps-card .zent-steps-item:first-child {
+	padding-left: 0
+}
+
+.zent-steps-card .zent-steps-item:last-child {
+	padding-right: 0
+}
+
+.zent-steps-card .zent-steps-item .zent-steps-step {
+	height: 50px;
+	line-height: 50px;
+	font-size: 16px;
+	background: #f8f8f8;
+	color: #666;
+	text-align: center;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	padding: 0 10px
+}
+
+.zent-steps-card .zent-steps-item.is-current .zent-steps-step {
+	background: #38f;
+	color: #fff
+}
