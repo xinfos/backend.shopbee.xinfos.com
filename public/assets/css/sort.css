@@ -70,11 +70,11 @@ a {
 	text-overflow:ellipsis
 }
 .wareSort ul li a:hover {
-	color:#727cf5
+	color:#38f
 }
 .wareSort ul li.active a {
-	border-color:#727cf5;
-	background:#727cf5 url(../img/arrow.png) no-repeat right center;
+	border-color:#38f;
+	background:#38f url(../img/arrow.png) no-repeat right center;
     color:#ffffff;
     font-weight:500;
 }

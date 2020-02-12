@@ -9,7 +9,7 @@
     <div class="col-lg-10 shop">
         <div class="card d-block">
             <div class="card-header" style="background:#f1f1f1;border-bottom-width: 0px">
-                <a href="/wizard/choose" class="btn btn-sm btn-primary float-right">创建店铺</a>
+                <a href="/wizard/choose" class="btn btn-sm btn-info float-right">创建店铺</a>
                 <h4 class="card-title">店铺列表</h4>
                 <h6 class="card-subtitle text-muted">Your shop List</h6>
             </div>
