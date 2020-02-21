@@ -55,6 +55,13 @@ class WizardController extends Controller {
     }
 
     public function success(Request $request) {
+        $input = [
+            "type"    => (int) $request->input('type'),
+            "version" => (int) $request->input('version'),
+            "cat_id"  => (int) $request->input('cat'),
+            "address" => $request->input('address'),
+        ];
+
         return view('wizard.success'); 
     }
 }

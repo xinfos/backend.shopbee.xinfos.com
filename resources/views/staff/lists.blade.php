@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.dashkit.app')
 
 @section('content')
 <div class="row">

@@ -1,7 +1,11 @@
 <?php
 
-$router->get('/', function () use ($router) {
-    return date('Y-m-d H:i:s');
+$router->group(['prefix' => '/'], function () use ($router) {
+    $router->any('login', 'SiteController@login');
+    $router->any('register', 'SiteController@register');
+    $router->any('forget', 'SellerController@forget');
+    $router->get('logout', 'SiteController@logout');
+    $router->any('menu', 'MenuController@get');
 });
 
 $router->group(['prefix' => '/seller'], function () use ($router) {
@@ -62,8 +66,14 @@ $router->group(['prefix' => '/store', 'middleware' => 'checkauth'], function () 
 
 //分类
 $router->group(['prefix' => '/category'], function () use ($router) {
-    $router->get('list', ['uses' => 'CategoryController@list']);
-    $router->post('list', ['uses' => 'CategoryController@list']);
+    $router->get('list', ['uses' => 'CategoryController@lists']);
+    // $router->post('query', ['uses' => 'CategoryController@query']);
+    $router->post('add', ['uses' => 'CategoryController@add']);
+    $router->post('subadd', ['uses' => 'CategoryController@subadd']);
+    $router->post('del', ['uses' => 'CategoryController@del']);
+    $router->post('edit', ['uses' => 'CategoryController@edit']);
+    $router->post('get', ['uses' => 'CategoryController@get']);
+
 });
 
 //品牌
@@ -74,4 +84,7 @@ $router->group(['prefix' => '/brand'], function () use ($router) {
 $router->group(['prefix' => '/product'], function () use ($router) {
     $router->get('list', ['uses' => 'ProductController@lists']);
     $router->get('detail', ['uses' => 'ProductController@detail']);
+    $router->get('publish', ['uses' => 'ProductController@publish']);
+    $router->get('create', ['uses' => 'ProductController@create']);
+    
 });

@@ -6,7 +6,7 @@ var wizardCatsPlugin = {
         _breadcrumb:"",
     },
     init: function() {
-        this._select(0, 0, 1);
+        this._select(0, 10000, 1);
     },
     _select: function(id, pid, level) {
         this._request('post', this._cfg._url, {"pid": pid}, id, level);

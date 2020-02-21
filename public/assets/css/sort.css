@@ -4,7 +4,7 @@
 	margin:0
 }
 body {
-	background-color:#fff;
+	/* background-color:#fff; */
 	color:#000;
 	font:12px/20px "Microsoft Yahei",Tahoma,Arial,"Helvetica Neue","Hiragino Sans GB",Simsun,sans-self
 }
@@ -17,7 +17,7 @@ b,strong {
 i,em {
 	font-style:normal
 }
-a {
+.cateLi a {
 	text-decoration:none;
 	color:#333
 }
@@ -48,13 +48,13 @@ a {
 .wareSort {
 	padding:15px 8px 15px 7px;
 	border:1px solid #ddd;
-	background-color:#f8f8f8
+	/* background-color:#f8f8f8 */
 }
 .wareSort ul {
 	float:left;
 	width:22%;
 	padding:10px;
-	border:1px solid #ddd;
+	border:1px solid #e1e1e1;
 	margin-right:7px;
 	margin-left:8px;
 	background-color:#fff
@@ -67,7 +67,8 @@ a {
 	line-height:28px;
 	overflow:hidden;
 	white-space:nowrap;
-	text-overflow:ellipsis
+	text-overflow:ellipsis;
+	padding: .1rem 1rem;
 }
 .wareSort ul li a:hover {
 	color:#38f

@@ -38,7 +38,7 @@
 							<label class="zent-form__control-label">
 								店铺名称：
 							</label>
-							<div class="zent-form__controls has-error">
+							<div class="zent-form__controls">
 								<div>
 									<div class="zent-input-wrapper">
 										<input type="text" class="zent-input" name="name" value="" placeholder="请输入店铺名称，建议15字以内">
@@ -58,7 +58,7 @@
 											<div id="distpicker">
 												<div class="form-group">
 													<div style="position: relative;">
-														<input id="city-picker3" class="form-control" name="city" readonly type="text" value="请选择省 / 市 / 区" data-toggle="city-picker" placeholder="请选择省 / 市 / 区">
+														<input id="city-picker3" class="form-control" name="city" readonly type="text" value="" data-toggle="city-picker" placeholder="请选择省 / 市 / 区">
 													</div>
 												</div>
 											</div>
@@ -122,6 +122,9 @@
 			errCity: "省 / 市 / 区不能为空",
 			errShop: "店铺名称不能为空",
 		},
+		data: {
+			
+		}
 		verify: function() {
 			
 		}

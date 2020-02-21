@@ -59,7 +59,7 @@
                 <a href="/product/list">商品管理</a>
             </li>
             <li class="side-nav-item">
-                <a href="javascript: void(0);">发布商品</a>
+                <a href="/product/create">发布商品</a>
             </li>
         </ul>
     </li>
