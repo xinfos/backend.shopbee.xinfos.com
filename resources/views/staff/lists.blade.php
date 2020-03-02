@@ -1,116 +1,139 @@
 @extends('layouts.dashkit.app')
 
 @section('content')
-<div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body">
-                <a href="/staff/add" class="btn btn-success btn-sm mb-2 mr-2 float-right">添加员工</a>
-                <h4 class="header-title mt-1">员工管理</h4>
-                <br>
-                <div class="card" style="background:#EFF0F2;">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-lg-3">
-                                <div class="form-group mb-3">
-                                    <label>状态</label>
-                                    <select class="form-control">
-                                        <option value="1">全部</option>
-                                        <option value="1">启用</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="form-group mb-3">
-                                    <label>角色</label>
-                                    <select class="form-control">
-                                        <option value="1">全部</option>
-                                        <option value="1">启用</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="form-group mb-3">
-                                    <label>员工姓名</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="form-group mb-3">
-                                    <label>员工手机号</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="text-lg-left">
-                                    <button type="button" class="btn btn-primary mb-2 mr-2">
-                                        <i class="dripicons-search mr-1"></i> 
-                                        搜 索
-                                    </button>
-                                    <button type="button" class="btn btn-light mb-2">导 出</button>
-                                </div>
-                            </div>
-                        </div>
+<link rel="stylesheet" href="/assets/dashkit/css/staff/app.css">
+<div class="header"></div>
+<div class="container-fluid" >
+    <div class="row justify-content-center" style="margin:0px;">
+        <div class="col-12" style="padding: 0px;">
+            <div class="card" data-toggle="lists">
+                <div class="card-header">
+                    <h5 class="card-header-title">店铺员工列表</h5>
+                    <a href="#" class="sf-btn sf-btn-primary sf-btn-create">新建员工</a>
+                </div>
+                <div class="card-body">
+                <section class="sf-search">
+                    <div class="sf-form-group">
+                        <label class="sf-label">员工姓名或帐号:</label>
+                        <input class="sf-form-control" name="title" placeholder="请输入员工姓名或帐号" value="">
                     </div>
-                </div>
+                    <div class="sf-form-group">
+                        <label class="sf-label">商品分类:</label>
+                        <select class="sf-form-control multiselect" id="single">
+                            <option value="0">全部</option>
+                            <option value="1">启用</option>
+                            <option value="2">停用</option>
+                        </select>
+                    </div>
+                    <div class="sf-form-group">
+                        <label class="sf-label">&nbsp;</label>
+                        <button class="sf-btn sf-btn-primary mr-2">搜索</button>
+                        <button class="sf-btn sf-btn-white">重置</button>
+                    </div>
+                </section>
                 <div class="table-responsive">
-                    <table class="table table-centered mb-0">
-                        <thead class="thead-light">
-                            <tr>
-                                <th style="width: 20px;">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                        <label class="custom-control-label" for="customCheck1">&nbsp;</label>
-                                    </div>
-                                </th>
-                                <th>员工姓名</th>
-                                <th>联系方式</th>
-                                <th>角色</th>
-                                <th>添加人</th>
-                                <th>添加时间</th>
-                                <th>状态</th>
-                                <th>操作</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck7">
-                                        <label class="custom-control-label" for="customCheck7">&nbsp;</label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <a href="apps-ecommerce-orders-details.html" class="text-body font-weight-bold">#BM9703</a>
-                                </td>
-                                <td>
-                                    13520928991
-                                </td>
-                                <td>
-                                    普通员工
-                                </td>
-                                <td>
-                                    Admin
-                                </td>
-                                <td>
-                                    2020-02-02 20:20:20
-                                </td>
-                                <td>
-                                    <h5><span class="badge badge-success-lighten"><i class="mdi mdi-check"></i> 启用</span></h5>
-                                </td>
-                                <td>
-                                    <a href="javascript:void(0);">查看</a>
-                                    <a href="javascript:void(0);">编辑</a>
-                                    <a href="javascript:void(0);">更换</a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <table class="table table-sm table-nowrap card-table" id="sf-brand-tb"></table>
                 </div>
-            </div> 
-        </div> 
-    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<div class="sf-modal csrf_token" csrf_token="{{ csrf_token() }}"></div>
+
+
+<script src="/assets/dashkit/js/select.jquery.js"></script>
+<script src="/assets/dashkit/js/list.js"></script>
+<script src="/assets/dashkit/js/modalfrm.sf.js"></script>
+<script type="text/javascript">
+$(function() {
+    $('.sf-btn-create').modalFrm({
+        unique: "sf-staff",
+        data: {
+            title: '新建员工',
+            input: [
+                {
+                    label: "员工姓名", 
+                    components: [
+                        {
+                            name: "staff_name", 
+                            type: "text", 
+                            vType: "string", 
+                            placeholder: "请输入员工姓名", 
+                        }
+                    ],
+                    required: true
+                },
+                {
+                    label: "员工手机号码",
+                    components: [
+                        {
+                            name: "country_code", 
+                            type: "select", 
+                            vType: "string", 
+                            placeholder: "",
+                        },
+                        {
+                            name: "staff_mobile", 
+                            type: "text",
+                            vType: "string",
+                            placeholder: "",
+                        }
+                    ],
+                    required: true
+                },
+                {
+                    label: "员工工号",
+                    components: [
+                        {
+                            name: "staff_no", 
+                            type: "text", 
+                            vType: "string", 
+                            placeholder: "请输入员工在公司的工号"
+                        }
+                    ],
+                    required: true
+                }
+            ],
+            bind: [
+                {
+                    el: "country_code",
+                    methods: "multiselect",
+                    options: {
+                        multiple: false,
+                        selectedHtmlValue: '单选'
+                    }
+                }
+            ],
+            rules: [
+                {'staff_name,country_code,staff_mobile':'required'},
+                {'staff_mobile':'mobile'}
+            ],
+            errors: {
+                'staff_name.required':'姓名不能为空',
+                'country_code.required': '手机区号不能空',
+                'staff_mobile.required': '联系方式不能为空',
+                'staff_mobile.mobile': '联系方式格式不正确',
+            },
+        }
+    });
+
+
+    $('#single').multiselect({multiple:false,selectedHtmlValue:'全部'});
+    $('#sf-brand-tb').DataList({
+        thead: [
+            {tag: 'brand_logo', name:'员工姓名', sort: 0},
+            {tag: 'brand_name', name:'联系方式', sort: 0},
+            {tag: 'cat_name', name:'角色', sort: 0},
+            {tag: 'is_show', name:'添加人', sort: 0},
+            {tag: 'created_at', name: '添加时间', sort: 0},
+            {tag: 'created_at', name: '状态', sort: 0},
+        ],
+        action: [
+        ],
+        url: "/brand/list"
+    });
+});
+</script>
 @endsection

@@ -17,7 +17,7 @@ class CheckAuth
     {
         if (!\Auth::check()) {
             // 以json格式返回
-            return redirect('/seller/login');
+            return redirect('/login');
             return response()->json(['msg' => '没登录']);
 
             // 返回登陆界面

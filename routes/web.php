@@ -8,6 +8,8 @@ $router->group(['prefix' => '/'], function () use ($router) {
     $router->any('menu', 'MenuController@get');
 });
 
+
+
 $router->group(['prefix' => '/seller'], function () use ($router) {
     // 注册
     $router->get('register', 'SellerController@register');
@@ -42,49 +44,54 @@ $router->group(['prefix' => '/shop', 'middleware' => 'checkauth'], function () u
     $router->get('info', ['uses' => 'ShopController@info']);
     $router->get('infoedit', ['uses' => 'ShopController@infoEdit']);
     $router->get('wizard', ['uses' => 'ShopController@wizard']);
+    
+    //商家地址库管理
+    $router->group(['prefix' => '/address', 'middleware' => 'checkauth'], function () use ($router) {
+        $router->get('list', ['uses' => 'AddressController@lists']);
+        $router->get('add', ['uses' => 'AddressController@add']);
+    });
+
+    //员工管理
+    $router->group(['prefix' => '/staff', 'middleware' => 'checkauth'], function () use ($router) {
+        $router->get('list', ['uses' => 'StaffController@lists']);
+        $router->get('add', ['uses' => 'StaffController@add']);
+    });
+
+    //门店管理
+    $router->group(['prefix' => '/store', 'middleware' => 'checkauth'], function () use ($router) {
+        $router->get('list', ['uses' => 'StoreController@lists']);
+        $router->get('add', ['uses' => 'StoreController@add']);
+    });
 });
 
-//商家地址库管理
-$router->group(['prefix' => '/address', 'middleware' => 'checkauth'], function () use ($router) {
-    $router->get('list', ['uses' => 'AddressController@lists']);
-    $router->get('add', ['uses' => 'AddressController@add']);
-});
 
-//员工管理
-$router->group(['prefix' => '/staff', 'middleware' => 'checkauth'], function () use ($router) {
-    $router->get('list', ['uses' => 'StaffController@lists']);
-    $router->get('add', ['uses' => 'StaffController@add']);
-});
-
-//门店管理
-$router->group(['prefix' => '/store', 'middleware' => 'checkauth'], function () use ($router) {
-    $router->get('list', ['uses' => 'StoreController@lists']);
-    $router->get('add', ['uses' => 'StoreController@add']);
-});
-
-
-
-//分类
-$router->group(['prefix' => '/category'], function () use ($router) {
-    $router->get('list', ['uses' => 'CategoryController@lists']);
-    // $router->post('query', ['uses' => 'CategoryController@query']);
-    $router->post('add', ['uses' => 'CategoryController@add']);
-    $router->post('subadd', ['uses' => 'CategoryController@subadd']);
-    $router->post('del', ['uses' => 'CategoryController@del']);
-    $router->post('edit', ['uses' => 'CategoryController@edit']);
-    $router->post('get', ['uses' => 'CategoryController@get']);
-
-});
-
-//品牌
-$router->group(['prefix' => '/brand'], function () use ($router) {
-});
-
-//商品
+//商品管理中心
 $router->group(['prefix' => '/product'], function () use ($router) {
+    //商品
     $router->get('list', ['uses' => 'ProductController@lists']);
     $router->get('detail', ['uses' => 'ProductController@detail']);
     $router->get('publish', ['uses' => 'ProductController@publish']);
     $router->get('create', ['uses' => 'ProductController@create']);
     
+    //分类
+    $router->group(['prefix' => '/category'], function () use ($router) {
+        $router->get('list', ['uses' => 'CategoryController@lists']);
+        // $router->post('query', ['uses' => 'CategoryController@query']);
+        $router->post('add', ['uses' => 'CategoryController@add']);
+        $router->post('subadd', ['uses' => 'CategoryController@subadd']);
+        $router->post('del', ['uses' => 'CategoryController@del']);
+        $router->post('edit', ['uses' => 'CategoryController@edit']);
+        $router->post('get', ['uses' => 'CategoryController@get']);
+    });
+
+    //品牌
+    $router->group(['prefix' => '/brand'], function () use ($router) {
+        $router->any('list', ['uses' => 'BrandController@lists']);
+        // $router->post('query', ['uses' => 'CategoryController@query']);
+        $router->post('add', ['uses' => 'BrandController@add']);
+        $router->post('subadd', ['uses' => 'BrandController@subadd']);
+        $router->post('del', ['uses' => 'BrandController@del']);
+        $router->post('edit', ['uses' => 'BrandController@edit']);
+        $router->post('get', ['uses' => 'BrandController@get']);
+    });
 });

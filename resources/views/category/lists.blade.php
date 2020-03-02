@@ -44,8 +44,7 @@
     <div class="categoryModal" csrf_token="{{ csrf_token() }}"></div>
 </div>
 
-<script src="/assets/js/jquery-3.4.1.min.js"></script>
+
 <script src="/assets/dashkit/libs/selectcats/dist/selectcats.js"></script>
 <script src="/assets/dashkit/libs/spop/dist/spop.min.js"></script>
 @endsection
-

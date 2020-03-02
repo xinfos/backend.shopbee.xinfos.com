@@ -1,16 +1,6 @@
 @extends('layouts.dashkit.app')
 
 @section('content')
-<nav class="navbar navbar-expand-md navbar-light d-none d-md-flex" id="topbar">
-    <div class="container-fluid">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item active" style="color:black;">店铺概况</li>
-            </ol>
-        </nav>
-    </div>
-</nav>
-
 <div class="header">
     <div class="container-fluid">
         <div class="header-body">

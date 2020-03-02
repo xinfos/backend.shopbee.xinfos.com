@@ -1,0 +1,72 @@
+.sf-staff-area {
+	padding: 10px 0px;
+	/* background: #f7f8fa; */
+	margin-bottom: 24px;
+}
+
+.sf-staff-area .sf-form-group {
+	margin-bottom: 20px;
+    font-size: 12px;
+}
+.sf-staff-area .sf-form-group .sf-label {
+	width: 100px;
+    margin-right: 15px;
+	font-size: 13px;
+	text-align:right;
+}
+
+.sf-staff-area .sf-form-group >.sf-form-control .is-invalid {
+	border-color: #e63757;
+}
+
+.sf-staff-area .sf-form-group .sf-form-control{
+	width:150px;
+	height: 40px;
+	font-size: 13px;
+	padding: .4rem .75rem;
+	line-height: 1.5;
+	color: #12263f;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid #d2ddec;
+	border-radius: .375rem;
+	-webkit-transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+	transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.sf-staff-area .sf-form-group .sf-form-control:focus {
+    color: #12263f;
+    background-color: #fff;
+    border-color: #2c7be5;
+    outline: 0;
+}
+.sf-staff-area .sf-select .sf-select-title span {
+	line-height: 1.5;
+}
+.sf-staff-area .sf-form-group .sf-input-staff_name {
+	width: 266px;
+}
+.sf-staff-area .sf-form-group .sf-select-country_code {
+	width: 110px;
+	margin-right:10px;
+}
+.sf-staff-area .sf-form-group .sf-input-staff_mobile {
+	width: 158px;
+}
+.sf-staff-area .sf-form-group .sf-input-staff_no {
+	width: 266px;
+}
+.sf-staff-area .sf-select .sf-select-title {
+	height: 40px;
+	width: 100px;
+	margin-right:10px;
+}
+
+.invalid-feedback {
+	margin-left: 115px;
+	width:150px;
+    display: none;
+    margin-top: .55rem;
+    font-size: .6625rem;
+	color: #e63757;
+}

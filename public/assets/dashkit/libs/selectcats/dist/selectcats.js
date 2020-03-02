@@ -10,7 +10,7 @@ var cateFrm = {
     _cfg: {
         _arrow:" <font>&gt;</font> ",
         _getcates_api: "http://127.0.0.1:8184/v1/category/sub",
-        _getcate_api: "/category/get",
+        _getcate_api: "/product/category/get",
         _cats: [],
         _breadcrumb:"",
     },
