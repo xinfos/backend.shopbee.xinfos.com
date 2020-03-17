@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Http\Controllers\Controller;
-use App\Services\Category\CategoryService;
+use App\Services\Staff\StaffService;
 use App\Services\Brand\BrandService;
 
 use Illuminate\Http\Request;
@@ -16,34 +16,34 @@ class StaffController extends Controller {
     */
     public function lists(Request $request) {
         if($request->isMethod('post')) {
-            try {
-                // if (\Auth::Check()) {
-                //     return ['code' => 200, 'msg' => "登录成功"];
-                // }
-
-                $input = [
-                    's_id' => (int) $request->input('s_id'),
-                    'page' => (int) $request->input('page'),
-                ];
-
-                // $staffService = new StaffService();
-                // $res = $staffService->lists($input);
-                if ($res['code'] != 200) {
-                    return ['code' => 201, 'msg'=> $res['msg']];
-                }
-                
-                return ['code' => 200, 'msg' => "succ", 'data' => $res['data']];
-
-            } catch (ValidationException $validationException) {
-                return ['code' => 201, 'msg' => "服务异常"];
-            }
+           
         }
         return view('staff.lists');
     }
 
-    public function add() {
-        // $input = [
-        //     'add'
-        // ];
+    public function getStaffList(Request $request) {
+        try {
+            $input = [
+                's_id'  => (int) $request->input('sid'),
+                'name'  => (string) $request->input('account'),
+                'state' => (int) $request->input('state'),
+                'page'  => (int) $request->input('page', 1),
+            ];
+
+    
+   
+            return ['code' => 200, 'data'=> $data, 'count' => 43];
+
+            $staffService = new StaffService();
+            $res = $staffService->lists($input);
+            if ($res['code'] != 200) {
+                return ['code' => 201, 'msg'=> $res['msg']];
+            }
+            
+            return ['code' => 200, 'msg' => "succ", 'data' => $res['data']];
+
+        } catch (ValidationException $validationException) {
+            return ['code' => 201, 'msg' => "服务异常"];
+        }
     }
 }

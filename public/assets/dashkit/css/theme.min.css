@@ -4136,8 +4136,8 @@ input[type=button].btn-block,input[type=reset].btn-block,input[type=submit].btn-
 .page-item.active .page-link,.page-item.active [data-toggle=lists] .pagination .page,[data-toggle=lists] .pagination .page-item.active .page,[data-toggle=lists] .pagination>li.active .page,[data-toggle=lists] .pagination>li.active .page-link {
 	z-index:3;
 	color:#fff;
-	background-color:#2c7be5;
-	border-color:#2c7be5
+	background-color:#0767e8;
+	border-color:#0767e8
 }
 .page-item.disabled .page-link,.page-item.disabled [data-toggle=lists] .pagination .page,[data-toggle=lists] .pagination .page-item.disabled .page,[data-toggle=lists] .pagination>li.disabled .page,[data-toggle=lists] .pagination>li.disabled .page-link {
 	color:#95aac9;
@@ -12795,7 +12795,7 @@ a:focus,button:focus {
     font-size: 12px;
 }
 .sf-search .sf-form-group .sf-label {
-	width: 100px;
+	width: 110px;
     margin-right: 5px;
 	font-size: 13px;
 	text-align:right;
@@ -13018,4 +13018,16 @@ a:focus,button:focus {
 }
 .sf-required {
 	color:red;
+}
+.sf-list-empty-content {
+	display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-align: center;
+    align-items: center;
+	padding: 50px 0;
+	border: 1px solid #2b5999;
 }

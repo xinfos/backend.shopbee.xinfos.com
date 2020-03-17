@@ -53,7 +53,8 @@ $router->group(['prefix' => '/shop', 'middleware' => 'checkauth'], function () u
 
     //员工管理
     $router->group(['prefix' => '/staff', 'middleware' => 'checkauth'], function () use ($router) {
-        $router->get('list', ['uses' => 'StaffController@lists']);
+        $router->any('list', ['uses' => 'StaffController@lists']);
+        $router->get('getlist', ['uses' => 'StaffController@getStaffList']);
         $router->get('add', ['uses' => 'StaffController@add']);
     });
 
@@ -76,7 +77,6 @@ $router->group(['prefix' => '/product'], function () use ($router) {
     //分类
     $router->group(['prefix' => '/category'], function () use ($router) {
         $router->get('list', ['uses' => 'CategoryController@lists']);
-        // $router->post('query', ['uses' => 'CategoryController@query']);
         $router->post('add', ['uses' => 'CategoryController@add']);
         $router->post('subadd', ['uses' => 'CategoryController@subadd']);
         $router->post('del', ['uses' => 'CategoryController@del']);

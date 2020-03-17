@@ -62,11 +62,9 @@ $(function(){
                         for(var kk in sr) {
                             for(var kkk in sf) {
                                 var ret = Validator[sr[kk]](data[sf[kkk]]);
-                                console.log('[' + sr[kk] + '||' + sf[kkk] + '||' + ret + ']');
+                                // console.log('[' + sr[kk] + '||' + sf[kkk] + '||' + ret + ']');
                                 if (!ret) {
                                     err = errMsg.hasOwnProperty(sf[kkk] + '.' + sr[kk]) ? errMsg[sf[kkk] + '.' + sr[kk]] : (sf[kkk] + Validator.message[sr[kk]]);
-                                    console.log(err);
-                                    console.log(sf[kkk]);
                                     $('.sf-form-control[name="' + sf[kkk] + '"]').addClass('is-invalid');
                                     $('.invalid-feedback').remove();
                                     $('.sf-form-control[name="' + sf[kkk] + '"]').parent().append('<div class="invalid-feedback">' + err + '</div>');
@@ -96,7 +94,8 @@ $(function(){
         },
         _inputType:{
             textarea: "textarea",
-            select: "select"
+            select: "select",
+            mobile: "mobile"
         },
         _data: {
             title: '',
@@ -110,7 +109,8 @@ $(function(){
             fail: 201
         },
         defaultBindEvents: [
-            {el: "sf-btn-save", event:'click', methods: "_eventSubmitNewData", options: {}}
+            {el: "sf-btn-save", event:'click', methods: "_eventSubmitNewData", options: {}},
+            {el: 'input[type="mobile"]', event:'input propertychange', methods: "_eventValidateMobile", options: {}}
         ],
         _template: function() {
             if (this._data.input.length <= 0) {
@@ -150,6 +150,9 @@ $(function(){
                     case this._inputType.textarea:
                         _inputHtml += this._inputTextarea(d.components[i]);
                         break;
+                    case this._inputType.mobile:
+                        _inputHtml += this._inputMobile(d.components[i]);
+                        break;
                     default :
                         _inputHtml += this._inputText(d.components[i]);
                 }
@@ -164,12 +167,32 @@ $(function(){
         _inputText: function(d) {
             return '<input type="text" name="'+d.name+'" id="'+d.name+'" class="sf-input-'+d.name+' sf-form-control">';
         },
+        _inputMobile: function(d) {
+            return '<input type="mobile" name="'+d.name+'" id="'+d.name+'" class="sf-input-'+d.name+' sf-form-control">';
+        },
         _inputTextarea: function(d) {
             return '<textarea name="'+d.name+'" id="'+d.name+'" class="form-control" rows="5"></textarea>';
         },
         _inputSelect: function(d) {
             options = '<option value="86">🇨🇳 +86</option><option value="54">🇦🇷 +54</option>';
             return '<select name="'+d.name+'" class="sf-select-'+d.name+' sf-form-control" id="'+d.name+'">'+options+'</select>';
+        },
+        _getFormValues: function(components) {
+            switch(components.type){
+                case 'text':
+                case 'mobile':
+                    return this._getInputValue(components.name);
+                case 'select':
+                    return this._getSelectValue(components.name);
+                default :
+                    return "";
+            }
+        },
+        _getInputValue(name) {
+            return $('.sf-input-' + name).val();
+        },
+        _getSelectValue(name) {
+            return $('#'+name+' option[data-select="true"]').val();
         },
         _event: function(method, el, event, options) {
             switch(method){
@@ -178,6 +201,10 @@ $(function(){
                     break;
                 case '_eventSubmitNewData':
                     this._eventBindSubmitNewData(el, event, options);
+                    break;
+                case '_eventValidateMobile':
+                    this._eventValidateMobile(el, event, options);
+                    break;
                 default :
                     break;
             }
@@ -198,20 +225,37 @@ $(function(){
 
         },
         _eventSubmitNewData: function() {
-            console.log(this._data.input);
             var data = {};
             for (var i = 0; i < this._data.input.length; i++) {
                 for (var j = 0; j < this._data.input[i].components.length; j++) {
-                    data[this._data.input[i].components[j].name] = $('.sf-input-' + this._data.input[i].components[j].name).val();
+                    data[this._data.input[i].components[j].name] = this._getFormValues(this._data.input[i].components[j]);
                 }
             }
-
+            console.log(data);
+            var that = this;
             if(Validator.make(data, this._data.rules, this._data.errors)){
-                frm.submit(data, "/category/add", function(){
-                    
+                that._ajaxPostRequest(data, '/category/add', function(){
+                    alert(1);
                 });
             }
-            console.log(data);
+        },
+        _eventValidateMobile: function(el, event, options) {
+            var that = this;
+            $(el).bind(event, function(){
+                console.log(111);
+                var _self =  $(el);
+                var v = _self.val();
+                if((v.length == 11 && !Validator.mobile(v)) || v.length > 11 || v.length <= 10) {
+                    _self.addClass('is-invalid');
+                    $('.sf-input-mobile-err').remove();
+                    _self.parent().append('<div class="invalid-feedback sf-input-mobile-err">请输入正确的手机号</div>');
+                    return false;
+                } else {
+                    _self.removeClass('is-invalid');
+                    $('.sf-input-mobile-err').remove();
+                    return true;
+                }
+            });
         },
         _ajaxPostRequest: function(data, api, callBackFunc) {
             $.ajax({
@@ -226,7 +270,6 @@ $(function(){
                     }
                 },
                 error: function(request) {
-                    console.log('[err] : connection is fail');
                 }
             });
         },
@@ -249,7 +292,6 @@ $(function(){
                 that.show();
                 that.bind();
             });
-            
         },
         show: function() {
             this._cfg.parent.empty().append(this._template());
@@ -265,7 +307,8 @@ $(function(){
             } else {
                 e = this.defaultBindEvents;
             }
-
+            console.log(e);
+            console.log($('input[type="mobile"]'));
             var that = this;
             for (var i = 0; i < e.length; i++) {
                 that._event(e[i].methods, e[i].el, e[i].event, e[i].options);
