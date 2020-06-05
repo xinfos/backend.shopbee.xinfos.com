@@ -4,9 +4,9 @@
 <link rel="stylesheet" href="/assets/dashkit/css/staff/app.css">
 <div class="header"></div>
 <div class="container-fluid" >
-    <div class="row justify-content-center" style="margin:0px;">
-        <div class="col-12" style="padding: 0px;">
-            <div class="card" data-toggle="lists">
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <div class="card">
                 <div class="card-header">
                     <h5 class="card-header-title">店铺员工列表</h5>
                     <a href="#" class="sf-btn sf-btn-primary sf-btn-create">新建员工</a>
