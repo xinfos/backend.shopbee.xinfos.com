@@ -9,7 +9,7 @@ class ProductController extends Controller {
         return view('product.lists');
     }
 
-    public function create() {
-        return view('product.create2');
+    public function add() {
+        return view('product.add');
     }
 }

@@ -72,6 +72,7 @@ $router->group(['prefix' => '/product'], function () use ($router) {
     $router->get('detail', ['uses' => 'ProductController@detail']);
     $router->get('publish', ['uses' => 'ProductController@publish']);
     $router->get('create', ['uses' => 'ProductController@create']);
+    $router->get('add', ['uses' => 'ProductController@add']);
     
     //分类
     $router->group(['prefix' => '/category'], function () use ($router) {
@@ -95,3 +96,9 @@ $router->group(['prefix' => '/product'], function () use ($router) {
         $router->post('get', ['uses' => 'BrandController@get']);
     });
 });
+
+Route::any('/ckfinder/connector', '\CKSource\CKFinderBridge\Controller\CKFinderController@requestAction')
+    ->name('ckfinder_connector');
+
+Route::any('/ckfinder/browser', '\CKSource\CKFinderBridge\Controller\CKFinderController@browserAction')
+    ->name('ckfinder_browser');
