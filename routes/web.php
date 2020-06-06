@@ -1,6 +1,7 @@
 <?php
 
 $router->group(['prefix' => '/'], function () use ($router) {
+    $router->any('/', 'ShopController@lists');
     $router->any('login', 'SiteController@login');
     $router->any('register', 'SiteController@register');
     $router->any('forget', 'SellerController@forget');
@@ -38,13 +39,14 @@ $router->group(['prefix' => '/wizard', 'middleware' => 'checkauth'], function ()
 });
 
 //店铺管理
-$router->group(['prefix' => '/shop', 'middleware' => 'checkauth'], function () use ($router) {
+$router->group(['prefix' => '/shop'], function () use ($router) {
+    
     $router->get('dashboard', ['uses' => 'ShopController@dashboard']);
     $router->get('list', ['uses' => 'ShopController@lists']);
     $router->get('info', ['uses' => 'ShopController@info']);
     $router->get('infoedit', ['uses' => 'ShopController@infoEdit']);
     $router->get('wizard', ['uses' => 'ShopController@wizard']);
-    
+
     //商家地址库管理
     $router->group(['prefix' => '/address', 'middleware' => 'checkauth'], function () use ($router) {
         $router->get('list', ['uses' => 'AddressController@lists']);
@@ -87,11 +89,18 @@ $router->group(['prefix' => '/product'], function () use ($router) {
     //品牌
     $router->group(['prefix' => '/brand'], function () use ($router) {
         $router->any('list', ['uses' => 'BrandController@lists']);
-        // $router->post('query', ['uses' => 'CategoryController@query']);
         $router->post('add', ['uses' => 'BrandController@add']);
         $router->post('subadd', ['uses' => 'BrandController@subadd']);
         $router->post('del', ['uses' => 'BrandController@del']);
         $router->post('edit', ['uses' => 'BrandController@edit']);
         $router->post('get', ['uses' => 'BrandController@get']);
     });
+
+    //商品属性
+    $router->group(['prefix' => '/attrs'], function () use ($router) {
+        $router->any('list', ['uses' => 'AttrsController@lists']);
+        $router->any('create', ['uses' => 'AttrsController@create']);
+        $router->any('get', ['uses' => 'AttrsController@get']);
+    });
+
 });

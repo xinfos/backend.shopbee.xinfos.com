@@ -165,7 +165,7 @@ class CategoryController extends Controller {
         if ($catId <= 0) {
             return ['code' => 201, 'msg'=> '提交参数有错误', 'data' => []];
         }
-
+        var_dump($catId);exit;
         //获取店铺基本信息
         $categoryService = new CategoryService();
         $info = $categoryService->get($catId);

@@ -7,7 +7,7 @@ use Exception;
 
 class UserService {
     
-    public $appService = "http://127.0.0.1:8184";
+    public $appService = "http://127.0.0.1:8085";
     
     public function getUserInfoByMobile($mobile) {
         try {
