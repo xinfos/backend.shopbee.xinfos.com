@@ -11,7 +11,6 @@ use Exception;
 class ShopController extends Controller {
     
     public function lists() {
-
         $sellerId = Auth::user()->id;
 
         //获取店铺列表基本信息

@@ -1,7 +1,7 @@
 var wizardCatsPlugin = {
     _cfg: {
         _arrow:" <font>&gt;</font> ",
-        _url: "http://127.0.0.1:8184/v1/category/sub",
+        _url: "http://127.0.0.1:8085/v1/category/sub",
         _cats: [],
         _breadcrumb:"",
     },
