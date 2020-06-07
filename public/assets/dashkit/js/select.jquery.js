@@ -33,7 +33,7 @@
 				}
 				if (options.multiple) {
 					if (_this.attr(options.selectedProperty)) {
-						selectedOption = 'data-select="true"';
+						selectedOption = 'selected data-select="true"';
 						selected = options.selectedIcon;
 						titleText += _this.html() + ',';
 					} else {
@@ -42,7 +42,7 @@
 					}
 				} else {
 					if (_this.attr(options.selectedProperty)) {
-						selectedOption = 'data-select="true"';
+						selectedOption = 'selected data-select="true"';
 						titleText = _this.html();
 					} else {
 						selectedOption = '';

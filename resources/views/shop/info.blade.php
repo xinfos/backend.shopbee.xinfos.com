@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="header">
-    <div class="container-fluid">
+    <!-- <div class="container-fluid">
         <div class="header-body">
             <div class="row align-items-center">
                 <div class="col-auto">
@@ -31,12 +31,12 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
 
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-xl-6">
+    <div class="row justify-content-center">
+        <!-- <div class="col-xl-6">
             <div class="card">
                 <div class="card-body">
                     <a href="/shop/infoedit" class="btn btn-sm btn-link float-right mb-3"><i class="mdi mdi-circle-edit-outline ml-1"></i> 编辑</a>
@@ -135,70 +135,8 @@
                     </div> 
                 </div> 
             </div>
-        </div>
+        </div> -->
     </div>
 
-    <div class="row">
-        <div class="col-12">
-            <div class="card widget-inline">
-                <div class="card-body p-0">
-                    <div class="row no-gutters">
-                        <div class="col-sm-6 col-xl-4">
-                            <div class="card shadow-none m-0">
-                                <div class="card-body text-center">
-                                    <p class="text-muted font-15 mb-0"><i class="dripicons-user-group text-muted" style="font-size: 24px;"></i> 已有员工</p>
-                                    <h3><span>29</span></h3>
-                                    <a href="#" class="font-10 mb-0">去添加</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-xl-4">
-                            <div class="card shadow-none m-0 border-left">
-                                <div class="card-body text-center">
-                                    <p class="text-muted font-15 mb-0"><i class="dripicons-network-3 text-muted" style="font-size: 24px;"></i> 开启的角色</p>
-                                    <h3><span>10</span></h3>
-                                    <a href="#" class="font-10 mb-0">去管理</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-xl-4">
-                            <div class="card shadow-none m-0 border-left">
-                                <div class="card-body text-center">
-                                    <p class="text-muted font-15 mb-0"><i class="dripicons-stopwatch text-muted" style="font-size: 24px;"></i> 停用员工</p>
-                                    <h3><span>31</span></h3>
-                                    <a href="#" class="font-10 mb-0">去开启</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <a href="/shop/infoedit" class="btn btn-sm btn-link float-right mb-3"> 查看更多</a>
-                    <h4 class="header-title">最近员工操作</h4>
-                    <br>
-                    <div class="table-responsive-sm">
-                        <table class="table table-centered">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>操作时间</th>
-                                    <th>操作人</th>
-                                    <th>操作模块</th>
-                                    <th>具体操作事项</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>2020-02-02 20:20:20</td>
-                                    <td>管理员</td>
-                                    <td>商品管理</td>
-                                    <td>发布商品</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div> 
-                </div> 
-            </div>
-        </div> 
-    </div>
 </div>
 @endsection

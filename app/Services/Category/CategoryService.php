@@ -7,7 +7,7 @@ use Exception;
 
 class CategoryService {
     
-    public $appService = "http://127.0.0.1:8184";
+    public $appService = "http://127.0.0.1:8082";
     
     public function create($data) {
         try {
@@ -57,6 +57,22 @@ class CategoryService {
                 'cat_id' => (int) $catId,
             ];
             $apiUrl = $this->appService. '/v1/category/get';
+            $rst = ClientRequest::post($apiUrl, $data);
+            if($rst['code'] == 200) {
+                return $rst['data'];
+            }
+            return [];
+        } catch(Exception $e) {
+            throw new Exception('Exception Error: ' . $e->getFile() . '] [' . $e->getLine() . '] [' . $e->getMessage() . "]");
+        }
+    }
+
+    public function getAttrsMaps($catId) {
+        try {
+            $data = [
+                'cat_id' => (int) $catId,
+            ];
+            $apiUrl = $this->appService. '/backend/category/attrs/get';
             $rst = ClientRequest::post($apiUrl, $data);
             if($rst['code'] == 200) {
                 return $rst['data'];

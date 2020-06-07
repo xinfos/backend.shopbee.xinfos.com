@@ -7,7 +7,7 @@ use Exception;
 
 class BrandService {
     
-    public $appService = "http://127.0.0.1:8184";
+    public $appService = "http://127.0.0.1:8085";
     
     public function create($data) {
         try {
