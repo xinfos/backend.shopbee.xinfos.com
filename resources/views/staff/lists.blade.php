@@ -53,14 +53,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php if(!empty($data)) { ?>
-                                        <?php foreach($data as $k=>$v) { ?>
+                                    <?php if (!empty($data)) {?>
+                                        <?php foreach ($data as $k => $v) {?>
                                             <tr>
                                                 <td></td>
                                                 <td></td>
                                             </tr>
-                                        <?php } ?>
-                                    <?php } ?>
+                                        <?php }?>
+                                    <?php }?>
                                 </tbody>
                             </table>
                         </div>
@@ -83,13 +83,13 @@ $(function() {
             title: '新建员工',
             input: [
                 {
-                    label: "员工姓名", 
+                    label: "员工姓名",
                     components: [
                         {
-                            name: "staff_name", 
-                            type: "text", 
-                            vType: "string", 
-                            placeholder: "请输入员工姓名", 
+                            name: "staff_name",
+                            type: "text",
+                            vType: "string",
+                            placeholder: "请输入员工姓名",
                         }
                     ],
                     required: true
@@ -98,13 +98,13 @@ $(function() {
                     label: "员工手机号码",
                     components: [
                         {
-                            name: "country_code", 
-                            type: "select", 
-                            vType: "string", 
+                            name: "country_code",
+                            type: "select",
+                            vType: "string",
                             placeholder: "",
                         },
                         {
-                            name: "staff_mobile", 
+                            name: "staff_mobile",
                             type: "mobile",
                             vType: "string",
                             placeholder: "",
@@ -116,9 +116,9 @@ $(function() {
                     label: "员工工号",
                     components: [
                         {
-                            name: "staff_no", 
-                            type: "text", 
-                            vType: "string", 
+                            name: "staff_no",
+                            type: "text",
+                            vType: "string",
                             placeholder: "请输入员工在公司的工号"
                         }
                     ],

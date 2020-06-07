@@ -9,14 +9,12 @@ $router->group(['prefix' => '/'], function () use ($router) {
     $router->any('menu', 'MenuController@get');
 });
 
-
-
 $router->group(['prefix' => '/seller'], function () use ($router) {
     // 注册
     $router->get('register', 'SellerController@register');
     $router->post('doRegister', 'SellerController@doRegister');
     $router->get('registerSuccess', 'SellerController@registerSuccess');
-    
+
     // 登陆页面
     $router->get('login', 'SellerController@login');
     $router->post('doLogin', 'SellerController@doLogin');
@@ -24,7 +22,7 @@ $router->group(['prefix' => '/seller'], function () use ($router) {
     // 忘记密码
     $router->get('forget', 'SellerController@forget');
     $router->post('forget', 'SellerController@forget');
-    
+
     // 退出登陆
     $router->get('logout', 'SellerController@logout');
 });
@@ -40,7 +38,7 @@ $router->group(['prefix' => '/wizard', 'middleware' => 'checkauth'], function ()
 
 //店铺管理
 $router->group(['prefix' => '/shop'], function () use ($router) {
-    
+
     $router->get('dashboard', ['uses' => 'ShopController@dashboard']);
     $router->get('list', ['uses' => 'ShopController@lists']);
     $router->get('info', ['uses' => 'ShopController@info']);
@@ -67,7 +65,6 @@ $router->group(['prefix' => '/shop'], function () use ($router) {
     });
 });
 
-
 //商品管理中心
 $router->group(['prefix' => '/product'], function () use ($router) {
     //商品
@@ -76,7 +73,7 @@ $router->group(['prefix' => '/product'], function () use ($router) {
     $router->get('publish', ['uses' => 'ProductController@publish']);
     $router->get('create', ['uses' => 'ProductController@create']);
     $router->get('add', ['uses' => 'ProductController@add']);
-    
+
     //分类
     $router->group(['prefix' => '/category'], function () use ($router) {
         $router->get('list', ['uses' => 'CategoryController@lists']);

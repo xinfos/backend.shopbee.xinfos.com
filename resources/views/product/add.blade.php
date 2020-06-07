@@ -60,7 +60,7 @@
 					<a href="#" class="sf-btn sf-btn-primary sf-btn-create">切换类目</a>
 				</div>
 			</div><!-- / .row -->
-			
+
 			<!-- Divider -->
 			<hr class="my-4">
 			<div class="card">
@@ -73,7 +73,7 @@
 						<!-- First name -->
 						<div class="form-group">
 							<!-- Label -->
-							<label>宝贝类型</label>
+							<em class="sf-required">*</em><label>宝贝类型：</label>
 							<!--  Radio -->
 							<!-- <input type="radio" class="form-control"> -->
 							<div class="col-md-8 btn-group-toggle d-flex" data-toggle="buttons">
@@ -107,26 +107,25 @@
 							<small class="form-text text-muted">
 								错误填写宝贝属性，可能会引起宝贝下架或搜索流量减少，影响您的正常销售，请认真准确填写！。
 							</small>
-							<div class="row col-10" style="margin-left:15px;">
+							<div class="row col-12" style="border: 0.5px solid #d2ddec;border-radius: .375rem;margin-left:1px;background-color:#f8f8f8;">
 								<div class="col-10  mt-4"></div>
 								<div class="col-12 col-md-6">
 									<div class="form-group">
 										<label>类目属性：</label>
+
 										<input type="text" class="form-control">
+										<small class="form-text text-muted mt-2">
+											标题和描述关键词是否违规自检工具：商品合规工具。
+										</small>
 									 </div>
 								</div>
-								<div class="col-12 col-md-6">
-									<div class="form-group">
-										<label>类目属性：</label>
-										<input type="text" class="form-control">
-									 </div>
-								</div>
+
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			
+
 			<!-- Divider -->
 			<hr class="my-4">
 			<div class="card">
@@ -174,7 +173,7 @@
 					</div>
 				</div>
 			</div>
-			
+
 			<!-- Divider -->
 			<hr class="my-4">
 			<div class="card">
@@ -218,126 +217,11 @@
 				</div>
 			</div>
 
-
-
-              <!-- Button -->
-              <button class="btn btn-primary">
-                Save changes
-              </button>
-
-              <!-- Divider -->
-              <hr class="my-5">
-
-              <div class="row">
-                <div class="col-12 col-md-6">
-
-                  <!-- Public profile -->
-                  <div class="form-group">
-
-                    <!-- Label -->
-                    <label class="mb-1">
-                      Public profile
-                    </label>
-
-                    <!-- Form text -->
-                    <small class="form-text text-muted">
-                      Making your profile public means that anyone on the Dashkit network will be able to find you.
-                    </small>
-
-                    <div class="row">
-                      <div class="col-auto">
-
-                        <!-- Switch -->
-                        <div class="custom-control custom-switch">
-                          <input type="checkbox" class="custom-control-input" id="switchOne">
-                          <label class="custom-control-label" for="switchOne"></label>
-                        </div>
-
-                      </div>
-                      <div class="col ml-n2">
-
-                        <!-- Help text -->
-                        <small class="text-muted">
-                          You're currently invisible
-                        </small>
-
-                      </div>
-                    </div> <!-- / .row -->
-                  </div>
-
-                </div>
-                <div class="col-12 col-md-6">
-
-                  <!-- Allow for additional Bookings -->
-                  <div class="form-group">
-
-                    <!-- Label -->
-                    <label class="mb-1">
-                      Allow for additional Bookings
-                    </label>
-
-                    <!-- Form text -->
-                    <small class="form-text text-muted">
-                      If you are available for hire outside of the current situation, you can encourage others to hire you.
-                    </small>
-
-                    <div class="row">
-                      <div class="col-auto">
-
-                        <!-- Switch -->
-                        <div class="custom-control custom-switch">
-                          <input type="checkbox" class="custom-control-input" id="switchTwo" checked="">
-                          <label class="custom-control-label" for="switchTwo"></label>
-                        </div>
-
-                      </div>
-                      <div class="col ml-n2">
-
-                        <!-- Help text -->
-                        <small class="text-muted">
-                          You're currently available
-                        </small>
-
-                      </div>
-                    </div> <!-- / .row -->
-                  </div>
-
-                </div>
-              </div> <!-- / .row -->
-
-              <!-- Divider -->
-              <hr class="mt-4 mb-5">
-
-              <div class="row justify-content-between">
-                <div class="col-12 col-md-6">
-
-                  <!-- Heading -->
-                  <h4>
-                    Delete your account
-                  </h4>
-
-                  <!-- Text -->
-                  <p class="small text-muted mb-md-0">
-                    Please note, deleting your account is a permanent action and will no be recoverable once completed.
-                  </p>
-
-                </div>
-                <div class="col-auto">
-
-                  <!-- Button -->
-                  <button class="btn btn-danger">
-                    Delete
-                  </button>
-
-                </div>
-              </div> <!-- / .row -->
-
-            </form>
-
-            <br><br>
-
-          </div>
-        </div>
+			<!-- Divider -->
+			<hr class="my-4">
+		</form>
+	</div>
+</div>
 
 <button id="ckfinder-modal" class="button-a button-a-background" style="float: left">Open Modal</button>
 <script>
