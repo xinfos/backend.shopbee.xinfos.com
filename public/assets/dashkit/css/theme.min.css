@@ -4066,7 +4066,9 @@ input[type=submit].btn-block {
 
 .btn-group-toggle>.btn,
 .btn-group-toggle>.btn-group>.btn {
-	margin-bottom: 0
+	margin-bottom: 0;
+	font-size: 13px;
+	line-height: 1.5rem;
 }
 
 .btn-group-toggle>.btn input[type=checkbox],
@@ -4326,7 +4328,7 @@ input[type=submit].btn-block {
 
 .custom-control-label {
 	position: relative;
-	margin-bottom: 0;
+	/* margin-bottom: 0; */
 	vertical-align: top
 }
 
@@ -13003,7 +13005,9 @@ a.text-white:hover {
 .btn-group-toggle .btn-white:not(:disabled):not(.disabled):active {
 	background-color: #fff;
 	border-color: #2c7be5;
-	color: #2c7be5
+	color: #2c7be5;
+	font-size: 12px;
+	line-height: 1.5rem;
 }
 
 .btn-group-toggle .btn-white.focus,

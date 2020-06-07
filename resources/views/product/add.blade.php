@@ -5,9 +5,19 @@
     .card-body div {
         font-size:12px;
 	}
+	/* .el-header{
+		position: fixed;
+		left: 400;
+		top: 50;
+		right: 0;
+		z-index: 999999;
+		background-color: #FFFFFF;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
+		box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)
+	} */
 </style>
-<div class="row justify-content-center">
-	<div class="col-12 col-lg-11 col-xl-10">
+<div class="row justify-content-center" style="background-color:#f7f8fa;">
+	<div class="sf-product-frm col-12 col-lg-10 col-xl-10">
 		<!-- Header -->
 		<div class="header mt-md-5">
 			<div class="header-body">
@@ -19,27 +29,27 @@
 						<h1 class="header-title">商品发布</h1>
 					</div>
 				</div><!-- / .row -->
-				<div class="row align-items-center">
+				<div class="row align-items-center el-header">
 					<div class="col">
 						<!-- Nav -->
 						<ul class="nav nav-tabs nav-overflow header-tabs">
 							<li class="nav-item">
-								<a href="#" class="nav-link active">基础信息</a>
+								<a href="#basic-info" class="nav-link active">基础信息</a>
 							</li>
 							<li class="nav-item">
-								<a href="#" class="nav-link">销售信息</a>
+								<a href="#sale-info" class="nav-link">销售信息</a>
 							</li>
 							<li class="nav-item">
-								<a href="#" class="nav-link">图文描述</a>
+								<a href="#image-info" class="nav-link">图文描述</a>
 							</li>
 							<li class="nav-item">
-								<a href="#" class="nav-link">支付信息</a>
+								<a href="#pay-info" class="nav-link">支付信息</a>
 							</li>
 							<li class="nav-item">
-								<a href="#" class="nav-link">物流信息</a>
+								<a href="#logistics-info" class="nav-link">物流信息</a>
 							</li>
 							<li class="nav-item">
-								<a href="#" class="nav-link">售后服务</a>
+								<a href="#after-sale-info" class="nav-link">售后服务</a>
 							</li>
 						</ul>
 					</div>
@@ -61,8 +71,8 @@
 				</div>
 			</div><!-- / .row -->
 
-			<!-- Divider -->
-			<hr class="my-4">
+			<!-- basic-info -->
+			<hr class="my-4" id="basic-info">
 			<div class="card">
 				<div class="card-header">
 					<!-- Heading -->
@@ -73,7 +83,7 @@
 						<!-- First name -->
 						<div class="form-group">
 							<!-- Label -->
-							<em class="sf-required">*</em><label>宝贝类型：</label>
+							<label><em class="sf-required">*</em>宝贝类型：</label>
 							<!--  Radio -->
 							<!-- <input type="radio" class="form-control"> -->
 							<div class="col-md-8 btn-group-toggle d-flex" data-toggle="buttons">
@@ -90,12 +100,12 @@
 						<!-- First name -->
 						<div class="form-group">
 							<!-- Label -->
-							<label>宝贝标题：</label>
+							<label><em class="sf-required">*</em>宝贝标题：</label>
 							<!--  Radio -->
-							<small class="form-text text-muted">
+							<small class="form-text text-muted ml-3">
 								标题和描述关键词是否违规自检工具：商品合规工具。
 							</small>
-							<input type="text" class="form-control" placeholder="最多允许输入30个汉字（60字符）">
+							<input type="text" class="form-control ml-3" placeholder="最多允许输入30个汉字（60字符）">
 						</div>
 					</div>
 					<div class="col-12">
@@ -104,30 +114,44 @@
 							<!-- Label -->
 							<label>类目属性：</label>
 							<!--  Radio -->
-							<small class="form-text text-muted">
+							<small class="form-text text-muted ml-3">
 								错误填写宝贝属性，可能会引起宝贝下架或搜索流量减少，影响您的正常销售，请认真准确填写！。
 							</small>
-							<div class="row col-12" style="border: 0.5px solid #d2ddec;border-radius: .375rem;margin-left:1px;background-color:#f8f8f8;">
+							<div class="row col-12 ml-3" style="border: 0.5px solid #d2ddec;border-radius: .375rem;margin-left:1px;background-color:#f8f8f8;">
 								<div class="col-10  mt-4"></div>
 								<div class="col-12 col-md-6">
 									<div class="form-group">
 										<label>类目属性：</label>
-
 										<input type="text" class="form-control">
 										<small class="form-text text-muted mt-2">
 											标题和描述关键词是否违规自检工具：商品合规工具。
 										</small>
 									 </div>
 								</div>
-
+									<?php foreach($item['attrs_template'] as $v) { ?>
+										<?php foreach($v as $vv) { ?>
+											<?php if(empty($vv['attrs'])) continue;?>
+											<?php foreach($vv['attrs'] as $vvv) {?>
+												<div class="sf-form-group">
+													<label class="sf-label" style="margin-left: 15px;"><?php echo $vvv['attr_name']?>:</label>
+													<?php if($vvv['fill_type'] == 1) { ?>
+													<?php } elseif ($vvv['fill_type'] == 2) { ?>
+														<input class="sf-form-control" name="name" id="s_name" placeholder="商品卖点" value="">
+													<?php } else { ?>
+													<?php }?>
+													<p class="help-block">在商品详情页标题下面展示卖点信息，建议60字以内 <a href="#">查看示例</a></p>
+												</div>
+											<?php }?>
+										<?php } ?>
+									<?php } ?>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<!-- Divider -->
-			<hr class="my-4">
+			<!-- sale-info -->
+			<hr class="my-4" id="sale-info">
 			<div class="card">
 				<div class="card-header">
 					<!-- Heading -->
@@ -139,11 +163,11 @@
 						<div class="form-group">
 							<!-- Label -->
 							<label>一口价：</label>
-							<small class="form-text text-muted">
+							<small class="form-text text-muted ml-3">
 								本类目下，宝贝价格必须在100.00元-999999.00元之间。
 							</small>
 							<!--  Radio -->
-							<div class="input-group input-group-merge mb-3">
+							<div class="input-group input-group-merge  ml-3 mb-3">
 								<input type="number" class="form-control form-control-appended" placeholder="">
 								<div class="input-group-append">
 									<div class="input-group-text">
@@ -158,10 +182,10 @@
 						<div class="form-group">
 							<!-- Label -->
 							<label>商品条形码：</label>
-							<small class="form-text text-muted">
+							<small class="form-text text-muted ml-3">
 							</small>
 							<!--  Radio -->
-							<div class="input-group input-group-merge mb-3">
+							<div class="input-group input-group-merge  ml-3 mb-3">
 								<input type="text" class="form-control form-control-appended" placeholder="">
 								<div class="input-group-append">
 									<div class="input-group-text">
@@ -174,8 +198,8 @@
 				</div>
 			</div>
 
-			<!-- Divider -->
-			<hr class="my-4">
+			<!-- image-info -->
+			<hr class="my-4" id="image-info">
 			<div class="card">
 				<div class="card-header">
 					<!-- Heading -->
@@ -186,19 +210,30 @@
 						<!-- First name -->
 						<div class="form-group">
 							<!-- Label -->
-							<label>电脑端宝贝图片：</label>
-							<small class="form-text text-muted">
+							<label><em class="sf-required">*</em>电脑端宝贝图片：</label>
+							<small class="form-text text-muted ml-3">
 							宝贝主图大小不能超过3MB；700*700 以上图片上传后宝贝详情页自动提供放大镜功能。第5张图为白底图会大大增加手淘曝光机会 查看规范
 							</small>
 							<!--  Radio -->
+							<div class="ml-3" id="cupload-create"></div>
+						</div>
+					</div>
+					<div class="col-12 col-md-12">
+						<!-- First name -->
+						<div class="form-group">
+							<!-- Label -->
+							<label><em class="sf-required">*</em>电脑端描述：</label>
+							<small class="form-text text-muted"></small>
+							<!--  Radio -->
+							<!-- <div id="cupload-create"></div> -->
+
 						</div>
 					</div>
 				</div>
 			</div>
 
-
-			<!-- Divider -->
-			<hr class="my-4">
+			<!-- pay-info -->
+			<hr class="my-4" id="pay-info">
 			<div class="card">
 				<div class="card-header">
 					<!-- Heading -->
@@ -206,45 +241,159 @@
 				</div>
 				<div class="card-body">
 					<div class="col-12 col-md-12">
-						<!-- First name -->
 						<div class="form-group">
 							<!-- Label -->
-							<label>付款方式：</label>
-							<small class="form-text text-muted"></small>
+							<label><em class="sf-required">*</em>付款方式：</label>
 							<!--  Radio -->
+							<div class="col-md-6 btn-group-toggle d-flex" data-toggle="buttons">
+								<label class="btn btn-white col">
+									<input type="radio" name="navPosition" id="navPositionSidenav" value="1"> 一口价(普通交易模式)
+								</label>
+								<label class="btn btn-white col ml-2">
+									<input type="radio" name="navPosition" id="navPositionTopnav" value="2"> 预售模式
+								</label>
+							</div>
+							<small class="form-text text-muted"></small>
+						</div>
+						<div class="form-group">
+							<!-- Label -->
+							<label><em class="sf-required">*</em>库存计数：</label>
+							<!--  Radio -->
+							<div class="col-md-6 btn-group-toggle d-flex" data-toggle="buttons">
+								<label class="btn btn-white col">
+									<input type="radio" name="navPosition" id="navPositionSidenav" value="1"> 买家拍下减库存
+								</label>
+								<label class="btn btn-white col ml-2">
+									<input type="radio" name="navPosition" id="navPositionTopnav" value="2"> 买家付款减库存
+								</label>
+							</div>
+							<small class="form-text text-muted"></small>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- logistics-info -->
+			<hr class="my-4" id="logistics-info">
+			<div class="card">
+				<div class="card-header">
+					<!-- Heading -->
+					<h5 class="card-header-title">物流信息</h5>
+				</div>
+				<div class="card-body">
+					<div class="col-12 col-md-12">
+						<div class="form-group">
+							<!-- Label -->
+							<label><em class="sf-required">*</em>提取方式：</label>
+							<!--  Radio -->
+							<small class="form-text text-muted"></small>
 						</div>
 					</div>
 				</div>
 			</div>
 
 			<!-- Divider -->
-			<hr class="my-4">
+			<hr class="my-4" id="after-sale-info">
+			<div class="card">
+				<div class="card-header">
+					<!-- Heading -->
+					<h5 class="card-header-title">售后服务</h5>
+				</div>
+				<div class="card-body">
+					<div class="col-12 col-md-12">
+						<div class="form-group">
+							<!-- Label -->
+							<label><em class="sf-required">*</em>售后服务：</label>
+							<!--  Radio -->
+							<div class="ml-3">
+								<div class="custom-control custom-checkbox mt-3">
+									<input type="checkbox" class="custom-control-input" id="customCheck1">
+									<label class="custom-control-label" for="customCheck1">提供发票</label>
+								</div>
+								<div class="custom-control custom-checkbox mt-3">
+									<input type="checkbox" class="custom-control-input" id="customCheck2">
+									<label class="custom-control-label" for="customCheck2">保修服务</label>
+								</div>
+								<div class="custom-control custom-checkbox mt-3">
+									<input type="checkbox" class="custom-control-input" id="customCheck2">
+									<label class="custom-control-label" for="customCheck2">保修服务</label>
+								</div>
+								<div class="custom-control custom-checkbox mt-3">
+									<input type="checkbox" class="custom-control-input" id="customCheck2">
+									<label class="custom-control-label" for="customCheck2">服务承诺：该类商品，必须支持【七天退货】服务</label>
+								</div>
+							</div>
+							<small class="form-text text-muted"></small>
+						</div>
+						<div class="form-group">
+							<!-- Label -->
+							<label><em class="sf-required">*</em>上架时间：</label>
+							<small class="form-text text-muted ml-3">定时上架的商品在上架前请到“仓库中的宝贝”里编辑商品。</small>
+							<!--  Radio -->
+							<div class="col-md-6 btn-group-toggle d-flex" data-toggle="buttons">
+								<label class="btn btn-white col">
+									<input type="radio" name="navPosition" id="navPositionSidenav" value="1"> 立刻上架
+								</label>
+								<label class="btn btn-white col ml-2">
+									<input type="radio" name="navPosition" id="navPositionTopnav" value="2"> 定时上架
+								</label>
+								<label class="btn btn-white col ml-2">
+									<input type="radio" name="navPosition" id="navPositionTopnav" value="2"> 放入仓库
+								</label>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</form>
 	</div>
 </div>
+<script src="/assets/dashkit/libs/cupload/cupload.js"></script>
+<script type="text/javascript">
+	var cuploadCreate = new Cupload ({
+		ele: '#cupload-create',
+		num: 8,
+	});
 
-<button id="ckfinder-modal" class="button-a button-a-background" style="float: left">Open Modal</button>
-<script>
-	var button = document.getElementById( 'ckfinder-modal' );
+	//滚动条
+	var basicInfoScrollTop = $('#basic-info').offset().top;
+	var saleInfoScrollTop = $('#sale-info').offset().top;
+	var imageInfoScrollTop = $('#image-info').offset().top;
+	var payInfoScrollTop = $('#pay-info').offset().top;
+	var logisticsInfoScrollTop = $('#logistics-info').offset().top;
+	var afterSaleInfoScrollTop = $('#after-sale-info').offset().top;
 
-	button.onclick = function() {
-		CKFinder.modal( {
-			chooseFiles: true,
-			width: 800,
-			height: 600,
-			onInit: function( finder ) {
-				finder.on( 'files:choose', function( evt ) {
-					var file = evt.data.files.first();
-					var output = document.getElementById( 'output' );
-					output.innerHTML = 'Selected: ' + escapeHtml( file.get( 'name' ) ) + '<br>URL: ' + escapeHtml( file.getUrl() );
-				} );
+	$(window).scroll(function(){
+		
+		var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+		if(scrollTop < basicInfoScrollTop) {
 
-				finder.on( 'file:choose:resizedImage', function( evt ) {
-					var output = document.getElementById( 'output' );
-					output.innerHTML = 'Selected resized image: ' + escapeHtml( evt.data.file.get( 'name' ) ) + '<br>url: ' + escapeHtml( evt.data.resizedUrl );
-				} );
-			}
-		} );
-	};
+		} else if(scrollTop >= basicInfoScrollTop && scrollTop < saleInfoScrollTop) {
+			console.log("basic");
+		} else if(scrollTop >= saleInfoScrollTop && scrollTop < imageInfoScrollTop) {
+			console.log("sale");
+		} else if(scrollTop >= imageInfoScrollTop && scrollTop < payInfoScrollTop) {
+			console.log("image");
+		} else if(scrollTop >= payInfoScrollTop && scrollTop < logisticsInfoScrollTop) {
+			console.log("pay");
+		} else if(scrollTop >= logisticsInfoScrollTop && scrollTop < afterSaleInfoScrollTop) {
+			console.log("logistics");
+		} else {
+			console.log("after-sale");
+		}
+	});
+	
+	//调整表单大小
+	window.onresize=function(){
+		console.log(document.body.clientWidth);
+		if (document.body.clientWidth > 1200) {
+			$('.sf-product-frm').removeClass('col-lg-10 col-xl-10');
+			$('.sf-product-frm').addClass('col-lg-8 col-xl-8');
+		} else {
+			$('.sf-product-frm').removeClass('col-lg-8 col-xl-8');
+			$('.sf-product-frm').addClass('col-lg-10 col-xl-10');
+		}
+	}
+
 </script>
 @endsection

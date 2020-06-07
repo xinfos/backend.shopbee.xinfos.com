@@ -155,6 +155,15 @@ class MenuController extends Controller {
                                             'is_menu'    => 1,
                                             'sub_menu'   => [],
                                         ],
+                                        [
+                                            'menu_id'    => 120112,
+                                            'menu_pid'   => 12011,
+                                            'title' => '商品发布',
+                                            'menu_icon'  => 'fe fe-shopping-bag',
+                                            'menu_addr'  => '/product/add',
+                                            'is_menu'    => 1,
+                                            'sub_menu'   => [],
+                                        ],
                                     ],
                                 ],
                                 [
