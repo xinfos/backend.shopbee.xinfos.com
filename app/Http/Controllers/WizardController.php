@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 use Exception;
 
-class WizardController extends Controller {
+class WizardController extends BaseController {
     
     public function choose(Request $request) {
         return view('wizard.choose');

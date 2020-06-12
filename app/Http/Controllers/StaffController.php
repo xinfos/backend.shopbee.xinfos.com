@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 
-class StaffController extends Controller {
+class StaffController extends BaseController {
     
     /**
      * @name 员工列表

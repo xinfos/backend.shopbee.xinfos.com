@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 
-class AttachmentController extends Controller {
+class AttachmentController extends BaseController {
 
     public function lists(Request $request) {
         try {

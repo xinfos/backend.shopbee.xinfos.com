@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 
-class MenuController extends Controller {
+class MenuController extends BaseController {
     public function Get(Request $request) {
         try {
             if (!\Auth::Check()) {

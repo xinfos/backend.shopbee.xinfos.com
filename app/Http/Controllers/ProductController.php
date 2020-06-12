@@ -6,7 +6,7 @@ use App\Services\Brand\BrandService;
 use App\Services\Category\CategoryService;
 use Illuminate\Support\Facades\View;
 
-class ProductController extends Controller
+class ProductController extends BaseController
 {
     public function lists()
     {

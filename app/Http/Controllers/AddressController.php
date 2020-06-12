@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Http\Controllers\Controller;
 
-class AddressController extends Controller {
+class AddressController extends BaseController {
     /**
      * @name 商家地址库
     */

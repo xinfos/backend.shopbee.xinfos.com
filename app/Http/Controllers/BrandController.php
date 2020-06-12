@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 
-class BrandController extends Controller {
+class BrandController extends BaseController {
     /**
      * @name 获取分类列表
     */

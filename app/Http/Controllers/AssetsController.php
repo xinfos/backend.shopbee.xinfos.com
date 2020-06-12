@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Http\Controllers\Controller;
 
-class AssetsController extends Controller {
+class AssetsController extends BaseController {
     /**
      * @name 商家地址库
     */

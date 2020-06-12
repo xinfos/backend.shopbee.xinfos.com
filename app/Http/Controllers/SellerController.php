@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 
 
-class SellerController extends Controller {
+class SellerController extends BaseController {
     
     public function register(Request $request) {
         if (!\Auth::Check()) {

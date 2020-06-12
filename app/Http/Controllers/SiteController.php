@@ -1,15 +1,14 @@
 <?php
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Seller;
 use App\Http\Controllers\Controller;
 use App\Services\User\UserService;
-
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\View;
-
 
 class SiteController extends Controller {
     
@@ -63,13 +62,12 @@ class SiteController extends Controller {
     }
     
     public function login(Request $request) {
-       
         if($request->isMethod('post')) {
             try {
-                if (\Auth::Check()) {
-                    return ['code' => 200, 'msg' => "登录成功"];
-                }
-                \Auth::logout();
+                // if (\Auth::Check()) {
+                //     return ['code' => 200, 'msg' => "登录成功"];
+                // }
+                // \Auth::logout();
 
                 $input = [
                     'mobile' => $request->input('mobile'),
@@ -90,7 +88,7 @@ class SiteController extends Controller {
                     return ['code' => 201, 'msg' => $validator->errors()->all()[0]];
                 }
 
-                if (\Auth::attempt($input)) {
+                if (Auth::attempt($input)) {
                     return ['code' => 200, 'msg' => "登录成功"];
                 }
 
@@ -110,7 +108,7 @@ class SiteController extends Controller {
     }
 
     public function logout(Request $request) {
-        \Auth::logout();
+        Auth::logout();
         return redirect('/seller/login');
     }
 }

@@ -60,7 +60,6 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
       if (!($exception instanceof AuthenticationException)) {
-        dd($exception);exit;
         if ($exception->getStatusCode() == 404) {
           $errmsg = "哇哦，我们是不是走错路了!~";
         } else {

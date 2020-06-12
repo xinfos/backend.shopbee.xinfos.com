@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Http\Controllers\Controller;
 
-class UserController extends Controller 
+class UserController extends BaseController 
 {
     /**
      * 显示给用户的概要文件.

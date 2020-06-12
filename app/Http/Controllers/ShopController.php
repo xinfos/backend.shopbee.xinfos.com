@@ -3,25 +3,17 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Http\Controllers\Controller;
-use App\Services\Shop\ShopService;
 use Illuminate\Support\Facades\Auth;
+
+use App\Services\Shop\ShopService;
 
 use Exception;
 
-class ShopController extends Controller {
+class ShopController extends BaseController {
     
-    public function lists() {
-        $sellerId = Auth::user()->id;
-
-        //获取店铺列表基本信息
-        $shopService = new ShopService();
-        $lists = $shopService->GetShopList($sellerId);
-        
-        return view('shop.lists', [
-            'lists' => $lists
-        ]);
-    }
-
+    /**
+     * @name 店铺概况
+    */
     public function dashboard() {
 
         $sellerId = Auth::user()->id;
@@ -37,6 +29,21 @@ class ShopController extends Controller {
             'info' => $info
         ]);
     }
+
+    public function lists() {
+
+        $sellerId = Auth::user()->id;
+
+        //获取店铺列表基本信息
+        $shopService = new ShopService();
+        $lists = $shopService->GetShopList($sellerId);
+        
+        return view('shop.lists', [
+            'lists' => $lists
+        ]);
+    }
+
+
 
     /**
      * @name 店铺详情

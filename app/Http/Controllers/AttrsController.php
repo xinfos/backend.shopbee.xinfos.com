@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 
-class AttrsController extends Controller {
+class AttrsController extends BaseController {
 
 	public function create(Request $request) {
 		if($request->isMethod('post')) {

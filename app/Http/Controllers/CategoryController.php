@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 
-class CategoryController extends Controller {
+class CategoryController extends BaseController {
     /**
      * @name 获取分类列表
     */

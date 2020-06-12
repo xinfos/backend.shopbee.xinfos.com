@@ -1,16 +1,16 @@
-$(function(){
+$(function () {
     var Frm = {
         _cfg: {
             url: "/login"
         },
-        isMobile:function(v) {
+        isMobile: function (v) {
             var reg = /^[1][3,4,5,7,8][0-9]{9}$/;
             return reg.test(v);
         },
-        validateMobile: function() {
-            var _self =  $(".sf-input-mobile")
+        validateMobile: function () {
+            var _self = $(".sf-input-mobile")
             var v = _self.val();
-            if((v.length == 11 && !this.isMobile(v)) || v.length > 11 || v.length <= 10) {
+            if ((v.length == 11 && !this.isMobile(v)) || v.length > 11 || v.length <= 10) {
                 _self.addClass('is-invalid');
                 $('.sf-input-mobile-err').remove();
                 _self.parent().append('<div class="invalid-feedback sf-input-mobile-err">请输入正确的手机号</div>');
@@ -21,10 +21,10 @@ $(function(){
                 return true;
             }
         },
-        validateSmscode: function() {
-            var _self =  $(".sf-input-smscode")
+        validateSmscode: function () {
+            var _self = $(".sf-input-smscode")
             var v = _self.val();
-            if(v.length != 6) {
+            if (v.length != 6) {
                 _self.addClass('is-invalid');
                 $('.sf-input-smscode-err').remove();
                 _self.parent().append('<div class="invalid-feedback sf-input-smscode-err">请填写短信验证码</div>');
@@ -35,10 +35,10 @@ $(function(){
                 return true;
             }
         },
-        validatePwd: function() {
-            var _self =  $(".sf-input-pwd")
+        validatePwd: function () {
+            var _self = $(".sf-input-pwd")
             var v = _self.val();
-            if(v.length > 15 || v.length < 8) {
+            if (v.length > 15 || v.length < 8) {
                 _self.addClass('is-invalid');
                 $('.sf-input-pwd-err').remove();
                 _self.parent().append('<div class="invalid-feedback sf-input-pwd-err">密码长度为8-15</div>');
@@ -49,11 +49,11 @@ $(function(){
                 return true;
             }
         },
-        validateConfirm: function() {
-            var _self =  $(".sf-input-pwd-confirm");
+        validateConfirm: function () {
+            var _self = $(".sf-input-pwd-confirm");
             var v = _self.val();
             var pwd = $(".sf-input-pwd").val();
-            if(v != pwd) {
+            if (v != pwd) {
                 _self.addClass('is-invalid');
                 $('.sf-input-pwd-confirm-err').remove();
                 _self.parent().append('<div class="invalid-feedback sf-input-pwd-confirm-err">两次密码不一致</div>');
@@ -64,7 +64,7 @@ $(function(){
                 return true;
             }
         },
-        login: function() {
+        login: function () {
             var isValidate1 = this.validateMobile();
             // var isValidate2 = this.validateSmscode();
             // var isValidate3 = this.validatePwd();
@@ -79,14 +79,12 @@ $(function(){
                 'password': $('.sf-input-pwd').val(),
                 '_token': $('.sf-token').attr('sf-token'),
             }
-            console.log(data);
-            console.log(isValidate1);
             $.ajax({
                 type: 'POST',
                 url: this._cfg.url,
                 dataType: 'json',
                 data: data,
-                success:function(resp) {
+                success: function (resp) {
                     if (resp.code != 200) {
                         spop({
                             template: resp.msg,
@@ -102,9 +100,11 @@ $(function(){
                         style: 'success',
                         autoclose: 1500
                     });
-                    setTimeout(function(){ window.location.href="/shop/list";}, 1600);
+                    setTimeout(function () {
+                        window.location.href = "/shop/list";
+                    }, 1600);
                 },
-                error: function() {
+                error: function () {
 
                 }
             });
@@ -112,7 +112,7 @@ $(function(){
         }
     }
 
-    $(".sf-input-mobile").bind('input propertychange', function() {
+    $(".sf-input-mobile").bind('input propertychange', function () {
         Frm.validateMobile();
     });
 
@@ -120,7 +120,7 @@ $(function(){
     //     Frm.validatePwd();
     // });
 
-    $(".sf-btn-login").bind("click", function(){
+    $(".sf-btn-login").bind("click", function () {
         Frm.login();
     });
 });

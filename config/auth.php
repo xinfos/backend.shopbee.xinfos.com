@@ -22,11 +22,6 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Seller::class,
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
     ],
     'passwords' => [
         'users' => [
