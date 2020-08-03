@@ -1,22 +1,26 @@
 @extends('layouts.dashkit.app')
 
 @section('content')
-<style>
-    .card-body div {
-        font-size:12px;
-	}
-	/* .el-header{
-		position: fixed;
-		left: 400;
-		top: 50;
-		right: 0;
-		z-index: 999999;
-		background-color: #FFFFFF;
-		box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
-		box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)
-	} */
+
+<style type="text/css">
+.sf-product-push {
+	margin:0 auto;
+	text-align:center;
+	left: 0;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	height: 80px;
+	z-index: 100;
+	background-color: #ffffff;
+	border-top: 1px solid #e3ebf6;
+}
+.sf-product-push-body{
+	margin-top: 30px;
+}
 </style>
-<div class="row justify-content-center" style="background-color:#f7f8fa;">
+
+<div class="row justify-content-center content" style="background-color:#f7f8fa;">
 	<div class="sf-product-frm col-12 col-lg-10 col-xl-10">
 		<!-- Header -->
 		<div class="header mt-md-5">
@@ -57,35 +61,30 @@
 			</div>
 		</div>
 		<!-- Form -->
-		<form>
+		<form class="sf-product-frm">
 			<div class="row align-items-center mt-4 ml-1">
 				<div class="col-auto">
 					<div class="row align-items-center">
 						<div class="col mt-2">
 							<h5 class="mb-1">当前类目：手机</h5>
 						</div>
-					</div> <!-- / .row -->
+					</div>
 				</div>
 				<div class="col-auto">
 					<a href="#" class="sf-btn sf-btn-primary sf-btn-create">切换类目</a>
 				</div>
-			</div><!-- / .row -->
+			</div>
 
 			<!-- basic-info -->
 			<hr class="my-4" id="basic-info">
 			<div class="card">
 				<div class="card-header">
-					<!-- Heading -->
-					<h5 class="card-header-title">基础信息</h5>
+					<h3 class="card-header-title">基础信息</h3>
 				</div>
 				<div class="card-body">
 					<div class="col-12 col-md-6">
-						<!-- First name -->
 						<div class="form-group">
-							<!-- Label -->
 							<label><em class="sf-required">*</em>宝贝类型：</label>
-							<!--  Radio -->
-							<!-- <input type="radio" class="form-control"> -->
 							<div class="col-md-8 btn-group-toggle d-flex" data-toggle="buttons">
 								<label class="btn btn-white col">
 									<input type="radio" name="navPosition" id="navPositionSidenav" value="1"> 全新
@@ -97,15 +96,19 @@
 						</div>
 					</div>
 					<div class="col-12">
-						<!-- First name -->
 						<div class="form-group">
-							<!-- Label -->
 							<label><em class="sf-required">*</em>宝贝标题：</label>
-							<!--  Radio -->
 							<small class="form-text text-muted ml-3">
 								标题和描述关键词是否违规自检工具：商品合规工具。
 							</small>
-							<input type="text" class="form-control ml-3" placeholder="最多允许输入30个汉字（60字符）">
+							<div class="input-group input-group-merge  ml-3 mb-3">
+								<input type="text" id="product_name"class="form-control form-control-appended" placeholder="最多允许输入30个汉字（60字符）">
+								<div class="input-group-append">
+									<div class="input-group-text">
+										<span class="input-word-length">0</span><span>/60</span>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 					<div class="col-12">
@@ -346,54 +349,26 @@
 				</div>
 			</div>
 		</form>
+
+		<div class="sf-product-push">
+			<div class="sf-product-push-body">
+				<a href="#" class="sf-btn sf-btn-primary sf-btn-create">保存</a>
+				<a href="#" class="sf-btn btn-info sf-btn-create">取消</a>
+			</div>
+		</div>
 	</div>
 </div>
+
 <script src="/assets/dashkit/libs/cupload/cupload.js"></script>
+<script src="/assets/js/product.js"></script>
 <script type="text/javascript">
-	var cuploadCreate = new Cupload ({
-		ele: '#cupload-create',
-		num: 8,
+	$(function(){
+		var cuploadCreate = new Cupload ({
+			ele: '#cupload-create',
+			num: 8,
+		});
+
+		$('sf-product-frm').Product();
 	});
-
-	//滚动条
-	var basicInfoScrollTop = $('#basic-info').offset().top;
-	var saleInfoScrollTop = $('#sale-info').offset().top;
-	var imageInfoScrollTop = $('#image-info').offset().top;
-	var payInfoScrollTop = $('#pay-info').offset().top;
-	var logisticsInfoScrollTop = $('#logistics-info').offset().top;
-	var afterSaleInfoScrollTop = $('#after-sale-info').offset().top;
-
-	$(window).scroll(function(){
-		
-		var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
-		if(scrollTop < basicInfoScrollTop) {
-
-		} else if(scrollTop >= basicInfoScrollTop && scrollTop < saleInfoScrollTop) {
-			console.log("basic");
-		} else if(scrollTop >= saleInfoScrollTop && scrollTop < imageInfoScrollTop) {
-			console.log("sale");
-		} else if(scrollTop >= imageInfoScrollTop && scrollTop < payInfoScrollTop) {
-			console.log("image");
-		} else if(scrollTop >= payInfoScrollTop && scrollTop < logisticsInfoScrollTop) {
-			console.log("pay");
-		} else if(scrollTop >= logisticsInfoScrollTop && scrollTop < afterSaleInfoScrollTop) {
-			console.log("logistics");
-		} else {
-			console.log("after-sale");
-		}
-	});
-	
-	//调整表单大小
-	window.onresize=function(){
-		console.log(document.body.clientWidth);
-		if (document.body.clientWidth > 1200) {
-			$('.sf-product-frm').removeClass('col-lg-10 col-xl-10');
-			$('.sf-product-frm').addClass('col-lg-8 col-xl-8');
-		} else {
-			$('.sf-product-frm').removeClass('col-lg-8 col-xl-8');
-			$('.sf-product-frm').addClass('col-lg-10 col-xl-10');
-		}
-	}
-
 </script>
 @endsection
