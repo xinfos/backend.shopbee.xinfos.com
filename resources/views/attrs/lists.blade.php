@@ -28,47 +28,47 @@
                     <h5 class="card-header-title">商品属性</h5>
                     <a href="/product/attrs/create" class="sf-btn sf-btn-primary sf-btn-create">新建商品属性</a>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-    	<div class="col-12 col-lg-4">
-    		<div class="card card-fill">
-    			<div class="card-header">
-    				<h5 class="card-header-title">商品分类列表</h5>
-    			</div>
-    			<div class="card-body">
-    				<div class="list-group list-group-flush my-n3">
-    					<div class="innerUl"></div>
-    				</div>
-    			</div>
-    		</div>
-    	</div>
-    	<div class="col-12 col-xl-8">
-    		<div class="card">
-    			<div class="card-header">
-    				<h5 class="card-header-title">属性列表</h5>
-    			</div>
-    			<div class="table-responsive mb-0">
-    				<table class="table table-sm table-nowrap table-hover card-table">
-    					<thead>
-    						<tr>
-    							<th>属性ID</th>
-    							<th>属性名称</th>
-    							<th>属性名称</th>
-    							<th>属性名称</th>
-    						</tr>
-    					</thead>
-                        <tbody class="list">
-                        	<tr>
-                        		<td>Homepage</td>
-                        		<td>Homepage</td>
-                        		<td>Homepage</td>
-                        		<td class="text-right"></td>
-                        	</tr>
-                        </tbody>
-                    </table>
-                </div>
+				<div class="row mt-3">
+					<div class="col-12 col-lg-4">
+						<div class="card card-fill">
+							<div class="card-header">
+								<h5 class="card-header-title">商品分类列表</h5>
+							</div>
+							<div class="card-body">
+								<div class="list-group list-group-flush my-n3">
+									<div class="innerUl"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-xl-8">
+						<div class="card">
+							<div class="card-header">
+								<h5 class="card-header-title">属性列表</h5>
+							</div>
+							<div class="table-responsive mb-0">
+								<table class="table table-sm table-nowrap table-hover card-table">
+									<thead>
+										<tr>
+											<th>属性ID</th>
+											<th>属性名称</th>
+											<th>属性名称</th>
+											<th>属性名称</th>
+										</tr>
+									</thead>
+									<tbody class="list">
+										<tr>
+											<td>Homepage</td>
+											<td>Homepage</td>
+											<td>Homepage</td>
+											<td class="text-right"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
             </div>
         </div>
     </div>
@@ -132,8 +132,8 @@
 			arr: arr,
 			close:true,
 			simIcon: "fe fe-file",//单个标题字体图标 不传默认glyphicon-file
-			mouIconOpen: "fe fe-folder-minus",//含多个标题的打开字体图标  不传默认glyphicon-folder-open
-			mouIconClose:"fe fe-folder-plus",//含多个标题的关闭的字体图标  不传默认glyphicon-folder-close
+			mouIconOpen: "fe fe-chevron-down",//含多个标题的打开字体图标  不传默认glyphicon-folder-open
+			mouIconClose:"fe fe-chevron-right",//含多个标题的关闭的字体图标  不传默认glyphicon-folder-close
 			callback: function(id,name) {
 	            $.ajax({
 	                type: 'post',

@@ -1,7 +1,7 @@
-$(function(){
+$(function () {
 
 
-	var Product = function(el,opts){
+    var Product = function (el, opts) {
         this.init();
     }
 
@@ -17,8 +17,9 @@ $(function(){
     };
 
     //初始化
-    Product.prototype.init = function() {
-    	console.log(1);
+    Product.prototype.init = function () {
+        console.log(1);
+        this.getBrandData(1000);
     }
 
     //初始化渲染属性
@@ -27,72 +28,80 @@ $(function(){
     }
 
     //检查数据
-    Product.prototype.check = function() {
+    Product.prototype.check = function () {
 
     }
 
     //检查商品标题
-   	Product.prototype.verifyProductName = function() {
-   		$('#product_name').value();
-   	}
+    Product.prototype.verifyProductName = function () {
+        $('#product_name').value();
+    }
 
     //计算字符串长度
-    Product.prototype.calcStrLength = function(str) {
-    	var l = str.length;
-    	var unicodeLen = 0;
-    	for(i=0; i<l; i++) {
-    		if ((str.charCodeAt(i)>127)){
-    			unicodeLen ++;
-    		}
-    		unicodeLen ++;
-    	}
-    	return unicodeLen ;
+    Product.prototype.calcStrLength = function (str) {
+        var l = str.length;
+        var unicodeLen = 0;
+        for (i = 0; i < l; i++) {
+            if ((str.charCodeAt(i) > 127)) {
+                unicodeLen++;
+            }
+            unicodeLen++;
+        }
+        return unicodeLen;
+    }
+
+    //获取商品分类品牌
+    Product.prototype.getBrandData = function (catId) {
+        this._options.
+        this.ajaxRequestData(catId, cals)
+        console.log(catId)
+    }
+
+    //渲染品牌
+    Product.prototype.renderBrandSelect = function (data) {
+
     }
 
     //ajax请求数据
-   	Product.prototype.ajaxRequestData = function(callbackFunc) {
-   		var that = this;
+    Product.prototype.ajaxRequestData = function (callbackFunc) {
+        var that = this;
         params._token = that._ajax.token;
         $.ajax({
-            type: this._options.ajaxType,
-            url: this._options.ajaxRequestUrl,
+            type: this._opt.ajaxType,
+            url: this._opt.ajaxRequestUrl,
             dataType: this._options.ajaxDataType,
             data: params,
-            success:function(resp) {
+            success: function (resp) {
                 var data = [];
-                if(resp.code == that._options.ajaxReturnSuccCode) {
+                if (resp.code == that._options.ajaxReturnSuccCode) {
                     data = resp.data;
                 }
                 callbackFunc(that, data);
             },
-            error: function() {}
+            error: function () {}
         });
-   	}
+    }
 
-
-
-
-    $.fn.Product = function(opts){
+    $.fn.Product = function (opts) {
         new Product(this, opts);
     };
 
+    $('#product_name').on('input', function () {
 
+        var productName = $(this).val();
 
- 	$('#product_name').on('input',function(){
- 		
- 		var productName = $(this).val();
+        value = $(this).val();
+        if (value.length > 6) {
+            $(this).addClass("is-invalid");
+            $('.input-word-length').empty().html('<span class="text-danger">' + value.length + "</span>");
+            return false;
+        }
+        $('.input-word-length').empty().html(value.length);
+    });
 
- 		
-
- 		value = $(this).val();
- 		
-
-
- 		$('.input-word-length').html(1);
-
-
- 		console.log(value.length);
- 	});
+    $('#product_brand').on('onselect', function () {
+        console.log(1);
+    });
 });
 
 
@@ -110,7 +119,7 @@ $(function(){
 // 	var afterSaleInfoScrollTop = $('#after-sale-info').offset().top;
 
 // 	$(window).scroll(function(){
-		
+
 // 		var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
 // 		if(scrollTop < basicInfoScrollTop) {
 
@@ -128,7 +137,7 @@ $(function(){
 // 			console.log("after-sale");
 // 		}
 // 	});
-	
+
 // 	//调整表单大小
 // 	window.onresize=function(){
 // 		console.log(document.body.clientWidth);

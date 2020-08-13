@@ -111,6 +111,20 @@
 							</div>
 						</div>
 					</div>
+					<div class="col-4">
+						<div class="form-group">
+							<label><em class="sf-required">*</em>品牌：</label>
+							<div class="input-group input-group-merge  ml-3 mb-3">
+								<select id="product_brand" class="custom-select" data-toggle="select">
+									<option id="1">1</option>
+									<option id="1">2</option>
+								</select>
+							</div>
+							<small class="form-text text-muted ml-3">
+								标题和描述关键词是否违规自检工具：商品合规工具。
+							</small>
+						</div>
+					</div>
 					<div class="col-12">
 						<!-- First name -->
 						<div class="form-group">
@@ -358,8 +372,9 @@
 		</div>
 	</div>
 </div>
-
+<script src="/assets/dashkit/libs/select2/select2.full.min.js"></script>
 <script src="/assets/dashkit/libs/cupload/cupload.js"></script>
+
 <script src="/assets/js/product.js"></script>
 <script type="text/javascript">
 	$(function(){
