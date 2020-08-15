@@ -1,50 +1,60 @@
 @extends('layouts.dashkit.app')
 
 @section('content')
-<link rel="stylesheet" type="text/css" href="/assets/css/sort.css">
-<link rel="stylesheet" type="text/css" href="/assets/dashkit/libs/spop/dist/spop.min.css">
-
-<nav class="navbar navbar-expand-md navbar-light d-none d-md-flex" id="topbar">
-    <div class="container-fluid">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">商品库</li>
-                <li class="breadcrumb-item active">商品分类</li>
-            </ol>
-        </nav>
-    </div>
-</nav>
-
-<div class="header">
-</div>
-
-<div class="container-fluid">
-    <div class="alert alert-light" role="alert" style="margin-bottom: 3px;">查看分类详情，请双击需要查看的分类名称!~ </div>
-    <div class="row justify-content-center" style="min-height: calc(100vh - 120px);">
-        <div class="col-12">
-            <!-- Header -->
-            <div class="header" style="margin-bottom:10px;"></div>
-            <!-- <div class="alert alert-secondary" role="alert" style="margin-bottom:10px;">
-                双击分类名称，编辑分类数据
-            </div> -->
+<div class="header"></div>
+<div class="container-fluid" >
+    <div class="row justify-content-center" style="margin:0px;">
+        <div class="col-12" style="padding: 0px;">
             <div class="card">
                 <div class="card-header">
-                    <form>
-                        <button type="button" class="btn btn-sm btn-primary mb-2" onclick="cateFrm._renderAdd(this);">+ 新建分类</button>
-                    </form>
+                    <h5 class="card-header-title">商品分类管理</h5>
+                    <button class="sf-btn sf-btn-primary sf-btn-create" data-toggle="modal" data-target="#modalMembers">新建分类</button>
+                    <button class="sf-btn sf-btn-white sf-btn-create ml-2" data-toggle="modal" data-target="#modalMembers">批量导入</button>
                 </div>
-                <div class="wareSort clearfix" style="border:none;">
-                    <ul class="cat-1"></ul>
-                    <ul class="cat-2" style="display: none;"></ul>
-                    <ul class="cat-3" style="display: none;"></ul>
+                <div class="card-body">
+                    <form>
+                        <section class="sf-search">
+                            <div class="sf-form-group-1">
+                                <label class="sf-label">分类名称:</label>
+                                <input class="sf-form-control" name="name" id="cat_name" placeholder="分类名称" value="<?php echo empty($_GET['name']) ? '' : $_GET['name']; ?>">
+                            </div>
+                            <div class="sf-form-group-1">
+                                <label class="sf-label">&nbsp;</label>
+                                <button class="sf-btn sf-btn-primary sf-btn-search mr-2" data-type="reload">搜索</button>
+                                <button class="sf-btn sf-btn-white">重置</button>
+                            </div>
+                        </section>
+                    <form>
+                    <div class="mt-4"></div>
+                    <table class="table table-hover table-sm" id="t1">
+                        <thead>
+                            <tr>
+                                <th scope="col">分类名称</th>
+                                <th scope="col">分类别名</th>
+                                <th scope="col">是否显示</th>
+                                <th scope="col">是否启用</th>
+                                <th class="text-right" scope="col">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
-    <div class="categoryModal" csrf_token="{{ csrf_token() }}"></div>
 </div>
 
+<script src="/assets/dashkit/js/tree/treetable.js"></script>
+<script type="text/javascript">
+$(function(){
+    var treeTable = $('#t1').treeTable({
+        ajaxRequestUrl:'/product/category/sub',
+        ajaxType: 'POST',
+        ajaxDataType: 'JSON',
+        ajaxReturnSuccCode: 200
+    });
+});
 
-<script src="/assets/dashkit/libs/selectcats/dist/selectcats.js"></script>
-<script src="/assets/dashkit/libs/spop/dist/spop.min.js"></script>
+</script>
 @endsection

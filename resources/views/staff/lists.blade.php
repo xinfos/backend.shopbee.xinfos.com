@@ -77,76 +77,13 @@
 <script src="/assets/dashkit/js/modalfrm.sf.js"></script>
 <script type="text/javascript">
 $(function() {
-    $('.sf-btn-create').modalFrm({
-        unique: "sf-staff",
-        data: {
-            title: '新建员工',
-            input: [
-                {
-                    label: "员工姓名",
-                    components: [
-                        {
-                            name: "staff_name",
-                            type: "text",
-                            vType: "string",
-                            placeholder: "请输入员工姓名",
-                        }
-                    ],
-                    required: true
-                },
-                {
-                    label: "员工手机号码",
-                    components: [
-                        {
-                            name: "country_code",
-                            type: "select",
-                            vType: "string",
-                            placeholder: "",
-                        },
-                        {
-                            name: "staff_mobile",
-                            type: "mobile",
-                            vType: "string",
-                            placeholder: "",
-                        }
-                    ],
-                    required: true
-                },
-                {
-                    label: "员工工号",
-                    components: [
-                        {
-                            name: "staff_no",
-                            type: "text",
-                            vType: "string",
-                            placeholder: "请输入员工在公司的工号"
-                        }
-                    ],
-                    required: true
-                }
-            ],
-            bind: [
-                {
-                    el: "country_code",
-                    methods: "multiselect",
-                    options: {
-                        multiple: false,
-                        selectedHtmlValue: '单选'
-                    }
-                }
-            ],
-            rules: [
-                {'staff_name,country_code,staff_mobile':'required'},
-                {'staff_mobile':'mobile'}
-            ],
-            errors: {
-                'staff_name.required':'姓名不能为空',
-                'country_code.required': '手机区号不能空',
-                'staff_mobile.required': '联系方式不能为空',
-                'staff_mobile.mobile': '联系方式格式不正确',
-            },
-        }
-    });
+
+});
+var treetable = $('#treetable').BootstrapTreeTable({
+    expandlevel: 1,
+    expandAll: false,
+    collapseAll: false,
+    maxResult: ''
 });
 </script>
 @endsection

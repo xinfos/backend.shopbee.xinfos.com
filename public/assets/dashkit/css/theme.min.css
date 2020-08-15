@@ -5358,7 +5358,7 @@ input[type=submit].btn-block {
 	-webkit-box-flex: 1;
 	flex: 1 1 auto;
 	min-height: 1px;
-	padding: 16px;
+	padding: 12px;
 }
 
 .card-title {
@@ -12875,7 +12875,7 @@ a.text-white:hover {
 }
 
 .badge-soft-success {
-	color: #00d97e;
+	color: #0ea968;
 	background-color: #ccf7e5
 }
 
@@ -15874,7 +15874,7 @@ body {
 .table thead th {
 	background-color: #f9fbfd;
 	text-transform: uppercase;
-	font-size: .8125rem;
+	font-size: 14px;
 	font-weight: 600;
 	letter-spacing: .08em;
 	color: #21344b;
@@ -15892,7 +15892,7 @@ body {
 }
 
 .table-sm thead th {
-	font-size: .695rem
+	font-size: 13px;
 }
 
 .table-nowrap td,
@@ -17597,13 +17597,12 @@ button:focus {
 }
 
 .sf-search .sf-form-group {
-	margin-bottom: 15px;
-	font-size: 12px;
+	margin-bottom: 12px;
 	display: inline-block;
 }
 
 .sf-search .sf-form-group .sf-label {
-	width: 110px;
+	width: 90px;
 	margin-right: 5px;
 	font-size: 13px;
 	text-align: right;
@@ -17631,6 +17630,39 @@ button:focus {
 	outline: 0;
 }
 
+.sf-search .sf-form-group-1 {
+	margin-bottom: 14px;
+}
+
+.sf-search .sf-form-group-1 .sf-label {
+	width: 90px;
+	margin-right: 5px;
+	font-size: 13px;
+	text-align: right;
+}
+
+.sf-search .sf-form-group-1 .sf-form-control {
+	width: 180px;
+	height: 40px;
+	font-size: 13px;
+	padding: .4rem .75rem;
+	line-height: 1.5;
+	color: #12263f;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid #d2ddec;
+	border-radius: .375rem;
+	-webkit-transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+	transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.sf-search .sf-form-group-1 .sf-form-control:focus {
+	color: #12263f;
+	background-color: #fff;
+	border-color: #2c7be5;
+	outline: 0;
+}
+
 .sf-btn {
 	color: #323233;
 	color: var(--theme-stroke-1, #323233);
@@ -17639,7 +17671,7 @@ button:focus {
 	display: inline-block;
 	height: 32px;
 	line-height: 30px;
-	font-size: 14px;
+	font-size: 12px;
 	padding: 0 16px;
 	border-radius: 2px;
 	font-family: inherit;
@@ -18032,4 +18064,12 @@ button:focus {
 	-webkit-transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 	transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 	display: inline-block;
+}
+
+.sf-child {
+	color: #0767e8;
+}
+
+.text-right {
+	text-align: right;
 }

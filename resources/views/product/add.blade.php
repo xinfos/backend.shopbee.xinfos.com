@@ -5,18 +5,8 @@
     .card-body div {
         font-size:12px;
 	}
-	/* .el-header{
-		position: fixed;
-		left: 400;
-		top: 50;
-		right: 0;
-		z-index: 999999;
-		background-color: #FFFFFF;
-		box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
-		box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)
-	} */
 </style>
-<div class="row justify-content-center" style="background-color:#f7f8fa;">
+<div class="row justify-content-center" style="background-color:#f7f8fa;margin:0px;">
 	<div class="sf-product-frm col-12 col-lg-10 col-xl-10">
 		<!-- Header -->
 		<div class="header mt-md-5">
@@ -119,31 +109,25 @@
 							</small>
 							<div class="row col-12 ml-3" style="border: 0.5px solid #d2ddec;border-radius: .375rem;margin-left:1px;background-color:#f8f8f8;">
 								<div class="col-10  mt-4"></div>
-								<div class="col-12 col-md-6">
-									<div class="form-group">
-										<label>类目属性：</label>
-										<input type="text" class="form-control">
-										<small class="form-text text-muted mt-2">
-											标题和描述关键词是否违规自检工具：商品合规工具。
-										</small>
-									 </div>
-								</div>
-									<?php foreach($item['attrs_template'] as $v) { ?>
-										<?php foreach($v as $vv) { ?>
-											<?php if(empty($vv['attrs'])) continue;?>
-											<?php foreach($vv['attrs'] as $vvv) {?>
-												<div class="sf-form-group">
-													<label class="sf-label" style="margin-left: 15px;"><?php echo $vvv['attr_name']?>:</label>
-													<?php if($vvv['fill_type'] == 1) { ?>
-													<?php } elseif ($vvv['fill_type'] == 2) { ?>
-														<input class="sf-form-control" name="name" id="s_name" placeholder="商品卖点" value="">
-													<?php } else { ?>
-													<?php }?>
-													<p class="help-block">在商品详情页标题下面展示卖点信息，建议60字以内 <a href="#">查看示例</a></p>
+									<?php foreach ($item['attrs_template'] as $v) {?>
+										<?php foreach ($v as $vv) {?>
+											<?php if (empty($vv['attrs'])) {
+    continue;
+}
+    ?>
+											<?php foreach ($vv['attrs'] as $vvv) {?>
+												<div class="col-10 col-md-4 ml-6">
+													<div class="form-group">
+														<label><?php echo $vvv['attr_name'] ?>：</label>
+														<input type="text" class="form-control">
+														<small class="form-text text-muted mt-2">
+															标题和描述关键词是否违规自检工具：商品合规工具。
+														</small>
+													</div>
 												</div>
 											<?php }?>
-										<?php } ?>
-									<?php } ?>
+										<?php }?>
+									<?php }?>
 							</div>
 						</div>
 					</div>
@@ -364,7 +348,7 @@
 	var afterSaleInfoScrollTop = $('#after-sale-info').offset().top;
 
 	$(window).scroll(function(){
-		
+
 		var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
 		if(scrollTop < basicInfoScrollTop) {
 
@@ -382,7 +366,7 @@
 			console.log("after-sale");
 		}
 	});
-	
+
 	//调整表单大小
 	window.onresize=function(){
 		console.log(document.body.clientWidth);
@@ -394,6 +378,5 @@
 			$('.sf-product-frm').addClass('col-lg-10 col-xl-10');
 		}
 	}
-
 </script>
 @endsection

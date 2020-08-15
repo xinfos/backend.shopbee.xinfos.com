@@ -1,8 +1,8 @@
-$(function(){
-    var DataList = function(el,opt){
+$(function () {
+    var DataList = function (el, opt) {
         this._el = this.$element = el;
         this._options = opt;
-        console.log( this._options );
+        console.log(this._options);
         this.init();
     }
 
@@ -49,29 +49,31 @@ $(function(){
             }
             return false;
         },
-        _event: function(method, el, event, options) {
-            switch(method){
+        _event: function (method, el, event, options) {
+            switch (method) {
                 case 'multiselect':
                     this._eventBindMultiSelect(el, event, options);
                     break;
-                default :
+                default:
                     break;
             }
         },
-        _eventBindMultiSelect: function(el, event, options) {
+        _eventBindMultiSelect: function (el, event, options) {
             $('#' + el).multiselect(options);
         },
-        _eventPage : function() {
+        _eventPage: function () {
             var that = this;
-            $('.page-item').bind('click', function(){
+            $('.page-item').bind('click', function () {
                 if ($(this).hasClass('active')) {
                     return false;
                 }
                 var jumpPage = $(this).text();
-                that._ajaxRequestData({page: jumpPage}, that._initListTbody);
+                that._ajaxRequestData({
+                    page: jumpPage
+                }, that._initListTbody);
             });
         },
-        _initSection: function(s) {
+        _initSection: function (s) {
             if (this._isValueEmpty(s.columns)) {
                 return;
             }
@@ -79,13 +81,13 @@ $(function(){
             for (var i = 0; i < s.columns.length; i++) {
                 html += this._initSectionTemplate(s.columns[i]);
             }
-        
-            $('#' + s.el).append(html +  this._initSectionSearchAction());
+
+            $('#' + s.el).append(html + this._initSectionSearchAction());
             for (var j = 0; j < s.events.length; j++) {
                 this._event(s.events[j].methods, s.events[j].el, s.events[j].event, s.events[j].options);
             }
         },
-        _initSectionTemplate: function(s) {
+        _initSectionTemplate: function (s) {
             switch (s.type) {
                 case 'text':
                     return this._initSectionText(s);
@@ -96,34 +98,34 @@ $(function(){
             }
         },
         _initSectionSearchAction() {
-            var actionHtml = '<div class="sf-form-group">'
-                           + '<label class="sf-label">&nbsp;</label>'
-                           + '<button class="sf-btn sf-btn-primary sf-btn-search mr-2">搜索</button>'
-                           + '<button class="sf-btn sf-btn-white">重置</button>'
-                           + '</div>';
+            var actionHtml = '<div class="sf-form-group">' +
+                '<label class="sf-label">&nbsp;</label>' +
+                '<button class="sf-btn sf-btn-primary sf-btn-search mr-2">搜索</button>' +
+                '<button class="sf-btn sf-btn-white">重置</button>' +
+                '</div>';
             return actionHtml;
         },
-        _initSectionText: function(s) {
+        _initSectionText: function (s) {
             if (this._isValueEmpty(s.label)) {
                 s.label = '&nbsp;'
             }
             var inputLabel = '<label class="sf-label">' + s.label + ': </label>';
 
             var inputName = '';
-            if(!this._isValueEmpty(s.field)) {
+            if (!this._isValueEmpty(s.field)) {
                 inputName = 'name="' + s.field + '"';
             }
 
             var inputPlaceholder = '';
-            if(!this._isValueEmpty(s.placeholder)) {
+            if (!this._isValueEmpty(s.placeholder)) {
                 inputPlaceholder = 'placeholder="' + s.placeholder + '"';
             }
-            input = '<input class="sf-form-control" '+inputName+' ' + inputPlaceholder+' value="">';
+            input = '<input class="sf-form-control" ' + inputName + ' ' + inputPlaceholder + ' value="">';
 
             return '<div class="sf-form-group">' + inputLabel + input + '</div>';
         },
         _initSectionSelect(s) {
-            if(this._isValueEmpty(s.filter)) {
+            if (this._isValueEmpty(s.filter)) {
                 console.log('[err]:select filter exception.');
                 return;
             }
@@ -134,22 +136,22 @@ $(function(){
             var inputLabel = '<label class="sf-label">' + s.label + ': </label>';
 
             var options = this._initSectionSelectOptions(s.filter.option);
-            var selectHtml = '<select name="'+s.field+'" class="sf-form-control multiselect" id="'+s.field+'">'+options+'</select>';
-            
+            var selectHtml = '<select name="' + s.field + '" class="sf-form-control multiselect" id="' + s.field + '">' + options + '</select>';
+
             return '<div class="sf-form-group">' + inputLabel + selectHtml + '</div>';
         },
-        _initSectionSelectOptions: function(o) {
-            if(this._isValueEmpty(o)) {
+        _initSectionSelectOptions: function (o) {
+            if (this._isValueEmpty(o)) {
                 console.log('[err]:select options exception.');
                 return;
             }
             var optionHtml = '';
             for (var i = 0; i < o.length; i++) {
-                optionHtml += '<option value="'+o[i].value+'">'+o[i].text+'</option>';
+                optionHtml += '<option value="' + o[i].value + '">' + o[i].text + '</option>';
             }
-            return optionHtml;  
+            return optionHtml;
         },
-        _initListThead: function(c) {
+        _initListThead: function (c) {
             var thHtml = '<th><div class="custom-control custom-checkbox table-checkbox"><input type="checkbox" class="custom-control-input"><label class="custom-control-label">&nbsp;</label></div></th>';
             for (var i = 0; i < c.length; i++) {
                 thHtml += '<th><a href="#" class="sort" data-sort="orders-' + c[i].key + '">' + c[i].text + '</a></th>';
@@ -158,23 +160,23 @@ $(function(){
 
             this._el.append('<thead><tr>' + thHtml + '</tr></thead>');
         },
-        _initListTbody: function(that, d) {  
+        _initListTbody: function (that, d) {
             var html = '';
             if (that._isValueEmpty(d)) {
                 colspan = that._options.columns.length + 2;
-                html = '<tr><td class="sf-list-empty-content" colspan="'+colspan+'">暂无数据</td></tr></tbody>';
+                html = '<tr><td class="sf-list-empty-content" colspan="' + colspan + '">暂无数据</td></tr></tbody>';
             } else {
                 var c = that._options.columns
                 for (var i = 0; i < d.length; i++) {
                     html += '<tr>';
                     html += that._initListTbodyCheckBox();
                     for (var j = 0; j < c.length; j++) {
-                        html += '<td>'+ d[i][c[j].key] +'</td>';
+                        html += '<td>' + d[i][c[j].key] + '</td>';
                     }
                     html += '</tr>';
                 }
             }
-            if(that._el.hasClass('list')) {
+            if (that._el.hasClass('list')) {
                 console.log(111111);
                 console.log(11);
                 return;
@@ -182,16 +184,16 @@ $(function(){
 
             that._el.append('<tbody class="list"> ' + html + '</tbody>');
         },
-        _initListTbodyCheckBox: function() {
-            var html = '<td>'
-                     + '<div class="custom-control custom-checkbox table-checkbox">'
-                     + '<input type="checkbox" class="custom-control-input">'
-                     + '<label class="custom-control-label">&nbsp;</label>'
-                     + '</div>'
-                     + '</td>';
+        _initListTbodyCheckBox: function () {
+            var html = '<td>' +
+                '<div class="custom-control custom-checkbox table-checkbox">' +
+                '<input type="checkbox" class="custom-control-input">' +
+                '<label class="custom-control-label">&nbsp;</label>' +
+                '</div>' +
+                '</td>';
             return html;
         },
-        _initList: function() {
+        _initList: function () {
             if (!this._isValueEmpty(this._options.sections)) {
                 this._initSection(this._options.sections);
             }
@@ -200,7 +202,7 @@ $(function(){
                 return false;
             }
         },
-        _ajaxRequestData: function(params, callbackFunc) {
+        _ajaxRequestData: function (params, callbackFunc) {
             var that = this;
             params._token = that._ajax.token;
             $.ajax({
@@ -208,22 +210,22 @@ $(function(){
                 url: this._options.ajaxRequestUrl,
                 dataType: this._options.ajaxDataType,
                 data: params,
-                success:function(resp) {
+                success: function (resp) {
                     var data = [];
-                    if(resp.code == that._options.ajaxReturnSuccCode) {
+                    if (resp.code == that._options.ajaxReturnSuccCode) {
                         data = resp.data;
                     }
                     callbackFunc(that, data);
                 },
-                error: function() {}
+                error: function () {}
             });
         },
-        init: function() {
-            this._initList();  
+        init: function () {
+            this._initList();
         }
     };
 
-    $.fn.DataList = function(options){
+    $.fn.DataList = function (options) {
         new DataList(this, options);
     };
 });

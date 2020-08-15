@@ -28,7 +28,7 @@ $router->group(['prefix' => '/seller'], function () use ($router) {
 });
 
 //开店向导
-$router->group(['prefix' => '/wizard', 'middleware' => 'checkauth'], function () use ($router) {
+$router->group(['prefix' => '/wizard', 'middleware' => ['checkauth']], function () use ($router) {
     $router->get('choose', 'WizardController@choose');
     $router->get('version', 'WizardController@version');
     $router->get('category', 'WizardController@category');
@@ -37,7 +37,7 @@ $router->group(['prefix' => '/wizard', 'middleware' => 'checkauth'], function ()
 });
 
 //店铺管理
-$router->group(['prefix' => '/shop'], function () use ($router) {
+$router->group(['prefix' => '/shop', 'middleware' => 'CheckAuth'], function () use ($router) {
 
     $router->get('dashboard', ['uses' => 'ShopController@dashboard']);
     $router->get('list', ['uses' => 'ShopController@lists']);
@@ -46,13 +46,13 @@ $router->group(['prefix' => '/shop'], function () use ($router) {
     $router->get('wizard', ['uses' => 'ShopController@wizard']);
 
     //商家地址库管理
-    $router->group(['prefix' => '/address', 'middleware' => 'checkauth'], function () use ($router) {
+    $router->group(['prefix' => '/address'], function () use ($router) {
         $router->get('list', ['uses' => 'AddressController@lists']);
         $router->get('add', ['uses' => 'AddressController@add']);
     });
 
     //员工管理
-    $router->group(['prefix' => '/staff', 'middleware' => 'checkauth'], function () use ($router) {
+    $router->group(['prefix' => '/staff'], function () use ($router) {
         $router->any('list', ['uses' => 'StaffController@lists']);
         $router->get('getlist', ['uses' => 'StaffController@getStaffList']);
         $router->get('add', ['uses' => 'StaffController@add']);
@@ -82,6 +82,7 @@ $router->group(['prefix' => '/product'], function () use ($router) {
         $router->post('del', ['uses' => 'CategoryController@del']);
         $router->post('edit', ['uses' => 'CategoryController@edit']);
         $router->post('get', ['uses' => 'CategoryController@get']);
+        $router->post('sub', ['uses' => 'CategoryController@sub']);
     });
 
     //品牌
@@ -102,9 +103,3 @@ $router->group(['prefix' => '/product'], function () use ($router) {
     });
 
 });
-
-Route::any('/ckfinder/connector', '\CKSource\CKFinderBridge\Controller\CKFinderController@requestAction')
-    ->name('ckfinder_connector');
-
-Route::any('/ckfinder/browser', '\CKSource\CKFinderBridge\Controller\CKFinderController@browserAction')
-    ->name('ckfinder_browser');
