@@ -13,9 +13,7 @@
                     <h5 class="card-header-title">商品品牌列表</h5>
                     <a href="#!" class="btn btn-sm btn-primary sf-btn-create">新建品牌</a>
                 </div>
-                <div class="table-responsive">
-                    <table class="table table-sm table-nowrap card-table" id="sf-brand-tb"></table>
-                </div>
+                
             </div>
         </div>
     </div>
