@@ -1,21 +1,20 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\User;
-use App\Http\Controllers\Controller;
-use App\Services\Category\CategoryService;
 use App\Services\Brand\BrandService;
-
+use App\Services\Category\CategoryService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 
-class BrandController extends BaseController {
+class BrandController extends BaseController
+{
     /**
      * @name 获取分类列表
-    */
-    public function lists(Request $request) {
-        if($request->isMethod('post')) {
+     */
+    public function lists(Request $request)
+    {
+        if ($request->isMethod('post')) {
             try {
                 // if (\Auth::Check()) {
                 //     return ['code' => 200, 'msg' => "登录成功"];
@@ -29,10 +28,9 @@ class BrandController extends BaseController {
                 $brandService = new BrandService();
                 $res = $brandService->lists($input);
                 if ($res['code'] != 200) {
-                    return ['code' => 201, 'msg'=> $res['msg']];
+                    return ['code' => 201, 'msg' => $res['msg']];
                 }
-                
-                return ['code' => 200, 'msg' => "succ", 'data' => $res['data']];
+                return ['code' => 200, 'msg' => "succ", 'data' => $res['data'][0]];
 
             } catch (ValidationException $validationException) {
                 return ['code' => 201, 'msg' => "服务异常"];
@@ -41,7 +39,8 @@ class BrandController extends BaseController {
         return view('brand.lists');
     }
 
-    public function add(Request $request) {
+    public function add(Request $request)
+    {
         try {
             $input = [
                 'name' => $request->input('cat_name'),
@@ -66,7 +65,7 @@ class BrandController extends BaseController {
             $categoryService = new CategoryService();
             $res = $categoryService->create($input);
             if ($res['code'] != 200) {
-                return ['code' => 201, 'msg'=> $res['msg']];
+                return ['code' => 201, 'msg' => $res['msg']];
             }
 
             return ['code' => 200, 'msg' => '创建成功'];
@@ -76,17 +75,18 @@ class BrandController extends BaseController {
         }
     }
 
-    public function subadd(Request $request) {
+    public function subadd(Request $request)
+    {
         try {
             $input = [
-                'pid'  => (int) $request->input('pid'),
+                'pid' => (int) $request->input('pid'),
                 'name' => $request->input('cat_name'),
                 'alias' => $request->input('cat_alias'),
                 'desc' => $request->input('cat_desc'),
             ];
 
             $rules = [
-                'pid' =>  'required',
+                'pid' => 'required',
                 'name' => 'required|max:20',
             ];
 
@@ -103,9 +103,9 @@ class BrandController extends BaseController {
 
             $categoryService = new CategoryService();
             $res = $categoryService->create($input);
-            
+
             if ($res['code'] != 200) {
-                return ['code' => 201, 'msg'=> $res['msg']];
+                return ['code' => 201, 'msg' => $res['msg']];
             }
             return ['code' => 200, 'msg' => '创建成功'];
 
@@ -114,7 +114,8 @@ class BrandController extends BaseController {
         }
     }
 
-    public function del(Request $request) {
+    public function del(Request $request)
+    {
         try {
             $input = [
                 'cat_id' => (int) $request->input('cat_id'),
@@ -136,7 +137,7 @@ class BrandController extends BaseController {
             $categoryService = new CategoryService();
             $res = $categoryService->delete($input['cat_id']);
             if ($res['code'] != 200) {
-                return ['code' => 201, 'msg'=> $res['msg']];
+                return ['code' => 201, 'msg' => $res['msg']];
             }
 
             return ['code' => 200, 'msg' => '删除成功'];
@@ -146,7 +147,8 @@ class BrandController extends BaseController {
         }
     }
 
-    public function edit(Request $request) {
+    public function edit(Request $request)
+    {
         try {
             $input = [
                 'cat_id' => (int) $request->input('cat_id'),
@@ -174,7 +176,7 @@ class BrandController extends BaseController {
             $categoryService = new CategoryService();
             $res = $categoryService->edit($input);
             if ($res['code'] != 200) {
-                return ['code' => 201, 'msg'=> $res['msg']];
+                return ['code' => 201, 'msg' => $res['msg']];
             }
 
             return ['code' => 200, 'msg' => '更新成功'];
@@ -184,20 +186,20 @@ class BrandController extends BaseController {
         }
     }
 
-    public function get(Request $request) {
+    public function get(Request $request)
+    {
         $catId = (int) $request->input('cat_id');
         if ($catId <= 0) {
-            return ['code' => 201, 'msg'=> '提交参数有错误', 'data' => []];
+            return ['code' => 201, 'msg' => '提交参数有错误', 'data' => []];
         }
 
         //获取店铺基本信息
         $categoryService = new CategoryService();
         $info = $categoryService->get($catId);
-        if(empty($info)) {
-            return ['code' => 201, 'msg'=> '没有找到相应的数据', 'data' => []];
+        if (empty($info)) {
+            return ['code' => 201, 'msg' => '没有找到相应的数据', 'data' => []];
         }
 
-        return ['code' => 200, 'msg'=> 'suceess', 'data' => $info];
+        return ['code' => 200, 'msg' => 'suceess', 'data' => $info];
     }
 }
-

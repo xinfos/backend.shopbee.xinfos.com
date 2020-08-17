@@ -2,9 +2,8 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use App\Http\Controllers\Controller;
 
-class UserController extends BaseController 
+class UserController extends BaseController
 {
     /**
      * 显示给用户的概要文件.
@@ -18,6 +17,3 @@ class UserController extends BaseController
         return view('user.profile', ['user' => User::findOrFail($id)]);
     }
 }
-
-
-?>

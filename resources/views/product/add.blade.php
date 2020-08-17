@@ -116,8 +116,6 @@
 							<label><em class="sf-required">*</em>品牌：</label>
 							<div class="input-group input-group-merge  ml-3 mb-3">
 								<select id="product_brand" class="custom-select" data-toggle="select">
-									<option id="1">1</option>
-									<option id="1">2</option>
 								</select>
 							</div>
 							<small class="form-text text-muted ml-3">
@@ -136,7 +134,7 @@
 							</small>
 							<div class="row col-12 ml-3" style="border: 0.5px solid #d2ddec;border-radius: .375rem;margin-left:1px;background-color:#f8f8f8;">
 								<div class="col-10  mt-4"></div>
-								<div class="col-12 col-md-6">
+								<div class="col-12 col-md-4">
 									<div class="form-group">
 										<label>类目属性：</label>
 										<input type="text" class="form-control">
@@ -145,25 +143,6 @@
 										</small>
 									 </div>
 								</div>
-									<?php foreach ($item['attrs_template'] as $v) {?>
-										<?php foreach ($v as $vv) {?>
-											<?php if (empty($vv['attrs'])) {
-    continue;
-}
-    ?>
-											<?php foreach ($vv['attrs'] as $vvv) {?>
-												<div class="sf-form-group">
-													<label class="sf-label" style="margin-left: 15px;"><?php echo $vvv['attr_name'] ?>:</label>
-													<?php if ($vvv['fill_type'] == 1) {?>
-													<?php } elseif ($vvv['fill_type'] == 2) {?>
-														<input class="sf-form-control" name="name" id="s_name" placeholder="商品卖点" value="">
-													<?php } else {?>
-													<?php }?>
-													<p class="help-block">在商品详情页标题下面展示卖点信息，建议60字以内 <a href="#">查看示例</a></p>
-												</div>
-											<?php }?>
-										<?php }?>
-									<?php }?>
 							</div>
 						</div>
 					</div>
@@ -377,7 +356,6 @@
 </div>
 <script src="/assets/dashkit/libs/select2/select2.full.min.js"></script>
 <script src="/assets/dashkit/libs/cupload/cupload.js"></script>
-
 <script src="/assets/js/product.js"></script>
 <script type="text/javascript">
 	$(function(){
@@ -388,4 +366,5 @@
 		$('sf-product-frm').Product();
 	});
 </script>
+
 @endsection

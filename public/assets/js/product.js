@@ -1,6 +1,4 @@
 $(function () {
-
-
     var Product = function (el, opts) {
         this.init();
     }
@@ -13,13 +11,16 @@ $(function () {
             ajaxType: 'POST',
             ajaxDataType: 'JSON',
             ajaxReturnSuccCode: 200,
+        },
+        _url: {
+            brandListUrl: "/product/brand/list"
         }
     };
 
     //初始化
     Product.prototype.init = function () {
-        console.log(1);
-        this.getBrandData(1000);
+        this._getCategoryAttrs();
+        this.getBrandData(this._url.brandListUrl, 10010);
     }
 
     //初始化渲染属性
@@ -49,34 +50,53 @@ $(function () {
         }
         return unicodeLen;
     }
+    //获取商品分类属性
+    Product.prototype._getCategoryAttrs = function (url, catId) {
+        this._opt.ajaxRequestUrl = url;
+        this.ajaxRequestData({
+            'cat_id': catId
+        }, this.renderBrandSelect);
+    };
 
     //获取商品分类品牌
-    Product.prototype.getBrandData = function (catId) {
-        this._options.
-        this.ajaxRequestData(catId, cals)
-        console.log(catId)
+    Product.prototype.getBrandData = function (url, catId) {
+        this._opt.ajaxRequestUrl = url;
+        this.ajaxRequestData({
+            'cat_id': catId
+        }, this.renderBrandSelect);
+    };
+
+    Product.prototype.renderAttrs = function (that, data) {
+        console.log(data);
     }
 
     //渲染品牌
-    Product.prototype.renderBrandSelect = function (data) {
+    Product.prototype.renderBrandSelect = function (that, data) {
 
+        if (data.list.length <= 0) {
+            return false;
+        }
+        var htm = '';
+        for (var i = 0; i < data.list.length; i++) {
+            htm += '<option id = "' + data.list[i].brand_id + '" > ' + data.list[i].brand_name + ' </option>';
+        }
+        $('#product_brand').empty().append(htm);
     }
 
     //ajax请求数据
-    Product.prototype.ajaxRequestData = function (callbackFunc) {
+    Product.prototype.ajaxRequestData = function (data, callbackFunc) {
         var that = this;
-        params._token = that._ajax.token;
         $.ajax({
             type: this._opt.ajaxType,
             url: this._opt.ajaxRequestUrl,
-            dataType: this._options.ajaxDataType,
-            data: params,
+            dataType: this._opt.ajaxDataType,
+            data: data,
             success: function (resp) {
-                var data = [];
-                if (resp.code == that._options.ajaxReturnSuccCode) {
-                    data = resp.data;
+                var respData = [];
+                if (resp.code == that._opt.ajaxReturnSuccCode) {
+                    respData = resp.data;
                 }
-                callbackFunc(that, data);
+                callbackFunc(that, respData);
             },
             error: function () {}
         });
@@ -85,6 +105,7 @@ $(function () {
     $.fn.Product = function (opts) {
         new Product(this, opts);
     };
+
 
     $('#product_name').on('input', function () {
 
@@ -99,9 +120,9 @@ $(function () {
         $('.input-word-length').empty().html(value.length);
     });
 
-    $('#product_brand').on('onselect', function () {
-        console.log(1);
-    });
+    // $('#product_brand').on('select', function () {
+    //     alert(1);
+    // });
 });
 
 
