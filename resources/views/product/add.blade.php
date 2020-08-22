@@ -18,6 +18,9 @@
 .sf-product-push-body{
 	margin-top: 30px;
 }
+input::placeholder{
+	font-size:13px;
+}
 </style>
 
 <div class="row justify-content-center content" style="background-color:#f7f8fa;">
@@ -42,6 +45,9 @@
 							</li>
 							<li class="nav-item">
 								<a href="#sale-info" class="nav-link">销售信息</a>
+							</li>
+							<li class="nav-item">
+								<a href="#spec-info" class="nav-link">商品规格</a>
 							</li>
 							<li class="nav-item">
 								<a href="#image-info" class="nav-link">图文描述</a>
@@ -127,21 +133,42 @@
 						<!-- First name -->
 						<div class="form-group">
 							<!-- Label -->
-							<label>类目属性：</label>
+							<label><em class="sf-required">&nbsp;&nbsp;</em>类目属性：</label>
 							<!--  Radio -->
 							<small class="form-text text-muted ml-3">
 								错误填写宝贝属性，可能会引起宝贝下架或搜索流量减少，影响您的正常销售，请认真准确填写！。
 							</small>
-							<div class="row col-12 ml-3" style="border: 0.5px solid #d2ddec;border-radius: .375rem;margin-left:1px;background-color:#f8f8f8;">
-								<div class="col-10  mt-4"></div>
-								<div class="col-12 col-md-4">
-									<div class="form-group">
-										<label>类目属性：</label>
-										<input type="text" class="form-control">
-										<small class="form-text text-muted mt-2">
-											标题和描述关键词是否违规自检工具：商品合规工具。
-										</small>
-									 </div>
+							<div class="row col-12" style="border: 0.5px solid #d2ddec;border-radius: .375rem;margin-left:1px;background-color:#f8f8f8;">
+								<div class="row col-12 mt-4 props"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- spec-info -->
+			<hr class="my-4" id="spec-info">
+			<div class="card">
+				<div class="card-header">
+					<!-- Heading -->
+					<h3 class="card-header-title">商品规格</h3>
+				</div>
+				<div class="card-body">
+					<div class="col-12 col-md-6">
+						<!-- First name -->
+						<div class="form-group">
+							<!-- Label -->
+							<label>一口价：</label>
+							<small class="form-text text-muted ml-3">
+								本类目下，宝贝价格必须在100.00元-999999.00元之间。
+							</small>
+							<!--  Radio -->
+							<div class="input-group input-group-merge  ml-3 mb-3">
+								<input type="number" class="form-control form-control-appended" placeholder="">
+								<div class="input-group-append">
+									<div class="input-group-text">
+										<span>元</span>
+									</div>
 								</div>
 							</div>
 						</div>

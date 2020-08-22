@@ -1,4 +1,8 @@
 $(function () {
+
+    const inputText = 1;
+    const inputSelect = 2;
+
     var Product = function (el, opts) {
         this.init();
     }
@@ -13,19 +17,15 @@ $(function () {
             ajaxReturnSuccCode: 200,
         },
         _url: {
-            brandListUrl: "/product/brand/list"
+            brandListUrl: "/product/brand/list",
+            AttrsListUrl: "/product/category/attrs",
         }
     };
 
     //初始化
     Product.prototype.init = function () {
-        this._getCategoryAttrs();
+        this._getCategoryAttrs(this._url.AttrsListUrl, 10003);
         this.getBrandData(this._url.brandListUrl, 10010);
-    }
-
-    //初始化渲染属性
-    Product.prototype.renderAttrView = function () {
-
     }
 
     //检查数据
@@ -55,8 +55,98 @@ $(function () {
         this._opt.ajaxRequestUrl = url;
         this.ajaxRequestData({
             'cat_id': catId
-        }, this.renderBrandSelect);
+        }, this.renderAttrs);
     };
+
+    //渲染分类属性
+    Product.prototype.renderAttrs = function (that, data) {
+        if (data.length <= 0) {
+            return false;
+        }
+        for (var i = 0; i < data.length; i++) {
+            if (!(data[i].attrs instanceof Array) || data[i].attrs.length <= 0) {
+                continue;
+            }
+            for (var j = 0; j < data[i].attrs.length; j++) {
+                that.renderAttrView(that, data[i].attrs[j]);
+            }
+        }
+    }
+
+    //初始化渲染属性
+    Product.prototype.renderAttrView = function (that, prop) {
+        switch (prop.fill_type) {
+            case inputText:
+                that.renderAttrInputText(that, prop);
+                break;
+            case inputSelect:
+                that.renderAttrInputSelect(that, prop);
+                break;
+        }
+    }
+
+    //渲染input框
+    Product.prototype.renderAttrInputText = function (that, prop) {
+
+        var requiredHtm, unitHtm = '';
+        if (prop.unit.length > 0) {
+            unitHtm = '<div class="input-group-append">' +
+                '<div class="input-group-text">' +
+                '<span>' + prop.unit + '</span>' +
+                '</div>' +
+                '</div>'
+        }
+        //是否为必填项
+        if (prop.is_required == 1) {
+            requiredHtm = '<em class="sf-required">*</em>';
+        } else {
+            requiredHtm = "&nbsp;&nbsp;&nbsp;"
+        }
+
+        var textType = 'type="text"';
+        if (prop.is_numeric == 1) {
+            textType = 'type="number" min=0'
+        }
+
+        var htm = '<div class="col-12 col-md-6 mb-2">' +
+            '<div class="form-group">' +
+            '<label>' + requiredHtm + prop.attr_name + '：</label>' +
+            '<div class="input-group ml-3 mb-3">' +
+            '<input ' + textType + '" id="product_name" class="form-control form-control-appended">' +
+            unitHtm +
+            '</div>' +
+            '<small class="form-text text-muted ml-3">' +
+            ' 标题和描述关键词是否违规自检工具：商品合规工具。' +
+            '</small>' +
+            '</div>' +
+            '</div>';
+        $('.props').append(htm);
+    }
+    //渲染select框
+    Product.prototype.renderAttrInputSelect = function (that, prop) {
+
+        var options = '';
+        // var data = [];
+        if (prop.values instanceof Array && prop.values.length > 0) {
+            for (var i = 0; i < prop.values.length; i++) {
+                options += '<option id="' + prop.values[i].val_id + '">' + prop.values[i].val + '</option>';
+            }
+        }
+        var htm = '<div class="col-12 col-md-6 mb-2">' +
+            '<div class="form-group">' +
+            '<label><em class="sf-required">*</em>' + prop.attr_name + '：</label>' +
+            '<div class="input-group input-group-merge ml-3 mb-3">' +
+            '<select id="sel-' + prop.attr_id + '" class="custom-select">' + options + '</select>' +
+            '</div>' +
+            '<small class="form-text text-muted ml-3">' +
+            ' 标题和描述关键词是否违规自检工具：商品合规工具。' +
+            '</small>' +
+            '</div>' +
+            '</div>';
+
+        $('.props').append(htm);
+    }
+
 
     //获取商品分类品牌
     Product.prototype.getBrandData = function (url, catId) {
@@ -66,13 +156,8 @@ $(function () {
         }, this.renderBrandSelect);
     };
 
-    Product.prototype.renderAttrs = function (that, data) {
-        console.log(data);
-    }
-
     //渲染品牌
     Product.prototype.renderBrandSelect = function (that, data) {
-
         if (data.list.length <= 0) {
             return false;
         }

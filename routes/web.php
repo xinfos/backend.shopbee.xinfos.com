@@ -83,6 +83,7 @@ $router->group(['prefix' => '/product'], function () use ($router) {
         $router->post('edit', ['uses' => 'CategoryController@edit']);
         $router->post('get', ['uses' => 'CategoryController@get']);
         $router->post('sub', ['uses' => 'CategoryController@sub']);
+        $router->post('attrs', ['uses' => 'CategoryController@attrs']);
     });
 
     //品牌

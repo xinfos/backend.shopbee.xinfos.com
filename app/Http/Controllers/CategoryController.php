@@ -206,4 +206,22 @@ class CategoryController extends BaseController
         }
         return ['code' => 200, 'msg' => 'suceess', 'data' => $info[0]];
     }
+
+    public function attrs(Request $request)
+    {
+        $catId = (int) $request->input('cat_id');
+        if ($catId <= 0) {
+            return ['code' => 201, 'msg' => '提交参数有错误', 'data' => []];
+        }
+        //获取店铺基本信息
+        $categoryService = new CategoryService();
+
+        $item = $categoryService->getAttrsMaps($catId);
+
+        if (empty($item[0])) {
+            return ['code' => 201, 'msg' => '没有找到相应的数据', 'data' => []];
+        }
+        return ['code' => 200, 'msg' => 'suceess', 'data' => $item[0]];
+
+    }
 }
