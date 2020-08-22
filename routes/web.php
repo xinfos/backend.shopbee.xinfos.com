@@ -103,4 +103,10 @@ $router->group(['prefix' => '/product'], function () use ($router) {
         $router->any('get', ['uses' => 'AttrsController@get']);
     });
 
+    //商品属性组
+    $router->group(['prefix' => '/attrsgroup'], function () use ($router) {
+        $router->any('list', ['uses' => 'AttrsGroupController@lists']);
+        $router->any('add', ['uses' => 'AttrsGroupController@add']);
+    });
+
 });

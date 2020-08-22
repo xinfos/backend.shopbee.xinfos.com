@@ -193,6 +193,15 @@ class MenuController extends BaseController {
                                     'is_menu'    => 1,
                                     'sub_menu'   => [],
                                 ],
+                                [
+                                    'menu_id'    => 12015,
+                                    'menu_pid'   => 1201,
+                                    'title'      => '商品属性组',
+                                    'menu_icon'  => 'fe fe-shopping-bag',
+                                    'menu_addr'  => '/product/attrsgroup/list',
+                                    'is_menu'    => 1,
+                                    'sub_menu'   => [],
+                                ],
                             ],
                         ],
                     ]
