@@ -1,24 +1,24 @@
-! function($) {
+! function ($) {
     $.extend({
         _jsonp: {
             scripts: {},
             counter: 1,
             charset: "gb2312",
             head: document.getElementsByTagName("head")[0],
-            name: function(callback) {
+            name: function (callback) {
                 var name = "_jsonp_" + (new Date).getTime() + "_" + this.counter;
                 this.counter++;
-                var cb = function(json) {
+                var cb = function (json) {
                     eval("delete " + name), callback(json), $._jsonp.head.removeChild($._jsonp.scripts[name]), delete $._jsonp.scripts[name]
                 };
                 return eval(name + " = cb"), name
             },
-            load: function(a, b) {
+            load: function (a, b) {
                 var c = document.createElement("script");
                 c.type = "text/javascript", c.charset = this.charset, c.src = a, this.head.appendChild(c), this.scripts[b] = c
             }
         },
-        getJSONP: function(a, b) {
+        getJSONP: function (a, b) {
             var c = $._jsonp.name(b),
                 a = a.replace(/{callback};/, c);
             return $._jsonp.load(a, c), this
@@ -1730,7 +1730,7 @@ function getStockOpt(id, name) {
 function getAreaListcallback(r) {
     currentDom.html(getAreaList(r));
     if (currentAreaInfo.currentLevel >= 2) {
-        currentDom.find("a").click(function() {
+        currentDom.find("a").click(function () {
             if (page_load) {
                 page_load = false;
             }
@@ -1774,7 +1774,7 @@ function chooseProvince(provinceId) {
     townaContainer.hide();
     if (provinceCityJson["" + provinceId]) {
         cityContainer.html(getAreaList(provinceCityJson["" + provinceId]));
-        cityContainer.find("a").click(function() {
+        cityContainer.find("a").click(function () {
             if (page_load) {
                 page_load = false;
             }
@@ -1829,19 +1829,19 @@ function chooseArea(areaId, areaName) {
     currentDom = townaContainer;
     $.getJSONP("http://d.jd.com/area/get?fid=" + areaId + "&callback=getAreaListcallback");
     $.AJAX({
-        type:"get",
-        async:false,
-        url:"http://d.jd.com/area/get?fid=" + areaId + "&callback=getAreaListcallback",
-        dataType:"jsonp"
-        jsonp:"cc",
-        jsonpCallback:"getAreaListcallback"  //就是相当于前面例子中?cc=demo的demo,自己可以更改
-        success:function(data, state, xhr){
-        
-                   这里得的data也是后台的$d数据
-        
-            }          //ajax成功得服务端响应执行的函数, 其中会先执行demo函数,然后才是这个
-        
-        })
+        type: "get",
+        async: false,
+        url: "http://d.jd.com/area/get?fid=" + areaId + "&callback=getAreaListcallback",
+        dataType: "jsonp"
+        jsonp: "cc",
+        jsonpCallback: "getAreaListcallback" //就是相当于前面例子中?cc=demo的demo,自己可以更改
+        success: function (data, state, xhr) {
+
+            这里得的data也是后台的$d数据
+
+        } //ajax成功得服务端响应执行的函数, 其中会先执行demo函数,然后才是这个
+
+    })
 }
 $("#store-selector .text").after(provinceHtml);
 var areaTabContainer = $("#JD-stock .tab li");
@@ -1881,13 +1881,13 @@ function CurrentAreaInfoInit() {
     }
 }
 var page_load = true;
-(function() {
-    $("#store-selector").unbind("mouseover").bind("mouseover", function() {
+(function () {
+    $("#store-selector").unbind("mouseover").bind("mouseover", function () {
         $('#store-selector').addClass('hover');
         $("#store-selector .content,#JD-stock").show();
     }).find("dl").remove();
     CurrentAreaInfoInit();
-    areaTabContainer.eq(0).find("a").click(function() {
+    areaTabContainer.eq(0).find("a").click(function () {
         areaTabContainer.removeClass("curr");
         areaTabContainer.eq(0).addClass("curr").show();
         provinceContainer.show();
@@ -1898,7 +1898,7 @@ var page_load = true;
         areaTabContainer.eq(2).hide();
         areaTabContainer.eq(3).hide();
     });
-    areaTabContainer.eq(1).find("a").click(function() {
+    areaTabContainer.eq(1).find("a").click(function () {
         areaTabContainer.removeClass("curr");
         areaTabContainer.eq(1).addClass("curr").show();
         provinceContainer.hide();
@@ -1908,7 +1908,7 @@ var page_load = true;
         areaTabContainer.eq(2).hide();
         areaTabContainer.eq(3).hide();
     });
-    areaTabContainer.eq(2).find("a").click(function() {
+    areaTabContainer.eq(2).find("a").click(function () {
         areaTabContainer.removeClass("curr");
         areaTabContainer.eq(2).addClass("curr").show();
         provinceContainer.hide();
@@ -1917,7 +1917,7 @@ var page_load = true;
         townaContainer.hide();
         areaTabContainer.eq(3).hide();
     });
-    provinceContainer.find("a").click(function() {
+    provinceContainer.find("a").click(function () {
         if (page_load) {
             page_load = false;
         }

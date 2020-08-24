@@ -43,4 +43,8 @@ class ProductController extends BaseController
 
         return view('product.create', ["item" => $item]);
     }
+
+    public function push() {
+        return view('product.p');
+    }
 }
