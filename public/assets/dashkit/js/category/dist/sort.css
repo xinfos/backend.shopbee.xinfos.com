@@ -1,18 +1,23 @@
 @charset "utf-8";
+
 /**Style Reset**/
-ul, li a {
+ul,
+li a {
 	font: 12px/20px "Microsoft Yahei", Tahoma, Arial, "Helvetica Neue", "Hiragino Sans GB", Simsun, sans-self;
 }
 
-ul, ol {
+ul,
+ol {
 	list-style-type: none;
 }
 
-b, strong {
+b,
+strong {
 	font-weight: normal;
 }
 
-i, em {
+i,
+em {
 	font-style: normal;
 }
 
@@ -20,6 +25,7 @@ a {
 	text-decoration: none;
 	color: #333;
 }
+
 /*清除浮动*/
 .clearfix:after {
 	clear: both;
@@ -27,11 +33,13 @@ a {
 	height: 0;
 	content: "";
 }
+
 /*主体部分*/
 .contains {
 	width: 1000px;
 	margin: 0 auto;
 }
+
 /*面包屑导航*/
 .crumbNav {
 	padding: 18px 0;
@@ -50,6 +58,7 @@ a {
 	padding: 0 2px;
 	font-family: simsun;
 }
+
 /**选择商品分类**/
 .wareSort {
 	padding: 15px 8px 15px 7px;
@@ -83,9 +92,9 @@ a {
 }
 
 .wareSort ul li.active a {
-	border-color: #52bea6;
-	background: #cefff4 url(../img/arrow.png) no-repeat right center;
-	color: #52bea6;
+	border-color: #2c7be5;
+	background: #2c7be5 url("&gt;&lt;") no-repeat right center;
+	color: #fff;
 }
 
 .selectedSort {

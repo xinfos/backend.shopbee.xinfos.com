@@ -146,9 +146,16 @@
                 </div>
                 <div class="card-body-no-height">
                     <div class="wareSort clearfix">
-                        <ul id="sort1"></ul>
-                        <ul id="sort2" style="display: none;"></ul>
-                        <ul id="sort3" style="display: none;"></ul>
+                        <select class="custom-select" data-toggle="select">
+                            <option>My first option</option>
+                            <option>Another option</option>
+                            <option>Third option is here</option>
+                        </select>
+                        <ul id="sort1" style="height:354px;overflow-y:scroll;">
+
+                        </ul>
+                        <!-- <ul id="sort2" style="display: none;"></ul>
+                        <ul id="sort3" style="display: none;"></ul> -->
                     </div>
                     <div class="selectedSort">
                         <b>您当前选择的商品类别是：</b>

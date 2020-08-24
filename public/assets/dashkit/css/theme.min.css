@@ -17590,7 +17590,7 @@ button:focus {
 
 .sf-search {
 	/* margin: 16px; */
-	padding: 25px 25px;
+	padding: 25px 25px 25px 0px;
 	background: #f7f8fa;
 	min-width: 768px;
 	/*margin-bottom: 24px;*/

@@ -34,17 +34,18 @@
     </div>
 </div>
 <div class="modal fade fixed-right" id="modalVerticalRight" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-vertical" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-        <h4 class="modal-title">模板</h4>
+    <div class="modal-dialog modal-dialog-vertical" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">模板</h4>
                 <ul class="nav nav-tabs nav-tabs-sm modal-header-tabs">
                     <li class="nav-item">
                         <a class="nav-link active" data-toggle="tab" href="#modalActivityAction">新增模板</a>
                     </li>
                 </ul>
             </div>
+        </div>
     </div>
-  </div>
 </div>
+<script src="/assets/dashkit/libs/select2/select2.full.min.js"></script>
 @endsection
