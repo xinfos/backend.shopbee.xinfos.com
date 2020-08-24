@@ -21,10 +21,6 @@
 
     };
 
-
-
-
-
     $.fn.extend({
         CategorySelector: function (opt) {
             return new CategorySelector($(this), opt)
