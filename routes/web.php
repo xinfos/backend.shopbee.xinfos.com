@@ -73,6 +73,7 @@ $router->group(['prefix' => '/product'], function () use ($router) {
     $router->get('publish', ['uses' => 'ProductController@publish']);
     $router->get('create', ['uses' => 'ProductController@create']);
     $router->get('add', ['uses' => 'ProductController@add']);
+    $router->get('push', ['uses' => 'ProductController@push']);
 
     //分类
     $router->group(['prefix' => '/category'], function () use ($router) {

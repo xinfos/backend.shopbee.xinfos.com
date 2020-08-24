@@ -3,7 +3,7 @@ var cateFrm = {
         host_api: "http://127.0.0.1:8184",
         getcate_api: host_api + "/v1/category/get",
     },
-    view: function(catId) {
+    view: function (catId) {
         console.log(catId);
         // $.ajax({
         //     type : "post",
