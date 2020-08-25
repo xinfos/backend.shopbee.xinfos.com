@@ -102,6 +102,7 @@ $router->group(['prefix' => '/product'], function () use ($router) {
         $router->any('list', ['uses' => 'AttrsController@lists']);
         $router->any('create', ['uses' => 'AttrsController@create']);
         $router->any('get', ['uses' => 'AttrsController@get']);
+        $router->post('add', ['uses' => 'AttrsController@add']);
     });
 
     //商品属性组

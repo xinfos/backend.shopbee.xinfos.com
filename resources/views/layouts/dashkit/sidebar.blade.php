@@ -70,7 +70,7 @@
                                     <div class="col-auto">
                                         <!-- Avatar -->
                                         <div class="avatar avatar-sm avatar-online">
-                                            <img class="avatar-img rounded-circle" src="./assets/img/avatars/profiles/avatar-1.jpg" alt="..." />
+                                            <img class="avatar-img rounded-circle" src="/assets/images/users/avatar-1.jpg" alt="..." />
                                         </div>
                                     </div>
                                     <div class="col ml-n2">
