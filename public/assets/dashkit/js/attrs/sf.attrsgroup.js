@@ -1,3 +1,11 @@
+var JSElement = document.createElement("script");
+
+JSElement.setAttribute("type", "text/javascript");
+
+JSElement.setAttribute("src", "/assets/dashkit/libs/bootstrapvalidator/dist/frm.js");
+
+document.body.appendChild(JSElement);
+
 $(function () {
 
     const api = {
@@ -18,7 +26,10 @@ $(function () {
         var self = this;
     }
 
-    sAttrsGroup.prototype.modal = function () {}
+
+    sAttrsGroup.prototype.vals = function () {
+
+    }
 
     sAttrsGroup.prototype._getAttrVals = function () {
         return $('.sf-attr-vals').val();
@@ -26,7 +37,13 @@ $(function () {
 
     //表单验证
     sAttrsGroup.prototype.verify = function (data) {
-        return true;
+        var rules = [{
+            'name': 'required'
+        }];
+        var err = {
+            'name.required': '属性名不能为空',
+        };
+        return Validator.make(data, rules, err);
     }
 
     //将form表单转换成JSON格式
@@ -46,6 +63,12 @@ $(function () {
         if (!self.verify(formValuesJSON)) {
             return false;
         }
+        //以下的表单类型类型，默认属性值是必填项
+        if (formValuesJSON.fill_type != 1) {
+            // vals = $('.')
+        }
+        console.log(formValuesJSON);
+
         self._ajaxPostRequest(api.create, formValuesJSON, this._parseSaveResult);
     }
 
