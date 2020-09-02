@@ -119,6 +119,7 @@ $(function () {
         });
         return serializeObj;
     };
+
     $('.sf-btn-saveAttrs').on('click', function () {
         $(frm.create).sAttrsGroup().saveSubmit();
     });

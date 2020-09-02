@@ -90,10 +90,10 @@
                                         <div class="card">
                                             <div class="card-header">
                                                 <h4 class="card-header-title">属性值</h4>
-                                                <button type="button" class="sf-btn sf-btn-primary">添加属性值</button>
+                                                <button type="button" class="sf-btn sf-btn-primary sf-btn-attrsvals-modal">添加属性值</button>
                                             </div>
                                             <div class="table-responsive">
-                                                <table class="table table-sm table-nowrap card-table">
+                                                <table class="table table-sm table-nowrap card-table sf-s">
                                                     <thead>
                                                         <tr>
                                                             <th>#</th>
@@ -143,5 +143,5 @@
     </div>
 </div>
 <script src="/assets/dashkit/libs/select2/select2.full.min.js"></script>
-<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
 <script src="/assets/dashkit/js/attrs/sf.attrsgroup.js"></script>
+<script src="/assets/dashkit/js/attrs/sf.attrsvals.js"></script>
