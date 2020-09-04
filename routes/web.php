@@ -109,6 +109,6 @@ $router->group(['prefix' => '/product'], function () use ($router) {
     $router->group(['prefix' => '/attrsgroup'], function () use ($router) {
         $router->any('list', ['uses' => 'AttrsGroupController@lists']);
         $router->any('add', ['uses' => 'AttrsGroupController@add']);
+        $router->any('edit', ['uses' => 'AttrsGroupController@edit']);
     });
-
 });

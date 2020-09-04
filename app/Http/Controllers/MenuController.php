@@ -196,13 +196,15 @@ class MenuController extends BaseController
                                     'menu_addr' => '/product/attrsgroup/list',
                                     'is_menu' => 1,
                                     'sub_menu' => [
-                                        'menu_id' => 120151,
-                                        'menu_pid' => 12015,
-                                        'title' => '属性模板详情',
-                                        'menu_icon' => 'fe fe-shopping-bag',
-                                        'menu_addr' => '/product/attrsgroup/add',
-                                        'is_menu' => 1,
-                                        'sub_menu' => [],
+                                        [
+                                            'menu_id' => 120151,
+                                            'menu_pid' => 12015,
+                                            'title' => '分类属性模板',
+                                            'menu_icon' => 'fe fe-shopping-bag',
+                                            'menu_addr' => '/product/attrsgroup/add',
+                                            'is_menu' => 1,
+                                            'sub_menu' => [],
+                                        ]
                                     ],
                                 ],
                             ],

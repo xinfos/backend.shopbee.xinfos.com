@@ -23,7 +23,7 @@ input::placeholder{
 }
 </style>
 
-<div class="row justify-content-center content" style="background-color:#f7f8fa;">
+<div class="row justify-content-center content" style="margin:0px;background-color:#f7f8fa;">
 	<div class="sf-product-frm col-12 col-lg-10 col-xl-10">
 		<!-- Header -->
 		<div class="header mt-md-5">

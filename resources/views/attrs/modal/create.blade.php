@@ -24,7 +24,6 @@
                                     <div class="form-group">
                                         <label>属性单位</label>
                                         <input type="text" name="unit" class="form-control" id="sf-attr-unit">
-
                                     </div>
                                 </div>
                                 <div class="col-12">

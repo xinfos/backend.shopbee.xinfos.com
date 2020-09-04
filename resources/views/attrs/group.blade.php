@@ -8,7 +8,7 @@
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-header-title">商品标准属性模板管理</h5>
-                    <button class="sf-btn sf-btn-primary sf-btn-create">新建标准模板</button>
+                    <a href="/product/attrsgroup/add" class="sf-btn sf-btn-primary">新建标准模板</a>
                 </div>
                 <div class="card-body">
                     <form>
@@ -23,22 +23,22 @@
                                 <button class="sf-btn sf-btn-white">重置</button>
                             </div>
                         </section>
-
-                    <div class="mt-4"></div>
-                    <table class="table table-hover table-sm">
-                        <thead>
-                            <tr>
-                                <th scope="col">模板名称</th>
-                                <th scope="col">所属分类</th>
-                                <th scope="col">模板完成度</th>
-                                <th scope="col">是否启用</th>
-                                <th class="text-right" scope="col">操作</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </form></div>
+                        <div class="mt-4"></div>
+                        <table class="table table-hover table-sm">
+                            <thead>
+                                <tr>
+                                    <th scope="col">模板名称</th>
+                                    <th scope="col">所属分类</th>
+                                    <th scope="col">模板完成度</th>
+                                    <th scope="col">是否启用</th>
+                                    <th class="text-right" scope="col">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
