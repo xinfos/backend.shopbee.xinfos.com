@@ -1,28 +1,23 @@
 $(function () {
     const api = {
-        "create": "/product/attrs/add",
+        "create": "/product/attrs/value/create",
         "edit": "/product/attrs/edit"
     };
 
-    var template = '<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">' +
-        '<div class="modal-dialog" role="document">' +
-        '<div class="modal-content">' +
-        '<div class="modal-header">' +
-        '<h4 class="modal-title">模板</h4>' +
-        '<ul class="nav nav-tabs nav-tabs-sm modal-header-tabs">' +
-        '<li class="nav-item">' +
-        '<a class="nav-link active" data-toggle="tab">新增模板</a>' +
-        '</li>' +
-        '</ul>' +
-        '</div>' +
-        '<div class="modal-body">' +
-        '<div class="row justify-content-center">' +
-        '<div class="col-12 col-lg-10 col-xl-10">111</div>' +
-        '</div>' +
-        '</div>' +
-        '</div>' +
-        '</div>' +
-        '</div>';
+    const clsName = {
+        createBtn: ".sf-btn-save-attrsvals",
+        listTable: ".sf-tb-list-attrsvals",
+        listTbody: ".sf-tb-list-attrsvals > tbody",
+    }
+
+    var templateTr = '<tr>' +
+        '<td>#</td>' +
+        '<td><div class="form-group"><input type="text" name="unit" class="form-control" id="sf-attr-unit"></div></td>' +
+        '<td><a href="#" class="sf-btn-attrsvals-save">保存 |</a><a href="#">取消</a></td>' +
+        '</tr>';
+
+
+
 
     var sAttrsVals = function (el, opt) {
         this.el = el;
@@ -33,12 +28,58 @@ $(function () {
         var self = this;
     }
 
+
     sAttrsVals.prototype.addTr = function () {
-        console.log(333);
+        var self = this;
+        $(clsName.listTbody).append(templateTr);
+        $('.sf-btn-attrsvals-save').on('click', function () {
+            self.saveSubmit();
+        });
     }
 
-    sAttrsVals.prototype.save = function () {
-        console.log(1);
+    sAttrsVals.prototype.saveSubmit = function () {
+        var self = this;
+        var data = {
+            "value": 1,
+        }
+        if (!self._verify(data)) {
+            return false;
+        }
+        self._ajaxPostRequest(api.create, data, this._parseSaveResult);
+    }
+
+    sAttrsVals.prototype._verify = function (data) {
+        var rules = [{
+            'value': 'required'
+        }];
+        var err = {
+            'value.required': '属性名不能为空',
+        };
+        return Validator.make(data, rules, err);
+    }
+
+    //处理保存结果
+    sAttrsVals.prototype._parseSaveResult = function (that, resp) {
+        if (resp.code != 200) {
+            return false;
+        }
+        $('.sf-tbody-attrs').empty().append();
+        console.log(resp);
+    }
+
+    //请求
+    sAttrsVals.prototype._ajaxPostRequest = function (url, params, callbackFunc) {
+        var that = this;
+        $.ajax({
+            type: 'post',
+            url: url,
+            dataType: 'json',
+            data: params,
+            success: function (resp) {
+                callbackFunc(that, resp);
+            },
+            error: function () {}
+        });
     }
 
     $.fn.extend({
@@ -47,12 +88,7 @@ $(function () {
         }
     });
 
-    $('.sf-btn-saveAttrsVals').on('click', function () {
-        // $(frm.create).sAttrsVals().save();
-    });
-
-    //展示modal
-    $('.sf-btn-attrsvals-modal').on('click', function () {
-        $('.sf-s').sAttrsVals().addTr();
+    $(clsName.createBtn).on('click', function () {
+        $(clsName.listTable).sAttrsVals().addTr();
     });
 })

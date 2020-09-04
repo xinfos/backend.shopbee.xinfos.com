@@ -24,7 +24,6 @@
                                     <div class="form-group">
                                         <label>属性单位</label>
                                         <input type="text" name="unit" class="form-control" id="sf-attr-unit">
-
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -90,10 +89,10 @@
                                         <div class="card">
                                             <div class="card-header">
                                                 <h4 class="card-header-title">属性值</h4>
-                                                <button type="button" class="sf-btn sf-btn-primary sf-btn-attrsvals-modal">添加属性值</button>
+                                                <button type="button" class="sf-btn sf-btn-primary sf-btn-save-attrsvals">添加属性值</button>
                                             </div>
                                             <div class="table-responsive">
-                                                <table class="table table-sm table-nowrap card-table sf-s">
+                                                <table class="table table-sm table-nowrap card-table sf-tb-list-attrsvals">
                                                     <thead>
                                                         <tr>
                                                             <th>#</th>
@@ -101,28 +100,7 @@
                                                             <th>操作</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody class="list">
-                                                        <tr>
-                                                            <td class="1">1</td>
-                                                            <td>1</td>
-                                                            <td>
-                                                                <a href="#">上移 |</a>
-                                                                <a href="#">下移 |</a>
-                                                                <a href="#">编辑 |</a>
-                                                                <a href="#">删除</a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td>1</td>
-                                                            <td>
-                                                                <a href="#">上移 |</a>
-                                                                <a href="#">下移 |</a>
-                                                                <a href="#">编辑 |</a>
-                                                                <a href="#">删除</a>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
+                                                    <tbody></tbody>
                                                 </table>
                                             </div>
                                         </div>

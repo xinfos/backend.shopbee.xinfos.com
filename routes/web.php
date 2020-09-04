@@ -97,6 +97,12 @@ $router->group(['prefix' => '/product'], function () use ($router) {
         $router->post('get', ['uses' => 'BrandController@get']);
     });
 
+    //商品属性组
+    $router->group(['prefix' => '/attrsgroup'], function () use ($router) {
+        $router->any('list', ['uses' => 'AttrsGroupController@lists']);
+        $router->any('add', ['uses' => 'AttrsGroupController@add']);
+    });
+
     //商品属性
     $router->group(['prefix' => '/attrs'], function () use ($router) {
         $router->any('list', ['uses' => 'AttrsController@lists']);
@@ -105,10 +111,9 @@ $router->group(['prefix' => '/product'], function () use ($router) {
         $router->post('add', ['uses' => 'AttrsController@add']);
     });
 
-    //商品属性组
-    $router->group(['prefix' => '/attrsgroup'], function () use ($router) {
-        $router->any('list', ['uses' => 'AttrsGroupController@lists']);
-        $router->any('add', ['uses' => 'AttrsGroupController@add']);
+    //商品属性值
+    $router->group(['prefix' => '/attrs/value'], function () use ($router) {
+        $router->post('create', ['uses' => 'AttrsValueController@create']);
     });
 
 });
