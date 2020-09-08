@@ -8,7 +8,7 @@
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-header-title">商品分类管理</h5>
-                    <button class="sf-btn sf-btn-primary sf-btn-create" data-toggle="modal" data-target="#modalMembers">新建分类</button>
+                    <button class="sf-btn sf-btn-primary" data-toggle="modal" data-target="#modalCreateCategory">新建分类</button>
                     <button class="sf-btn sf-btn-white sf-btn-create ml-2" data-toggle="modal" data-target="#modalMembers">批量导入</button>
                 </div>
                 <div class="card-body">
@@ -45,6 +45,8 @@
     </div>
 </div>
 
+@include('category.modal.create')
+
 <script src="/assets/dashkit/js/tree/treetable.js"></script>
 <script type="text/javascript">
 $(function(){
@@ -54,6 +56,7 @@ $(function(){
         ajaxDataType: 'JSON',
         ajaxReturnSuccCode: 200
     });
+
 });
 
 </script>
