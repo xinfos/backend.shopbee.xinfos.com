@@ -27,8 +27,8 @@
                             </tr>
                         </thead>
                         <tbody class="list sf-tbody-attrs">
-                            <tr>
-                                <td rowspan="2">1</td>
+                            <tr class="sf-tb-tr-1">
+                                <td rowspan="3">1</td>
                                 <td>1</td>
                                 <td>1</td>
                                 <td>1</td>
@@ -37,30 +37,83 @@
                                 <td>1</td>
                                 <td>1</td>
                                 <td>
-                                    <a href="#">上移 |</a>
-                                    <a href="#">下移 |</a>
-                                    <a href="#">编辑 |</a>
-                                    <a href="#">删除</a>
+                                    <a href="javascript:void(0);" class="sf-tb-up">上移 |</a>
+                                    <a href="javascript:void(0);" class="sf-tb-down">下移 |</a>
+                                    <a href="javascript:void(0);">编辑 |</a>
+                                    <a href="javascript:void(0);">删除</a>
                                 </td>
-                                <td rowspan="2">
+                                <td rowspan="3">
                                     <a href="#">添加属性 |</a>
-                                    <a href="#">上移 |</a>
+                                    <a href="javascript:void(0);" class="sf-tb-grp-up">上移 |</a>
                                     <a href="#">下移 |</a>
                                     <a href="#">编辑 |</a>
                                     <a href="#">删除</a>
                                 </td>
                             </tr>
                             <tr>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
+                                <td>2</td>
+                                <td>2</td>
+                                <td>2</td>
+                                <td>2</td>
+                                <td>2</td>
+                                <td>2</td>
+                                <td>2</td>
                                 <td>
-                                    <a href="#">上移 |</a>
+                                    <a href="javascript:void(0);" class="sf-tb-up">上移 |</a>
+                                    <a href="javascript:void(0);" class="sf-tb-down">下移 |</a>
+                                    <a href="#">编辑 |</a>
+                                    <a href="#">删除</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>3</td>
+                                <td>3</td>
+                                <td>3</td>
+                                <td>3</td>
+                                <td>3</td>
+                                <td>3</td>
+                                <td>
+                                    <a href="javascript:void(0);" class="sf-tb-up">上移 |</a>
+                                    <a href="javascript:void(0);" class="sf-tb-down">下移 |</a>
+                                    <a href="#">编辑 |</a>
+                                    <a href="#">删除</a>
+                                </td>
+                            </tr>
+                            <tr class="sf-tb-tr-2">
+                                <td rowspan="2">12</td>
+                                <td>12</td>
+                                <td>12</td>
+                                <td>12</td>
+                                <td>12</td>
+                                <td>12</td>
+                                <td>12</td>
+                                <td>12</td>
+                                <td>
+                                    <a href="javascript:void(0);" class="sf-tb-up">上移 |</a>
+                                    <a href="javascript:void(0);" class="sf-tb-down">下移 |</a>
+                                    <a href="javascript:void(0);">编辑 |</a>
+                                    <a href="javascript:void(0);">删除</a>
+                                </td>
+                                <td rowspan="3">
+                                    <a href="#">添加属性 |</a>
+                                    <a href="javascript:void(0);" class="sf-tb-grp-up">上移 |</a>
                                     <a href="#">下移 |</a>
+                                    <a href="#">编辑 |</a>
+                                    <a href="#">删除</a>
+                                </td>
+                            </tr>
+                            <tr class="sf-tb-tr-2">
+                                <td>13</td>
+                                <td>13</td>
+                                <td>13</td>
+                                <td>13</td>
+                                <td>13</td>
+                                <td>13</td>
+                                <td>13</td>
+                                <td>
+                                    <a href="javascript:void(0);" class="sf-tb-up">上移 |</a>
+                                    <a href="javascript:void(0);" class="sf-tb-down">下移 |</a>
                                     <a href="#">编辑 |</a>
                                     <a href="#">删除</a>
                                 </td>
@@ -75,4 +128,5 @@
 
 @include('attrs.modal.create')
 
+<script src="/assets/dashkit/js/table/sf.table.js"></script>
 @endsection

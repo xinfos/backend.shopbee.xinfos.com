@@ -46,4 +46,34 @@ class AttrsGroupController extends BaseController
     public function edit(Request $request) {
         return view('attrs.groupedit');
     }
+
+    /**
+     * @name del
+     * @desc 删除
+    */
+    public function del(Request $request) {
+        try {
+            $input = [
+                'template_id' => (int)$request->input('template_id'),
+            ];
+            $rules = [
+                'template_id' => 'required',
+            ];
+            $messages = [
+                'template_id.required' => '模板不存在',
+            ];
+            $validator = Validator::make($input, $rules, $messages);
+            if ($validator->fails()) {
+                return ['code' => 201, 'msg' => $validator->errors()->all()[0]];
+            }
+            // $categoryService = new CategoryService();
+            // $res = $categoryService->create($input);
+            // if ($res['code'] != 200) {
+            //     return ['code' => 201, 'msg' => $res['msg']];
+            // }
+            return ['code' => 200, 'msg' => '删除成功'];
+        } catch (ValidationException $validationException) {
+            return ['code' => 201, 'msg' => $validationException->validator->getMessageBag()->first()];
+        }
+    }
 }

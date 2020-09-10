@@ -5987,7 +5987,8 @@ a.badge-white:focus {
 .alert-primary {
 	color: #205295;
 	background-color: #2c7be5;
-	border-color: #2c7be5
+	border-color: #2c7be5;
+	font-size: 13px;
 }
 
 .alert-primary hr {
@@ -6057,7 +6058,8 @@ a.badge-white:focus {
 .alert-danger {
 	color: #802f4b;
 	background-color: #e63757;
-	border-color: #e63757
+	border-color: #e63757;
+	font-size: 13px;
 }
 
 .alert-danger hr {

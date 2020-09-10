@@ -41,6 +41,5 @@
         </div>
         <!-- Theme JS -->
         <script type="text/javascript" src="/assets/dashkit/js/theme.min.js"></script>
-        <script type="text/javascript" src="/js/ckfinder/ckfinder.js"></script>
     </body>
 </html>
