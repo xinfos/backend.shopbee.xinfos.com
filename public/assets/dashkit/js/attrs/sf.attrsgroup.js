@@ -38,10 +38,12 @@ $(function () {
     //表单验证
     sAttrsGroup.prototype.verify = function (data) {
         var rules = [{
-            'name': 'required'
+            'name': 'required',
+            'pid': 'required',
         }];
         var err = {
             'name.required': '属性名不能为空',
+            'pid.required': '父级分类不能为空',
         };
         return Validator.make(data, rules, err);
     }

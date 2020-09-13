@@ -43,7 +43,7 @@
                                     <td>1</td>
                                     <td>1</td>
                                     <td class="text-right" scope="col">
-                                        <a href="/setting/product/attrsgroup/edit">编辑</a> | 
+                                        <a href="/setting/product/attrsgroup/edit">编辑</a> |
                                         <a href="javascript:void(0)" class="sf-btn-del">删除</a>
                                     </td>
                                 </tr>

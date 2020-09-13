@@ -2,6 +2,8 @@ $(function () {
 
     const liClsName = 'sf-cascader-res__opt';
     const activeClsName = 'sf-cascader-active';
+    const contetClsName = 'sf-cascader-content';
+    const cascaderClsName = 'sf-cascader';
 
     var template = '';
 
@@ -35,8 +37,22 @@ $(function () {
          */
         _init: function () {
             var self = this;
-            self._getLevelData(10000, self._opt.initLevel);
+            var m = $('.' + cascaderClsName);
+            m.on("click", function () {
+                //已展示，则收回
+                if (m.siblings().hasClass(contetClsName)) {
+                    $('.' + contetClsName).fadeOut("fast", function () {
+                        $(this).remove();
+                    });
+                    return false;
+                }
+                self._getLevelData(10000, self._opt.initLevel);
+            });
         },
+        _shrink: function () {
+
+        },
+        _expand: function () {},
         /**
          * 获取层级内容
          * @method _getLevelData
@@ -75,7 +91,7 @@ $(function () {
 
             var liHtm = '';
             for (var i = 0; i < data.length; i++) {
-                liHtm += '<li class="sf-cascader-res__opt" sf-data="' + data[i].cat_id + '">' + data[i].name +
+                liHtm += '<li class="sf-cascader-res__opt sf-cascader-' + data[i].cat_id + '" sf-pid="' + data[i].pid + '" sf-data="' + data[i].cat_id + '" sf-val="' + data[i].name + '">' + data[i].name +
                     '<span class="sf-right"><i class="fe fe-chevron-right"></i></span>' +
                     '</li>';
             }
@@ -85,11 +101,53 @@ $(function () {
 
             $('#sf-category-pid').parent().append(ulHtm);
             that._addlistenEvent();
+            that._dlistenEvent();
+        },
+        _getParentName: function (pid) {
+            return $('.sf-cascader-' + pid).attr('sf-val');
+        },
+        _getParentPid: function (pid) {
+            return $('.sf-cascader-' + pid).attr('sf-pid');
+        },
+        _dlistenEvent: function () {
+            var that = this;
+            var liJqObject = $('.' + liClsName);
+            liJqObject.off("click").one('click', function () {
+                var level = that._getCurrentLevel(this);
+                var cateName = $(this).attr('sf-val');
+                var catId = $(this).attr('sf-data');
+                // $('.' + cascaderClsName).val();
+                if (level <= 1) {
+                    $('.' + cascaderClsName).val(cateName);
+                    $('.' + cascaderClsName).attr({
+                        "sf-data": catId,
+                    })
+                    $('.' + contetClsName).fadeOut("fast", function () {
+                        $(this).remove();
+                    });
+                    return;
+                }
+                var pid = $(this).attr('sf-pid')
+                var pNames = [cateName];
+                for (var i = level; i > 1; i--) {
+                    pName = that._getParentName(pid);
+                    pid = that._getParentPid(pid);
+                    pNames.unshift(pName);
+                }
+                $('.' + cascaderClsName).val(pNames.join(' / '));
+                $('.' + cascaderClsName).attr({
+                    "sf-data": catId,
+                })
+                $('.' + contetClsName).fadeOut("fast", function () {
+                    $(this).remove();
+                });
+            });
+
         },
         _addlistenEvent: function () {
             var that = this;
-            $('.' + liClsName).on('click', function () {
-
+            var liJqObject = $('.' + liClsName);
+            liJqObject.hover(function () {
                 //判断当前是否已经是`active`状态
                 if ($(this).hasClass(activeClsName)) {
                     return false
@@ -138,7 +196,7 @@ $(function () {
                 data: params,
                 success: function (resp) {
                     if (resp.code != 200) {
-                        console.log("[err]: data empty");
+                        // console.log("[err]: data empty");
                         return;
                     }
                     callback(that, level, resp.data);

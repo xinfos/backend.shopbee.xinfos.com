@@ -12,19 +12,17 @@
                     <button class="sf-btn sf-btn-white sf-btn-create ml-2" data-toggle="modal" data-target="#modalMembers">批量导入</button>
                 </div>
                 <div class="card-body">
-                    <form>
-                        <section class="sf-search">
-                            <div class="sf-form-group-1">
-                                <label class="sf-label">分类名称:</label>
-                                <input class="sf-form-control" name="name" id="cat_name" placeholder="分类名称" value="<?php echo empty($_GET['name']) ? '' : $_GET['name']; ?>">
-                            </div>
-                            <div class="sf-form-group-1">
-                                <label class="sf-label">&nbsp;</label>
-                                <button class="sf-btn sf-btn-primary sf-btn-search mr-2" data-type="reload">搜索</button>
-                                <button class="sf-btn sf-btn-white">重置</button>
-                            </div>
-                        </section>
-                    <form>
+                    <section class="sf-search">
+                        <div class="sf-form-group-1">
+                            <label class="sf-label">分类名称:</label>
+                            <input class="sf-form-control" name="name" id="cat_name" placeholder="分类名称" value="<?php echo empty($_GET['name']) ? '' : $_GET['name']; ?>">
+                        </div>
+                        <div class="sf-form-group-1">
+                            <label class="sf-label">&nbsp;</label>
+                            <button class="sf-btn sf-btn-primary sf-btn-search mr-2" data-type="reload">搜索</button>
+                            <button class="sf-btn sf-btn-white">重置</button>
+                        </div>
+                    </section>
                     <div class="mt-4"></div>
                     <table class="table table-hover table-sm" id="t1">
                         <thead>

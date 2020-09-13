@@ -93,8 +93,14 @@ var Validator = {
 							if (!ret) {
 								err = errMsg.hasOwnProperty(sf[kkk] + '.' + sr[kk]) ? errMsg[sf[kkk] + '.' + sr[kk]] : (sf[kkk] + Validator.message[sr[kk]]);
 								$('input[name="' + sf[kkk] + '"]').addClass('is-invalid');
+								$('.invalid-feedback').remove();
 								$('input[name="' + sf[kkk] + '"]').parent().append('<div class="invalid-feedback">' + err + '</div>');
 								return ret;
+							} else {
+								console.log(sf[kkk]);
+								// $('input[name="' + sf[kkk] + '"]').removeClass('');
+								$('.is-invalid').removeClass('is-invalid');
+								$('.invalid-feedback').remove();
 							}
 						}
 					}

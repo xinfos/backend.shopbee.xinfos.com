@@ -29,7 +29,7 @@ $(function () {
             $(".sf-alert-el").fadeIn("slow", function () {
                 $('.sf-alert-el').empty().append(that._template.succAlert);
                 $('.sf-tr-' + that._template.id).remove();
-            }).delay(1500).fadeOut("slow", function () {
+            }).delay(150000000).fadeOut("slow", function () {
                 $(this).empty();
             });
         },

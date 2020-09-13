@@ -32,25 +32,31 @@ class CategoryController extends BaseController
     {
         try {
             $input = [
+                'pid' => (int) $request->input('pid'),
                 'name' => $request->input('cat_name'),
                 'alias' => $request->input('cat_alias'),
                 'desc' => $request->input('cat_desc'),
+                'is_show' => (int) $request->input('is_show'),
+                'state' => (int) $request->input('state'),
+                'is_parent' => 0,
+                'show_in_nav' => 0,
             ];
 
             $rules = [
                 'name' => 'required|max:20',
+                'pid' => 'required',
             ];
 
             $messages = [
                 'name.required' => '分类名称不能空',
                 'name.max' => '分类名称不能超过20个字符',
+                'pid.required' => '没有选择父级分类',
             ];
 
             $validator = Validator::make($input, $rules, $messages);
             if ($validator->fails()) {
                 return ['code' => 201, 'msg' => $validator->errors()->all()[0]];
             }
-
             $categoryService = new CategoryService();
             $res = $categoryService->create($input);
             if ($res['code'] != 200) {

@@ -35,7 +35,7 @@ $(function () {
 
         var nbspHtm = '';
         for (var j = 0; j < depth * 2; j++) {
-            nbspHtm += '  &nbsp; ';
+            nbspHtm += '  &nbsp; &nbsp; ';
         }
 
         var htm = '';
@@ -132,6 +132,13 @@ $(function () {
                 'data-filter': 'collapse'
             });
         }
+        var self = $('.l-' + pid);
+        var child = $('.l-c-' + pid);
+        var lvl = self.attr('lvl');
+        for (var i = lvl; i < 4; i++) {
+            console.log(child.attr('data-value'));
+        }
+        // console.log(self.attr('lvl'))
         $('.l-c-' + pid).remove();
     }
 
