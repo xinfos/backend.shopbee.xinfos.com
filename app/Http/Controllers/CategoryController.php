@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Services\Category\CategoryService;
@@ -64,7 +65,6 @@ class CategoryController extends BaseController
             }
 
             return ['code' => 200, 'msg' => '创建成功'];
-
         } catch (ValidationException $validationException) {
             return ['code' => 201, 'msg' => $validationException->validator->getMessageBag()->first()];
         }
@@ -103,7 +103,6 @@ class CategoryController extends BaseController
                 return ['code' => 201, 'msg' => $res['msg']];
             }
             return ['code' => 200, 'msg' => '创建成功'];
-
         } catch (ValidationException $validationException) {
             return ['code' => 201, 'msg' => $validationException->validator->getMessageBag()->first()];
         }
@@ -136,7 +135,6 @@ class CategoryController extends BaseController
             }
 
             return ['code' => 200, 'msg' => '删除成功'];
-
         } catch (ValidationException $validationException) {
             return ['code' => 201, 'msg' => $validationException->validator->getMessageBag()->first()];
         }
@@ -175,7 +173,6 @@ class CategoryController extends BaseController
             }
 
             return ['code' => 200, 'msg' => '更新成功'];
-
         } catch (ValidationException $validationException) {
             return ['code' => 201, 'msg' => $validationException->validator->getMessageBag()->first()];
         }
@@ -187,7 +184,8 @@ class CategoryController extends BaseController
         if ($catId <= 0) {
             return ['code' => 201, 'msg' => '提交参数有错误', 'data' => []];
         }
-        var_dump($catId);exit;
+        var_dump($catId);
+        exit;
         //获取店铺基本信息
         $categoryService = new CategoryService();
         $info = $categoryService->get($catId);
@@ -228,6 +226,5 @@ class CategoryController extends BaseController
             return ['code' => 201, 'msg' => '没有找到相应的数据', 'data' => []];
         }
         return ['code' => 200, 'msg' => 'suceess', 'data' => $item[0]];
-
     }
 }

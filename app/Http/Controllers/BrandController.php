@@ -1,8 +1,10 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Services\Brand\BrandService;
 use App\Services\Category\CategoryService;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
@@ -14,29 +16,22 @@ class BrandController extends BaseController
      */
     public function lists(Request $request)
     {
-        if ($request->isMethod('post')) {
-            try {
-                // if (\Auth::Check()) {
-                //     return ['code' => 200, 'msg' => "登录成功"];
-                // }
+        $data = [];
+        try {
+            $input = [
+                "page_no" => (int) $request->input('page'),
+                "page_size" => 10,
+            ];
 
-                $input = [
-                    'cat_id' => (int) $request->input('cat_id'),
-                    'page' => (int) $request->input('page'),
-                ];
-
-                $brandService = new BrandService();
-                $res = $brandService->lists($input);
-                if ($res['code'] != 200) {
-                    return ['code' => 201, 'msg' => $res['msg']];
-                }
-                return ['code' => 200, 'msg' => "succ", 'data' => $res['data'][0]];
-
-            } catch (ValidationException $validationException) {
-                return ['code' => 201, 'msg' => "服务异常"];
+            $brandService = new BrandService();
+            $res = $brandService->lists($input);
+            if ($res['code'] == 200) {
+                $data = $res['data'][0];
             }
+        } catch (Exception $e) {
         }
-        return view('brand.lists');
+        // dd($data);
+        return view('brand.lists', ['data' => $data]);
     }
 
     public function add(Request $request)
@@ -69,46 +64,6 @@ class BrandController extends BaseController
             }
 
             return ['code' => 200, 'msg' => '创建成功'];
-
-        } catch (ValidationException $validationException) {
-            return ['code' => 201, 'msg' => $validationException->validator->getMessageBag()->first()];
-        }
-    }
-
-    public function subadd(Request $request)
-    {
-        try {
-            $input = [
-                'pid' => (int) $request->input('pid'),
-                'name' => $request->input('cat_name'),
-                'alias' => $request->input('cat_alias'),
-                'desc' => $request->input('cat_desc'),
-            ];
-
-            $rules = [
-                'pid' => 'required',
-                'name' => 'required|max:20',
-            ];
-
-            $messages = [
-                'pid.required' => '父级分类数据异常',
-                'name.required' => '分类名称不能空',
-                'name.max' => '分类名称不能超过20个字符',
-            ];
-
-            $validator = Validator::make($input, $rules, $messages);
-            if ($validator->fails()) {
-                return ['code' => 201, 'msg' => $validator->errors()->all()[0]];
-            }
-
-            $categoryService = new CategoryService();
-            $res = $categoryService->create($input);
-
-            if ($res['code'] != 200) {
-                return ['code' => 201, 'msg' => $res['msg']];
-            }
-            return ['code' => 200, 'msg' => '创建成功'];
-
         } catch (ValidationException $validationException) {
             return ['code' => 201, 'msg' => $validationException->validator->getMessageBag()->first()];
         }
@@ -141,7 +96,6 @@ class BrandController extends BaseController
             }
 
             return ['code' => 200, 'msg' => '删除成功'];
-
         } catch (ValidationException $validationException) {
             return ['code' => 201, 'msg' => $validationException->validator->getMessageBag()->first()];
         }
@@ -149,41 +103,18 @@ class BrandController extends BaseController
 
     public function edit(Request $request)
     {
-        try {
-            $input = [
-                'cat_id' => (int) $request->input('cat_id'),
-                'name' => $request->input('cat_name'),
-                'alias' => $request->input('cat_alias'),
-                'desc' => $request->input('cat_desc'),
-            ];
-
-            $rules = [
-                'cat_id' => 'required',
-                'name' => 'required|max:20',
-            ];
-
-            $messages = [
-                'cat_id.required' => '分类数据异常',
-                'name.required' => '分类名称不能空',
-                'name.max' => '分类名称不能超过20个字符',
-            ];
-
-            $validator = Validator::make($input, $rules, $messages);
-            if ($validator->fails()) {
-                return ['code' => 201, 'msg' => $validator->errors()->all()[0]];
-            }
-
-            $categoryService = new CategoryService();
-            $res = $categoryService->edit($input);
-            if ($res['code'] != 200) {
-                return ['code' => 201, 'msg' => $res['msg']];
-            }
-
-            return ['code' => 200, 'msg' => '更新成功'];
-
-        } catch (ValidationException $validationException) {
-            return ['code' => 201, 'msg' => $validationException->validator->getMessageBag()->first()];
+        if ($request->isMethod('post')) {
+            return false;
         }
+        $brandId = (int) $request->input('id');
+        if ($brandId <= 0) {
+        }
+        $brandService = new BrandService();
+        $data = $brandService->get($brandId);
+        if (empty($data[0])) {
+            $data = [];
+        }
+        return view('brand.edit', ['data' => $data[0]]);
     }
 
     public function get(Request $request)
