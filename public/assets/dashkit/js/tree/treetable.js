@@ -55,7 +55,7 @@ $(function () {
                 '<td>' + data[i].alias + '</td>' +
                 '<td>' + isShow + '</td>' +
                 '<td>' + isState + '</td>' +
-                '<td class="text-right"><a href="javascript:">编辑</a> | <a href="javascript:">删除</a></td>' +
+                '<td class="text-right"><a href="javascript:void(0);" class="sf-btn-edit">编辑</a> | <a href="javascript:" class="sf-btn-del">删除</a></td>' +
                 '</tr>'
         }
 
@@ -125,6 +125,7 @@ $(function () {
 
     //折叠
     treeTable.prototype.collapse = function (pid) {
+        var that = this;
         if ($('.l-' + pid + '> td > a > i').hasClass('fe-chevron-down')) {
             $('.l-' + pid + '> td > a > i').removeClass('fe-chevron-down');
             $('.l-' + pid + '> td > a > i').addClass('fe-chevron-right');
@@ -133,14 +134,19 @@ $(function () {
             });
         }
         var self = $('.l-' + pid);
-        var child = $('.l-c-' + pid);
-        var lvl = self.attr('lvl');
-        for (var i = lvl; i < 4; i++) {
-            console.log(child.attr('data-value'));
-        }
-        // console.log(self.attr('lvl'))
+
+        $('.l-c-' + pid).each(function () {
+            var a = $(this).children().children().first('a');
+            var cPid = a.attr("data-value");
+            if (cPid > 0) {
+                return that.collapse(cPid);
+            }
+            console.log(cPid);
+        });
         $('.l-c-' + pid).remove();
     }
+
+
 
 
     $.fn.treeTable = function (opt) {

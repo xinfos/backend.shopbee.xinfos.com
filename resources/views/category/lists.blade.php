@@ -54,8 +54,8 @@ $(function(){
         ajaxDataType: 'JSON',
         ajaxReturnSuccCode: 200
     });
-
 });
 
 </script>
+<script src="/assets/dashkit/js/category/sf.category.js"></script>
 @endsection

@@ -98,7 +98,6 @@
 </div>
 
 <script src="/assets/dashkit/libs/bootstrapvalidator/dist/frm.js"></script>
-<script src="/assets/dashkit/js/category/sf.category.js"></script>
 <script src="/assets/dashkit/js/category/sf.cascader.js"></script>
 <script type="text/javascript">
     $(function () {

@@ -92,7 +92,10 @@ $(function () {
         }
     });
 
-    // $('.sf-category-add').off("click").bind('click', function () {
-    //     category._add();
-    // });
+    $(document).on('click', '.sf-btn-edit', function () {});
+
+    $(document).on('click', '.sf-btn-del', function () {
+        var pid = $(this).parent().parent().first().attr('data-value');
+        console.log(pid)
+    });
 });
