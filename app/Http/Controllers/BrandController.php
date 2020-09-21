@@ -20,7 +20,7 @@ class BrandController extends BaseController
         try {
             $input = [
                 "page_no" => (int) $request->input('page'),
-                "page_size" => 10,
+                "page_size" => 8,
             ];
 
             $brandService = new BrandService();

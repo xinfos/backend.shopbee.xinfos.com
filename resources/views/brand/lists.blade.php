@@ -19,8 +19,8 @@
                     <table class="table table-hover table-sm">
                         <thead>
                             <tr>
-                                <th scope="col">品牌名称</th>
                                 <th scope="col">品牌LOGO</th>
+                                <th scope="col">品牌名称</th>
                                 <th scope="col">品牌（CN）</th>
                                 <th scope="col">品牌（EN）</th>
                                 <th scope="col">品牌主营类目</th>
@@ -29,27 +29,31 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php if (!empty($data['list'])) { ?>
-                                <?php foreach ($data['list'] as $v) { ?>
+                            <?php if (!empty($data['list'])) {?>
+                                <?php foreach ($data['list'] as $v) {?>
                                     <tr class="li-<?php echo $v['brand_id']; ?>" data-value="<?php echo $v['brand_id']; ?>">
+                                        <td>
+                                            <div class="avatar">
+                                                <img src="<?php echo $v['brand_logo']; ?>" alt="..." class="avatar-img rounded">
+                                            </div>
+                                        </td>
                                         <td><?php echo $v['brand_name']; ?></td>
-                                        <td><?php echo $v['brand_logo']; ?></td>
                                         <td><?php echo $v['cn_name']; ?></td>
                                         <td><?php echo $v['en_name']; ?></td>
                                         <td><?php echo $v['brand_name']; ?></td>
                                         <td><?php echo $v['brand_name']; ?></td>
-                                        <td>
+                                        <td class="text-right">
                                             <a href="/setting/product/brand/edit?id=<?php echo $v['brand_id']; ?>" class="sf-btn-edit">编辑</a>
                                             |
                                             <a href="javascript:void(0);" class="sf-btn-del">删除</a>
                                         </td>
                                     </tr>
-                                <?php } ?>
-                            <?php } else { ?>
+                                <?php }?>
+                            <?php } else {?>
                                 <tr>
                                     <td colspan="7" class="text-center" scope="col"> - 暂无数据 -</td>
                                 </tr>
-                            <?php } ?>
+                            <?php }?>
                         </tbody>
                     </table>
                 </div>
@@ -73,7 +77,7 @@
             pageTotal: <?php echo ceil($data['total_count'] / $data['current_page_size']); ?>,
             pageAmount: <?php echo $data['current_page_size']; ?>,
             dataTotal: <?php echo $data['total_count']; ?>,
-            curPage: <?php echo empty((int) $_GET['page']) ? 1 : (int) $_GET['page']; ?>,
+            curPage: <?php echo empty($_GET['page']) ? 1 : (int) $_GET['page']; ?>,
             showPageTotalFlag: true,
             showSkipInputFlag: true,
             getPage: function(page) {

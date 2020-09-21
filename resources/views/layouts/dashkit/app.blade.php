@@ -13,16 +13,14 @@
         <!-- Theme CSS -->
         <link rel="stylesheet" href="/assets/dashkit/css/app.css">
         <link rel="stylesheet" href="/assets/dashkit/css/theme.min.css" id="stylesheetLight">
-        <link rel="stylesheet" href="/assets/dashkit/css/theme-dark.min.css" id="stylesheetDark">
         <link rel="stylesheet" href="/assets/dashkit/css/boxicons.min.css" id="boxicons">
-    
+
         <!-- Libs JS -->
         <script src="/assets/js/jquery-3.4.1.min.js"></script>
-        <script src="/assets/dashkit/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
         <title>Dashkit</title>
     </head>
-    
+
     <body>
         <!-- SideBar -->
         @yield('sidebar', View::make('layouts.dashkit.sidebar'))
@@ -40,6 +38,8 @@
             @yield('content')
         </div>
         <!-- Theme JS -->
+        <!-- <script src="https://cdn.bootcdn.net/ajax/libs/pace/0.4.16/pace.min.js"></script> -->
         <script type="text/javascript" src="/assets/dashkit/js/theme.min.js"></script>
+
     </body>
 </html>
