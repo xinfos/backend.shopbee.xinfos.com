@@ -15,7 +15,8 @@
                     </button>
                 </div>
                 <div class="card-body">
-                    <table class="table table-hover table-sm" id="t1">
+                    <div class="sf-alert-el"></div>
+                    <table class="table table-hover table-sm">
                         <thead>
                             <tr>
                                 <th scope="col">品牌名称</th>
@@ -30,7 +31,7 @@
                         <tbody>
                             <?php if (!empty($data['list'])) { ?>
                                 <?php foreach ($data['list'] as $v) { ?>
-                                    <tr data-value="<?php echo $v['brand_id']; ?>">
+                                    <tr class="li-<?php echo $v['brand_id']; ?>" data-value="<?php echo $v['brand_id']; ?>">
                                         <td><?php echo $v['brand_name']; ?></td>
                                         <td><?php echo $v['brand_logo']; ?></td>
                                         <td><?php echo $v['cn_name']; ?></td>
