@@ -84,7 +84,7 @@ $router->group(['prefix' => '/setting/product'], function () use ($router) {
         $router->post('add', ['uses' => 'BrandController@add']);
         $router->post('subadd', ['uses' => 'BrandController@subadd']);
         $router->post('del', ['uses' => 'BrandController@del']);
-        $router->post('edit', ['uses' => 'BrandController@edit']);
+        $router->get('edit', ['uses' => 'BrandController@edit']);
         $router->post('get', ['uses' => 'BrandController@get']);
     });
     //商品属性

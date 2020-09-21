@@ -3,24 +3,26 @@
 @section('content')
 
 <style type="text/css">
-.sf-product-push {
-	margin:0 auto;
-	text-align:center;
-	left: 0;
-	position: fixed;
-	bottom: 0;
-	width: 100%;
-	height: 80px;
-	z-index: 100;
-	background-color: #ffffff;
-	border-top: 1px solid #e3ebf6;
-}
-.sf-product-push-body{
-	margin-top: 30px;
-}
-input::placeholder{
-	font-size:13px;
-}
+	.sf-product-push {
+		margin: 0 auto;
+		text-align: center;
+		left: 0;
+		position: fixed;
+		bottom: 0;
+		width: 100%;
+		height: 80px;
+		z-index: 100;
+		background-color: #ffffff;
+		border-top: 1px solid #e3ebf6;
+	}
+
+	.sf-product-push-body {
+		margin-top: 30px;
+	}
+
+	input::placeholder {
+		font-size: 13px;
+	}
 </style>
 
 <div class="row justify-content-center content" style="margin:0px;background-color:#f7f8fa;">
@@ -108,7 +110,7 @@ input::placeholder{
 								标题和描述关键词是否违规自检工具：商品合规工具。
 							</small>
 							<div class="input-group input-group-merge  ml-3 mb-3">
-								<input type="text" id="product_name"class="form-control form-control-appended" placeholder="最多允许输入30个汉字（60字符）">
+								<input type="text" id="product_name" class="form-control form-control-appended" placeholder="最多允许输入30个汉字（60字符）">
 								<div class="input-group-append">
 									<div class="input-group-text">
 										<span class="input-word-length">0</span><span>/60</span>
@@ -238,7 +240,7 @@ input::placeholder{
 							<!-- Label -->
 							<label><em class="sf-required">*</em>电脑端宝贝图片：</label>
 							<small class="form-text text-muted ml-3">
-							宝贝主图大小不能超过3MB；700*700 以上图片上传后宝贝详情页自动提供放大镜功能。第5张图为白底图会大大增加手淘曝光机会 查看规范
+								宝贝主图大小不能超过3MB；700*700 以上图片上传后宝贝详情页自动提供放大镜功能。第5张图为白底图会大大增加手淘曝光机会 查看规范
 							</small>
 							<!--  Radio -->
 							<div class="ml-3" id="cupload-create"></div>
@@ -385,8 +387,8 @@ input::placeholder{
 <script src="/assets/dashkit/libs/cupload/cupload.js"></script>
 <script src="/assets/js/product.js"></script>
 <script type="text/javascript">
-	$(function(){
-		var cuploadCreate = new Cupload ({
+	$(function() {
+		var cuploadCreate = new Cupload({
 			ele: '#cupload-create',
 			num: 8,
 		});

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -235,7 +236,17 @@ class MenuController extends BaseController
                                     'menu_icon' => 'fe fe-shopping-bag',
                                     'menu_addr' => '/setting/product/brand/list',
                                     'is_menu' => 1,
-                                    'sub_menu' => [],
+                                    'sub_menu' => [
+                                        [
+                                            'menu_id' => 130131,
+                                            'menu_pid' => 13013,
+                                            'title' => '编辑',
+                                            'menu_icon' => 'fe fe-shopping-bag',
+                                            'menu_addr' => '/setting/product/brand/edit',
+                                            'is_menu' => 1,
+                                            'sub_menu' => [],
+                                        ],
+                                    ],
                                 ],
                             ],
                         ],
@@ -244,7 +255,6 @@ class MenuController extends BaseController
             ];
 
             return ['code' => 200, 'msg' => "succ", 'data' => $data];
-
         } catch (ValidationException $validationException) {
             return ['code' => 201, 'msg' => "服务异常"];
         }

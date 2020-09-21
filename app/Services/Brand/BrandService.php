@@ -55,11 +55,11 @@ class BrandService
         }
     }
 
-    public function get($catId)
+    public function get($brandId)
     {
         try {
             $data = [
-                'cat_id' => (int) $catId,
+                'brand_id' => (int) $brandId,
             ];
             $apiUrl = $this->appService . '/get';
             $rst = ClientRequest::post($apiUrl, $data);
