@@ -6,6 +6,7 @@ $(function () {
         },
         _template: {
             createfrm: $('#formCreateCategory'),
+            editfrm: $('#formEditCategory')
         },
         _serializeJson: function (obj) {
             var arr = obj.serializeArray();
@@ -58,8 +59,49 @@ $(function () {
             }
             self._ajaxPostRequest(self._api.add, formValuesJSON, self._parseAddResult);
         },
-        _edit: function () {
+        _editVerify: function (data) {
+            var rules = [{
+                'cat_id,cat_name,pid': 'required',
+            }];
+            var err = {
+                'cat_id.required': '没有找到对应的分类信息',
+                'cat_name.required': '分类名不能为空',
+                'pid.required': '父级分类不能为空',
+            };
+            return Validator.make(data, rules, err);
+        },
+        _parseEditResult: function (that, resp) {
+            var alertClsName = 'alert-primary';
+            if (resp.code != 200) {
+                alertClsName = 'alert-danger';
+            }
 
+            $(".sf-alert-el").fadeIn("fast", function () {
+                $('.alert-content').html(resp.msg);
+                $('.alert').addClass(alertClsName);
+                $(".alert").fadeIn("slow", function () {
+                    $(this).css({
+                        "display": ""
+                    });
+                }).delay(1500).fadeOut("slow", function () {
+                    $(this).css({
+                        "display": "none"
+                    });
+                    $(this).removeClass(alertClsName);
+                    if (resp.code == 200) {
+                        $('#modalCreateCategory').modal('hide');
+                    }
+                });
+            })
+        },
+        _edit: function () {
+            var self = this;
+            var formValuesJSON = self._serializeJson(this._template.editfrm);
+            formValuesJSON["desc"] = EditEditor.getData();
+            if (!self._editVerify(formValuesJSON)) {
+                return false;
+            }
+            self._ajaxPostRequest(self._api.edit, formValuesJSON, self._parseEditResult);
         },
         _parseEditResult: function () {
 
@@ -92,10 +134,20 @@ $(function () {
         }
     });
 
-    $(document).on('click', '.sf-btn-edit', function () {});
+    $(document).on('click', '.sf-btn-edit', function () {
+        var id = $(this).parent().parent().children(':first-child').children().attr("data-value");
+        if (id <= 0) {
+            return false
+        }
+        window.location.href = "/setting/product/category/edit?id=" + id
+    });
 
     $(document).on('click', '.sf-btn-del', function () {
-        var pid = $(this).parent().parent().first().attr('data-value');
+        var pid = $(this).parent().parent().first(':a').attr('data-value');
         console.log(pid)
+    });
+
+    $('.sf-btn-save').on('click', function () {
+        category._edit();
     });
 });

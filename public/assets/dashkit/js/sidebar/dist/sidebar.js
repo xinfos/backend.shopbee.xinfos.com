@@ -5,11 +5,17 @@ $(function () {
             url: "/menu"
         },
         init: function () {
-            var menuStr = localStorage.getItem("menu");
-            if (menuStr !== null || menuStr !== undefined || menuStr !== '') {
-                sidebarMenu._renderFirstMenu(JSON.parse(menuStr));
-                return
-            }
+            // console.log(22222);
+            // var menu = JSON.parse(localStorage.getItem("menu"));
+            // console.log(menu.length);
+            // console.log(typeof (menu));
+
+            // if (menu !== "null" || menu !== null || menu !== undefined || menu !== '' || !(menu instanceof Array)) {
+            //     console.log(333);
+            //     sidebarMenu._renderFirstMenu(menu);
+            //     return
+            // }
+            // console.log(1111);
             this._request({
                 '_token': $('.sf-token').attr('sf-token'),
             }, sidebarMenu._renderFirstMenu);
@@ -27,7 +33,7 @@ $(function () {
             return v[1];
         },
         _renderFirstMenu: function (menu) {
-
+            console.log(menu);
             var menuJSON = JSON.stringify(menu);
             localStorage.setItem("menu", menuJSON);
 

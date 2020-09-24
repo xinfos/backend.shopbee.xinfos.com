@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="header"></div>
-<div class="container-fluid" >
+<div class="container-fluid">
     <div class="row justify-content-center" style="margin:0px;">
         <div class="col-12" style="padding: 0px;">
             <div class="card">
@@ -47,15 +47,14 @@
 
 <script src="/assets/dashkit/js/tree/treetable.js"></script>
 <script type="text/javascript">
-$(function(){
-    var treeTable = $('#t1').treeTable({
-        ajaxRequestUrl:'/product/category/sub',
-        ajaxType: 'POST',
-        ajaxDataType: 'JSON',
-        ajaxReturnSuccCode: 200
+    $(function() {
+        var treeTable = $('#t1').treeTable({
+            ajaxRequestUrl: '/product/category/sub',
+            ajaxType: 'POST',
+            ajaxDataType: 'JSON',
+            ajaxReturnSuccCode: 200
+        });
     });
-});
-
 </script>
 <script src="/assets/dashkit/js/category/sf.category.js"></script>
 @endsection

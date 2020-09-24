@@ -96,7 +96,7 @@ class BrandController extends BaseController
             }
 
             return ['code' => 200, 'msg' => '删除成功'];
-        } catch (ValidationException $validationException) {
+        } catch (Exception $validationException) {
             return ['code' => 201, 'msg' => $validationException->validator->getMessageBag()->first()];
         }
     }
@@ -109,10 +109,11 @@ class BrandController extends BaseController
         $brandId = (int) $request->input('id');
         if ($brandId <= 0) {
         }
+        $data = [];
         $brandService = new BrandService();
         $data = $brandService->get($brandId);
         if (empty($data[0])) {
-            $data = [];
+            throw new Exception("没有找到", 404);
         }
         return view('brand.edit', ['data' => $data[0]]);
     }

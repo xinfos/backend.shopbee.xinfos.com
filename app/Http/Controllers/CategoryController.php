@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\Category\CategoryService;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
@@ -142,40 +143,53 @@ class CategoryController extends BaseController
 
     public function edit(Request $request)
     {
-        try {
-            $input = [
-                'cat_id' => (int) $request->input('cat_id'),
-                'name' => $request->input('cat_name'),
-                'alias' => $request->input('cat_alias'),
-                'desc' => $request->input('cat_desc'),
-            ];
+        if ($request->isMethod('post')) {
+            try {
+                $input = [
+                    'cat_id' => (int) $request->input('cat_id'),
+                    'name' => $request->input('cat_name'),
+                    'alias' => $request->input('cat_alias'),
+                    'desc' => $request->input('cat_desc'),
+                ];
 
-            $rules = [
-                'cat_id' => 'required',
-                'name' => 'required|max:20',
-            ];
+                $rules = [
+                    'cat_id' => 'required',
+                    'name' => 'required|max:20',
+                ];
 
-            $messages = [
-                'cat_id.required' => '分类数据异常',
-                'name.required' => '分类名称不能空',
-                'name.max' => '分类名称不能超过20个字符',
-            ];
+                $messages = [
+                    'cat_id.required' => '分类数据异常',
+                    'name.required' => '分类名称不能空',
+                    'name.max' => '分类名称不能超过20个字符',
+                ];
 
-            $validator = Validator::make($input, $rules, $messages);
-            if ($validator->fails()) {
-                return ['code' => 201, 'msg' => $validator->errors()->all()[0]];
+                $validator = Validator::make($input, $rules, $messages);
+                if ($validator->fails()) {
+                    return ['code' => 201, 'msg' => $validator->errors()->all()[0]];
+                }
+
+                $categoryService = new CategoryService();
+                $res = $categoryService->edit($input);
+                if ($res['code'] != 200) {
+                    return ['code' => 201, 'msg' => $res['msg']];
+                }
+
+                return ['code' => 200, 'msg' => '更新成功'];
+            } catch (Exception $validationException) {
+                return ['code' => 201, 'msg' => $validationException->validator->getMessageBag()->first()];
             }
-
-            $categoryService = new CategoryService();
-            $res = $categoryService->edit($input);
-            if ($res['code'] != 200) {
-                return ['code' => 201, 'msg' => $res['msg']];
-            }
-
-            return ['code' => 200, 'msg' => '更新成功'];
-        } catch (ValidationException $validationException) {
-            return ['code' => 201, 'msg' => $validationException->validator->getMessageBag()->first()];
         }
+        $catId = (int) $request->input('id');
+        if ($catId <= 0) {
+            return ['code' => 201, 'msg' => '提交参数有错误', 'data' => []];
+        }
+        $categoryService = new CategoryService();
+        $data = $categoryService->get($catId);
+        if (empty($data[0])) {
+            return ['code' => 201, 'msg' => '提交参数有错误', 'data' => []];
+        }
+        // dd($data[0]);
+        return view('category.edit', ['data' => $data[0]]);
     }
 
     public function get(Request $request)
@@ -186,7 +200,6 @@ class CategoryController extends BaseController
         }
         var_dump($catId);
         exit;
-        //获取店铺基本信息
         $categoryService = new CategoryService();
         $info = $categoryService->get($catId);
         if (empty($info)) {
