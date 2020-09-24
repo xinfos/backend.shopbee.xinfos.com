@@ -1,137 +1,50 @@
-$(function () {
-    var category = {
-        _api: {
-            add: '/product/category/add',
-            edit: '/product/category/edit',
+var _methods = {
+    add: {
+        api: "/product/category/add",
+        rule: [{
+            'cat_name,pid': 'required'
+        }],
+        errmsg: {
+            'cat_name.required': '分类名不能为空',
+            'pid.required': '父级分类不能为空',
         },
-        _template: {
-            createfrm: $('#formCreateCategory'),
-            editfrm: $('#formEditCategory')
+        frm: $('#formCreateCategory'),
+    },
+    edit: {
+        api: "/product/category/edit",
+        rule: [{
+            'cat_id,cat_name,pid': 'required',
+        }],
+        errmsg: {
+            'cat_id.required': '没有找到对应的分类信息',
+            'cat_name.required': '分类名不能为空',
+            'pid.required': '父级分类不能为空',
         },
-        _serializeJson: function (obj) {
-            var arr = obj.serializeArray();
-            var arrJSON = {};
-            $(arr).each(function () {
-                arrJSON[this.name] = this.value;
-            });
-            arrJSON["pid"] = $('#sf-category-pid').attr('sf-data');
-            return arrJSON;
-        },
-        _addVerify: function (data) {
-            var rules = [{
-                'cat_name,pid': 'required',
-            }];
-            var err = {
-                'cat_name.required': '分类名不能为空',
-                'pid.required': '父级分类不能为空',
-            };
-            return Validator.make(data, rules, err);
-        },
-        _parseAddResult: function (that, resp) {
-            var alertClsName = 'alert-primary';
-            if (resp.code != 200) {
-                alertClsName = 'alert-danger';
-            }
-
-            $(".sf-alert-el").fadeIn("fast", function () {
-                $('.alert-content').html(resp.msg);
-                $('.alert').addClass(alertClsName);
-                $(".alert").fadeIn("slow", function () {
-                    $(this).css({
-                        "display": ""
-                    });
-                }).delay(1500).fadeOut("slow", function () {
-                    $(this).css({
-                        "display": "none"
-                    });
-                    $(this).removeClass(alertClsName);
-                    if (resp.code == 200) {
-                        $('#modalCreateCategory').modal('hide');
-                    }
-                });
-            })
-        },
-        _add: function () {
-            var self = this;
-            var formValuesJSON = self._serializeJson(this._template.createfrm);
-            if (!self._addVerify(formValuesJSON)) {
-                return false;
-            }
-            self._ajaxPostRequest(self._api.add, formValuesJSON, self._parseAddResult);
-        },
-        _editVerify: function (data) {
-            var rules = [{
-                'cat_id,cat_name,pid': 'required',
-            }];
-            var err = {
-                'cat_id.required': '没有找到对应的分类信息',
-                'cat_name.required': '分类名不能为空',
-                'pid.required': '父级分类不能为空',
-            };
-            return Validator.make(data, rules, err);
-        },
-        _parseEditResult: function (that, resp) {
-            var alertClsName = 'alert-primary';
-            if (resp.code != 200) {
-                alertClsName = 'alert-danger';
-            }
-
-            $(".sf-alert-el").fadeIn("fast", function () {
-                $('.alert-content').html(resp.msg);
-                $('.alert').addClass(alertClsName);
-                $(".alert").fadeIn("slow", function () {
-                    $(this).css({
-                        "display": ""
-                    });
-                }).delay(1500).fadeOut("slow", function () {
-                    $(this).css({
-                        "display": "none"
-                    });
-                    $(this).removeClass(alertClsName);
-                    if (resp.code == 200) {
-                        $('#modalCreateCategory').modal('hide');
-                    }
-                });
-            })
-        },
-        _edit: function () {
-            var self = this;
-            var formValuesJSON = self._serializeJson(this._template.editfrm);
-            formValuesJSON["desc"] = EditEditor.getData();
-            if (!self._editVerify(formValuesJSON)) {
-                return false;
-            }
-            self._ajaxPostRequest(self._api.edit, formValuesJSON, self._parseEditResult);
-        },
-        _parseEditResult: function () {
-
-        },
-        _ajaxPostRequest: function (url, params, callback) {
-            var that = this;
-            $.ajax({
-                type: 'post',
-                url: url,
-                dataType: 'json',
-                data: params,
-                success: function (resp) {
-                    callback(that, resp);
-                },
-                error: function () {}
-            });
-        }
+        frm: $('#formEditCategory'),
     }
+}
 
-    var isClick = true;
-    $(".sf-category-add").off('click').on("click", function () {
-        if (isClick) {
-            isClick = false;
-            //事件
-            category._add();
-            //定时器
-            setTimeout(function () {
-                isClick = true;
-            }, 1000); //一秒内不能重复点击
-        }
+$(function () {
+    //add category
+    $('.sf-btn-add').on('click', function () {
+        SF.FrmSubmit(_methods.add, function (that, resp) {
+            console.log(resp);
+        });
+    });
+
+    //edit category
+    $('.sf-btn-save').on('click', function () {
+        SF.FrmSubmit(_methods.edit, function (that, resp) {
+            console.log(resp);
+        });
+    });
+
+    //del category
+    $(document).on('click', '.sf-btn-del', function () {
+        var pid = $(this).parent().parent().first(':a').attr('data-value');
+        SF.FrmSubmit(_methods.del, function (that, resp) {
+            console.log(resp);
+        });
     });
 
     $(document).on('click', '.sf-btn-edit', function () {
@@ -142,12 +55,4 @@ $(function () {
         window.location.href = "/setting/product/category/edit?id=" + id
     });
 
-    $(document).on('click', '.sf-btn-del', function () {
-        var pid = $(this).parent().parent().first(':a').attr('data-value');
-        console.log(pid)
-    });
-
-    $('.sf-btn-save').on('click', function () {
-        category._edit();
-    });
 });

@@ -83,7 +83,7 @@
                                     </div>
                                     <div class="row mt-6">
                                         <div class="col-12">
-                                            <button type="button" class="sf-btn sf-btn-primary sf-category-add mr-2">保 存</button>
+                                            <button type="button" class="sf-btn sf-btn-primary sf-btn-add mr-2">保 存</button>
                                             <button type="button" class="sf-btn btn-white" data-dismiss="modal" aria-label="Close">取 消</button>
                                         </div>
                                     </div>
@@ -100,7 +100,7 @@
 <script src="/assets/dashkit/libs/bootstrapvalidator/dist/frm.js"></script>
 <script src="/assets/dashkit/js/category/sf.cascader.js"></script>
 <script type="text/javascript">
-    $(function () {
+    $(function() {
         $('#sf-category-pid').sFCascader();
     });
 </script>

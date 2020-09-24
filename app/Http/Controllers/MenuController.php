@@ -190,7 +190,17 @@ class MenuController extends BaseController
                                     'menu_icon' => 'fe fe-settings',
                                     'menu_addr' => '/setting/product/category/list',
                                     'is_menu' => 1,
-                                    'sub_menu' => [],
+                                    'sub_menu' => [
+                                        [
+                                            'menu_id' => 130121,
+                                            'menu_pid' => 13012,
+                                            'title' => '编辑分类',
+                                            'menu_icon' => 'fe fe-shopping-bag',
+                                            'menu_addr' => '/setting/product/category/edit',
+                                            'is_menu' => 1,
+                                            'sub_menu' => [],
+                                        ],
+                                    ],
                                 ],
                                 [
                                     'menu_id' => 13014,

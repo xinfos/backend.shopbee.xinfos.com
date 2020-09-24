@@ -148,6 +148,80 @@ var frm = {
 	}
 }
 
+var SF = {
+	_method: {
+		add: {
+			api: "",
+			rule: [],
+			errmsg: {},
+			frm: null,
+			callback: null,
+		}
+	},
+	_serializeFormJSON: function (that) {
+		var arr = that.serializeArray();
+		var arrJSON = {};
+		$(arr).each(function () {
+			arrJSON[this.name] = this.value;
+		});
+		return arrJSON;
+	},
+	_parse: function (that, resp) {
+		var alertClassName = "alert-primary";
+		if (resp.code != 200) {
+			alertClassName = "alert-danger";
+		}
+		var alertObj = $('.alert');
+		$(".sf-alert-el").fadeIn("fast", function () {
+			$('.alert-content').html(resp.msg);
+			alertObj.addClass(alertClassName);
+			alertObj.fadeIn("slow", function () {
+				$(this).css({
+					"display": ""
+				});
+			}).delay(1500).fadeOut("slow", function () {
+				$(this).css({
+					"display": "none"
+				});
+				$(this).removeClass(alertClassName);
+				if (resp.code == 200) {
+					$('#modalCreateCategory').modal('hide');
+				}
+			});
+		});
+	},
+	_ajaxPost: function (url, params, succCallback, errCallBack) {
+		var that = this;
+		$.ajax({
+			type: 'post',
+			url: url,
+			dataType: 'json',
+			data: params,
+			success: function (resp) {
+				succCallback(that, resp);
+			},
+			error: function () {}
+		});
+	},
+	FrmSubmit: function (method, callback) {
+		var formValuesJSON = this._serializeFormJSON(method.frm);
+		console.log(formValuesJSON);
+		if (!Validator.make(formValuesJSON, method.rule, method.errmsg)) {
+			return false;
+		}
+
+		if (typeof callback === "function") {
+			return this._ajaxPost(method.api, formValuesJSON, callback);
+		}
+
+		if (typeof method.callback === "function") {
+			return this._ajaxPost(method.api, formValuesJSON, method.callback);
+		}
+
+		return this._ajaxPost(method.api, formValuesJSON, this._parse);
+	}
+};
+
 $(document).on("input", "input", function (e) {
 	$(this).removeClass('is-invalid');
 });

@@ -18182,3 +18182,7 @@ button:focus {
 .no-display {
 	display: none;
 }
+
+.ck-editor__editable_inline {
+	min-height: 120px;
+}
