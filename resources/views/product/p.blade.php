@@ -5,7 +5,7 @@
 <link rel="stylesheet" type="text/css" href="/assets/dashkit/css/product/cate2.css">
 
 <div class="header"></div>
-<div class="container-fluid" >
+<div class="container-fluid">
     <div class="row justify-content-center" style="margin:0px;">
         <div class="col-12" style="padding: 0px;">
             <div class="card">
@@ -13,8 +13,7 @@
                     <!-- notice -->
                     <div class="com-struct category-page-notice" id="struct-notice">
                         <div class="sell-feedback-message">
-                            <div role="alert" content="<font color=red>111，11111。</font>"
-                            class="next-message next-message-prompt next-inline next-medium next-only-content">
+                            <div role="alert" content="<font color=red>111，11111。</font>" class="next-message next-message-prompt next-inline next-medium next-only-content">
                                 <i class="next-icon next-medium next-message-symbol next-message-symbol-icon">
                                 </i>
                                 <div class="next-message-content">
@@ -33,15 +32,12 @@
                     <!-- search -->
                     <div class="com-struct" id="struct-search">
                         <div class="category-search-wrap l-category-search">
-                            <span class="next-select next-select-auto-complete next-size-medium category-search"
-                            aria-haspopup="true">
+                            <span class="next-select next-select-auto-complete next-size-medium category-search" aria-haspopup="true">
                                 <span class="next-input next-medium">
-                                    <input role="combobox" aria-autocomplete="list" aria-disabled="false"
-                                    placeholder="类目搜索：可输入产品名称" height="100%" autocomplete="off" value="">
+                                    <input role="combobox" aria-autocomplete="list" aria-disabled="false" placeholder="类目搜索：可输入产品名称" height="100%" autocomplete="off" value="">
                                 </span>
                             </span>
-                            <button type="button" class="next-btn next-medium next-btn-normal search-btn"
-                            role="button">
+                            <button type="button" class="next-btn next-medium next-btn-normal search-btn" role="button">
                                 搜索
                             </button>
                         </div>
@@ -311,22 +307,19 @@
                                     <span class="path-label">
                                         已选类目:
                                     </span>
-                                    <button type="button" class="next-btn next-medium next-btn-primary next-btn-text path-node"
-                                    role="button">
+                                    <button type="button" class="next-btn next-medium next-btn-primary next-btn-text path-node" role="button">
                                         ZIPPO/瑞士军刀/眼镜
                                     </button>
                                     <span class="connector-char">
                                         &gt;
                                     </span>
-                                    <button type="button" class="next-btn next-medium next-btn-primary next-btn-text path-node"
-                                    role="button">
+                                    <button type="button" class="next-btn next-medium next-btn-primary next-btn-text path-node" role="button">
                                         替烟产品
                                     </button>
                                     <span class="connector-char">
                                         &gt;
                                     </span>
-                                    <button type="button" class="next-btn next-medium next-btn-primary next-btn-text path-node"
-                                    role="button">
+                                    <button type="button" class="next-btn next-medium next-btn-primary next-btn-text path-node" role="button">
                                         鼻烟
                                     </button>
                                 </div>

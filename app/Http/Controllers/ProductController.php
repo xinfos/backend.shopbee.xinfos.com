@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Services\Brand\BrandService;
@@ -9,7 +10,7 @@ class ProductController extends BaseController
 {
     public function lists()
     {
-        return view('product.lists');
+        return view('product.t');
     }
 
     public function add()
@@ -44,7 +45,8 @@ class ProductController extends BaseController
         return view('product.create', ["item" => $item]);
     }
 
-    public function push() {
+    public function push()
+    {
         return view('product.p');
     }
 }
