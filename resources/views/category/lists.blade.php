@@ -1,6 +1,8 @@
 @extends('layouts.dashkit.app')
 
 @section('content')
+<link rel="stylesheet" href="/assets/dashkit/libs/jquery-confirm/jquery-confirm.css">
+
 <div class="header"></div>
 <div class="container-fluid">
     <div class="row justify-content-center" style="margin:0px;">
@@ -12,18 +14,21 @@
                     <button class="sf-btn sf-btn-white sf-btn-create ml-2" data-toggle="modal" data-target="#modalMembers">批量导入</button>
                 </div>
                 <div class="card-body">
-                    <section class="sf-search">
-                        <div class="sf-form-group-1">
-                            <label class="sf-label">分类名称:</label>
-                            <input class="sf-form-control" name="name" id="cat_name" placeholder="分类名称" value="<?php echo empty($_GET['name']) ? '' : $_GET['name']; ?>">
-                        </div>
-                        <div class="sf-form-group-1">
-                            <label class="sf-label">&nbsp;</label>
-                            <button class="sf-btn sf-btn-primary sf-btn-search mr-2" data-type="reload">搜索</button>
-                            <button class="sf-btn sf-btn-white">重置</button>
-                        </div>
-                    </section>
+                    <form action="/setting/product/category/list" method="get">
+                        <section class="sf-search">
+                            <div class="sf-form-group-1">
+                                <label class="sf-label">分类名称:</label>
+                                <input class="sf-form-control" name="name" id="cat_name" placeholder="分类名称" value="<?php echo empty($_GET['name']) ? '' : $_GET['name']; ?>">
+                            </div>
+                            <div class="sf-form-group-1">
+                                <label class="sf-label">&nbsp;</label>
+                                <button class="sf-btn sf-btn-primary sf-btn-search mr-2" data-type="reload">搜索</button>
+                                <a href="/setting/product/category/list" class="sf-btn sf-btn-white">重置</a>
+                            </div>
+                        </section>
+                    </form>
                     <div class="mt-4"></div>
+                    <div class="sf-alert-el"></div>
                     <table class="table table-hover table-sm" id="t1">
                         <thead>
                             <tr>
@@ -44,7 +49,7 @@
 </div>
 
 @include('category.modal.create')
-
+<script src="/assets/dashkit/libs/jquery-confirm/dist/jquery-confirm.js"></script>
 <script src="/assets/dashkit/js/tree/treetable.js"></script>
 <script type="text/javascript">
     $(function() {
@@ -52,7 +57,8 @@
             ajaxRequestUrl: '/product/category/sub',
             ajaxType: 'POST',
             ajaxDataType: 'JSON',
-            ajaxReturnSuccCode: 200
+            ajaxReturnSuccCode: 200,
+            initData: <?php echo json_encode($data); ?>,
         });
     });
 </script>

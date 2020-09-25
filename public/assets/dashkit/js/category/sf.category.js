@@ -21,6 +21,25 @@ var _methods = {
             'pid.required': '父级分类不能为空',
         },
         frm: $('#formEditCategory'),
+    },
+    del: {
+        api: "/product/category/del",
+        rule: [{
+            'cat_id': 'required',
+        }],
+        errmsg: {
+            'cat_id.required': '没有找到对应的分类信息',
+        },
+        tips: {
+            title: '提示',
+            content: '是否确认删除该分类?!',
+            confirmButton: '是',
+            cancelButton: '否',
+            confirmButtonClass: 'sf-btn sf-btn-primary',
+            cancelButtonClass: 'sf-btn sf-btn-white',
+            confirm: function () {},
+            cancel: function () {}
+        }
     }
 }
 
@@ -41,9 +60,15 @@ $(function () {
 
     //del category
     $(document).on('click', '.sf-btn-del', function () {
-        var pid = $(this).parent().parent().first(':a').attr('data-value');
-        SF.FrmSubmit(_methods.del, function (that, resp) {
-            console.log(resp);
+        var params = {
+            "cat_id": $(this).parent().parent().children(':first-child').children().attr("data-value")
+        }
+        SF.Bind(_methods.del, params, function (that, resp) {
+            if (resp.code == 200) {
+                $('.l-' + params.cat_id).remove();
+                return SF._showSucc(resp.msg);
+            }
+            return SF._showFail(resp.msg);
         });
     });
 

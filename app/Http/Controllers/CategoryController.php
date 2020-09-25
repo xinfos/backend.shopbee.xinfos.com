@@ -15,18 +15,22 @@ class CategoryController extends BaseController
      */
     public function lists(Request $request)
     {
-        $catName = trim($request->input('name'));
-
+        $name = trim($request->input('name'));
         $categoryService = new CategoryService();
-
-        $topCats = [];
-        if (!empty($catName)) {
-            // $topCats = $categoryService->query(['cat_name' => $catName]);
+        $data = [];
+        if (!empty($name)) {
+            $res = $categoryService->query(['name' => $name, 'page_no' => 1]);
+            if (!empty($res[0]['list'])) {
+                $data = $res[0]['list'];
+            }
         } else {
-            $topCats = $categoryService->sub(10000);
+            $res = $categoryService->sub(10000);
+            if (!empty($res[0])) {
+                $data = $res[0];
+            }
         }
         return view('category.lists', [
-            'topCats' => $topCats,
+            'data' => $data,
         ]);
     }
 
@@ -112,29 +116,16 @@ class CategoryController extends BaseController
     public function del(Request $request)
     {
         try {
-            $input = [
-                'cat_id' => (int) $request->input('cat_id'),
-            ];
-
-            $rules = [
-                'cat_id' => 'required',
-            ];
-
-            $messages = [
-                'cat_id.required' => '分类数据异常',
-            ];
-
-            $validator = Validator::make($input, $rules, $messages);
-            if ($validator->fails()) {
-                return ['code' => 201, 'msg' => $validator->errors()->all()[0]];
+            $catId =  (int) $request->input('cat_id');
+            if ($catId <= 0) {
+                return ['code' => 201, 'msg' => "抱歉，删除失败，没有找到对应的分类信息!~"];
             }
 
             $categoryService = new CategoryService();
-            $res = $categoryService->delete($input['cat_id']);
+            $res = $categoryService->delete($catId);
             if ($res['code'] != 200) {
                 return ['code' => 201, 'msg' => $res['msg']];
             }
-
             return ['code' => 200, 'msg' => '删除成功'];
         } catch (ValidationException $validationException) {
             return ['code' => 201, 'msg' => $validationException->validator->getMessageBag()->first()];
@@ -198,8 +189,6 @@ class CategoryController extends BaseController
         if ($catId <= 0) {
             return ['code' => 201, 'msg' => '提交参数有错误', 'data' => []];
         }
-        var_dump($catId);
-        exit;
         $categoryService = new CategoryService();
         $info = $categoryService->get($catId);
         if (empty($info)) {

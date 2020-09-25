@@ -16,17 +16,23 @@ $(function () {
             disableCache: true,
         },
         init: function () {
+            var that = this;
             this._opt.ajaxData = {
                 'cat_id': 10000
             };
-            this.ajaxRequestData(this.ajaxRender);
+            if (this._opt.initData.length <= 0) {
+                return that.showEmptyRender();
+            }
+            this.ajaxRender(this, this._opt.initData);
             this.addBindEvent();
         }
     };
 
-    treeTable.prototype.ajaxRender = function (that, data) {
+    treeTable.prototype.showEmptyRender = function () {
+        $('tbody').empty().append('<tr><td class="text-center" colspan="5"> - 暂无数据 - </td></tr>');
+    }
 
-        var len = data.length;
+    treeTable.prototype.ajaxRender = function (that, data) {
         var depth, pid = 0;
         if (data.length > 0) {
             depth = data[0].depth - 1;
@@ -152,6 +158,4 @@ $(function () {
     $.fn.treeTable = function (opt) {
         new treeTable(this, opt);
     };
-
-
 })

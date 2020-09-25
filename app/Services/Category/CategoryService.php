@@ -105,4 +105,18 @@ class CategoryService
             throw new Exception('Exception Error: ' . $e->getFile() . '] [' . $e->getLine() . '] [' . $e->getMessage() . "]");
         }
     }
+
+    public function Query($data)
+    {
+        try {
+            $apiUrl = $this->appService . 'category/list';
+            $rst = ClientRequest::post($apiUrl, $data);
+            if ($rst['code'] == 200) {
+                return $rst['data'];
+            }
+            return [];
+        } catch (Exception $e) {
+            throw new Exception('Exception Error: ' . $e->getFile() . '] [' . $e->getLine() . '] [' . $e->getMessage() . "]");
+        }
+    }
 }

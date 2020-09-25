@@ -158,6 +158,32 @@ var SF = {
 			callback: null,
 		}
 	},
+	_showSucc: function (msg) {
+		var template = '<div class="alert alert-primary alert-dismissible fade show" role="alert">' +
+			msg +
+			'<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+			'<span aria-hidden="true">×</span>' +
+			'</button>' +
+			'</div>';
+		$(".sf-alert-el").fadeIn("fast", function () {
+			$(this).empty().append(template);
+		}).delay(1500).fadeOut("slow", function () {
+			$(this).empty();
+		});
+	},
+	_showFail: function (msg) {
+		var template = '<div class="alert alert-danger alert-dismissible fade show" role="alert">' +
+			msg +
+			'<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+			'<span aria-hidden="true">×</span>' +
+			'</button>' +
+			'</div>';
+		$(".sf-alert-el").fadeIn("fast", function () {
+			$(this).empty().append(template);
+		}).delay(1500).fadeOut("slow", function () {
+			$(this).empty();
+		});
+	},
 	_serializeFormJSON: function (that) {
 		var arr = that.serializeArray();
 		var arrJSON = {};
@@ -190,6 +216,20 @@ var SF = {
 			});
 		});
 	},
+	_confirm: function (method, params, callback) {
+		$.confirm({
+			title: method.tips.title,
+			content: method.tips.content,
+			confirmButton: method.tips.confirmButton,
+			cancelButton: method.tips.cancelButton,
+			confirmButtonClass: method.tips.confirmButtonClass,
+			cancelButtonClass: method.tips.cancelButtonClass,
+			confirm: function () {
+				SF.AjaxSubmit(method, params, callback)
+			},
+			cancel: function () {}
+		});
+	},
 	_ajaxPost: function (url, params, succCallback, errCallBack) {
 		var that = this;
 		$.ajax({
@@ -205,7 +245,6 @@ var SF = {
 	},
 	FrmSubmit: function (method, callback) {
 		var formValuesJSON = this._serializeFormJSON(method.frm);
-		console.log(formValuesJSON);
 		if (!Validator.make(formValuesJSON, method.rule, method.errmsg)) {
 			return false;
 		}
@@ -219,6 +258,26 @@ var SF = {
 		}
 
 		return this._ajaxPost(method.api, formValuesJSON, this._parse);
+	},
+	AjaxSubmit: function (method, params, callback) {
+		if (!Validator.make(params, method.rule, method.errmsg)) {
+			return false;
+		}
+		if (typeof callback === "function") {
+			return this._ajaxPost(method.api, params, callback);
+		}
+
+		if (typeof method.callback === "function") {
+			return this._ajaxPost(method.api, params, method.callback);
+		}
+		return this._ajaxPost(method.api, params, this._parse);
+	},
+	Bind: function (method, params, callback) {
+		var self = this;
+		if (JSON.stringify(method.tips) !== '{}') {
+			return self._confirm(method, params, callback);
+		}
+		return self.AjaxSubmit(method, params, callback);
 	}
 };
 
