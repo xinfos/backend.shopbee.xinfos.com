@@ -1,0 +1,203 @@
+@charset "utf-8";
+
+ul,
+li a {
+    font: 12px/20px "Microsoft Yahei", Tahoma, Arial, "Helvetica Neue", "Hiragino Sans GB", "Simsun", "sans-self";
+}
+
+ul,
+ol {
+    list-style-type: none;
+}
+
+b,
+strong {
+    font-weight: normal;
+}
+
+i,
+em {
+    font-style: normal;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+.sf-category-contains {
+    height: 340px;
+    min-width: 600px;
+    margin: 0 auto;
+    overflow: auto;
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.sf-category-contains .sf-category-list {
+    width: 235px;
+    border: 1px solid #ddd;
+}
+
+.sf-category-contains .clear-border {
+    border-left: none;
+}
+
+.sf-category-contains .sf-category-list ul {
+    width: 100%;
+    height: 100%;
+    padding: 2px;
+    background-color: #fff;
+}
+
+.sf-category-list-search {
+    display: block;
+    margin: auto;
+    width: 98%;
+    padding: 10px;
+}
+
+.sf-category-list-search input {
+    font-size: 12px;
+    padding: .4rem .75rem;
+    line-height: 1.5;
+    width: 100%;
+    color: #12263f;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #d2ddec;
+    border-radius: 1px;
+    -webkit-transition: border-color .15s ease-in-out,
+        box-shadow .15s ease-in-out;
+    transition: border-color .15s ease-in-out,
+        box-shadow .15s ease-in-out;
+}
+
+.sf-category-list-search input:focus {
+    color: #12263f;
+    background-color: #fff;
+    outline: 0;
+}
+
+.category-list-content {
+    height: 83%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+
+}
+
+.category-list-content::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px #FFF(0, 0, 0, 0.3);
+    background-color: #FFF;
+}
+
+.category-list-content::-webkit-scrollbar {
+    width: 1px;
+    background-color: #FFF;
+}
+
+.category-list-content::-webkit-scrollbar-thumb {}
+
+.sf-search-content ul {
+    position: absolute;
+    width: 100%;
+    background-color: #FFFFFF;
+    border: 1px solid #BCBCBC;
+    z-index: 1000;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 0;
+    border-radius: 3px;
+    box-shadow: darkgrey 10px 10px 30px 5px;
+}
+
+.sf-search-content ul li {
+    cursor: pointer;
+    height: 28px;
+    padding: 0 8px;
+    box-sizing: border-box;
+    list-style: none;
+    line-height: 28px;
+}
+
+.sf-search-content ul li:hover {
+    background-color: #e6f9ff;
+}
+
+.no-result {
+    margin-top: 30px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #999;
+    text-align: center;
+}
+
+.category-list-content ul li a {
+    cursor: pointer;
+    display: block;
+    padding-right: 25px;
+    padding-left: 10px;
+    border: 1px solid #fff;
+    line-height: 28px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.category-list-content ul li a:hover {
+    color: #000;
+    background-color: #4f9afe2e;
+}
+
+.category-list-content ul li.active a {
+    border-color: #2c7be5;
+    background: #2c7be5 url("&gt;&lt;") no-repeat right center;
+    color: #fff;
+}
+
+.selected-category {
+    padding: 10px 15px;
+    border: 1px solid #ed7f5a;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #fff4f0;
+    color: #ed7f5a;
+    font: 12px/20px "Microsoft Yahei", Tahoma, Arial, "Helvetica Neue", "Hiragino Sans GB", Simsun, sans-self;
+}
+
+.selected-category b {
+    font-weight: bold;
+}
+
+.selected-category i font {
+    font-family: simsun;
+}
+
+.selected-category-confirm {
+    padding-bottom: 50px;
+    text-align: center;
+}
+
+.selected-category-confirm input {
+    width: 200px;
+    height: 36px;
+    border: 1px solid #ed7f5a;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    background-color: #ed7f5a;
+    color: #fff;
+}
+
+.selected-category-confirm input:hover {
+    border-color: #d95459;
+    background-color: #d95459;
+}
+
+.selected-category-confirm input:disabled {
+    border-color: #ddd;
+    background-color: #f6f6f6;
+    color: #9a9a9a;
+    cursor: default;
+}

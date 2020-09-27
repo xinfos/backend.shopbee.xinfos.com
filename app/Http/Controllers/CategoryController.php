@@ -229,4 +229,22 @@ class CategoryController extends BaseController
         }
         return ['code' => 200, 'msg' => 'suceess', 'data' => $item[0]];
     }
+
+    public function search(Request $request)
+    {
+        $input = [
+            'keyword' => trim($request->input('keyword')),
+        ];
+        if (empty($input['keyword'])) {
+            return ['code' => 201, 'msg' => '提交参数有错误', 'data' => []];
+        }
+        //获取店铺基本信息
+        $categoryService = new CategoryService();
+        $item = $categoryService->Search($input);
+        dd($item);
+        if (empty($item[0])) {
+            return ['code' => 201, 'msg' => '没有找到相应的数据', 'data' => []];
+        }
+        return ['code' => 200, 'msg' => 'suceess', 'data' => $item[0]];
+    }
 }

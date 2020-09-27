@@ -3,14 +3,13 @@
 @section('content')
 <link rel="stylesheet" type="text/css" href="/assets/dashkit/js/category/dist/sort.css">
 <div class="header"></div>
-<div class="container-fluid" >
+<div class="container-fluid">
     <div class="row justify-content-center" style="margin:0px;">
         <div class="col-12" style="padding: 0px;">
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-header-title">商品库管理</h5>
                     <button class="sf-btn sf-btn-primary sf-btn-create" data-toggle="modal" data-target="#modalMembers">新建商品</button>
-
                 </div>
                 <div class="card-body">
                     <form>
@@ -51,73 +50,73 @@
                                 <button class="sf-btn sf-btn-white">重置</button>
                             </div>
                         </section>
-                    <form>
-                    <div class="ml-2">
-                        <ul class="nav nav-tabs nav-tabs-sm mb-4">
-                            <li class="nav-item">
-                                <a href="#home" data-toggle="tab" aria-expanded="false" class="nav-link active">
-                                    <i class="mdi mdi-home-variant d-lg-none d-block mr-1"></i>
-                                    <span class="d-none d-lg-block">全部</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#profile" data-toggle="tab" aria-expanded="true" class="nav-link">
-                                    <i class="mdi mdi-account-circle d-lg-none d-block mr-1"></i>
-                                    <span class="d-none d-lg-block">销售中</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#settings" data-toggle="tab" aria-expanded="false" class="nav-link">
-                                    <i class="mdi mdi-settings-outline d-lg-none d-block mr-1"></i>
-                                    <span class="d-none d-lg-block">已售罄</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#settings" data-toggle="tab" aria-expanded="false" class="nav-link">
-                                    <i class="mdi mdi-settings-outline d-lg-none d-block mr-1"></i>
-                                    <span class="d-none d-lg-block">已下架</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                        <form>
+                            <div class="ml-2">
+                                <ul class="nav nav-tabs nav-tabs-sm mb-4">
+                                    <li class="nav-item">
+                                        <a href="#home" data-toggle="tab" aria-expanded="false" class="nav-link active">
+                                            <i class="mdi mdi-home-variant d-lg-none d-block mr-1"></i>
+                                            <span class="d-none d-lg-block">全部</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#profile" data-toggle="tab" aria-expanded="true" class="nav-link">
+                                            <i class="mdi mdi-account-circle d-lg-none d-block mr-1"></i>
+                                            <span class="d-none d-lg-block">销售中</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#settings" data-toggle="tab" aria-expanded="false" class="nav-link">
+                                            <i class="mdi mdi-settings-outline d-lg-none d-block mr-1"></i>
+                                            <span class="d-none d-lg-block">已售罄</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#settings" data-toggle="tab" aria-expanded="false" class="nav-link">
+                                            <i class="mdi mdi-settings-outline d-lg-none d-block mr-1"></i>
+                                            <span class="d-none d-lg-block">已下架</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
 
-                    <div class="table-responsive">
-                    <table class="table table-sm table-nowrap card-table" id="sf-brand-tb">
-                        <thead>
-                            <tr>
-                                <th>
-                                    <div class="custom-control custom-checkbox table-checkbox">
-                                        <input type="checkbox" class="custom-control-input" name="ordersSelect" id="ordersSelectAll">
-                                        <label class="custom-control-label" for="ordersSelectAll"></label>
-                                    </div>
-                                </th>
-                                <th>品牌LOGO</th>
-                                <th>品牌名称</th>
-                                <th>归属分类名称</th>
-                                <th>是否显示</th>
-                                <th>创建时间</th>
-                            </tr>
-                        </thead>
-                        <tbody class="list">
-                            <tr>
-                                <td>
-                                    <div class="custom-control custom-checkbox table-checkbox">
-                                        <input type="checkbox" class="custom-control-input" name="ordersSelect">
-                                        <label class="custom-control-label" for="ordersSelectOne">&nbsp;</label>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                            <div class="table-responsive">
+                                <table class="table table-sm table-nowrap card-table" id="sf-brand-tb">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                <div class="custom-control custom-checkbox table-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" name="ordersSelect" id="ordersSelectAll">
+                                                    <label class="custom-control-label" for="ordersSelectAll"></label>
+                                                </div>
+                                            </th>
+                                            <th>品牌LOGO</th>
+                                            <th>品牌名称</th>
+                                            <th>归属分类名称</th>
+                                            <th>是否显示</th>
+                                            <th>创建时间</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="list">
+                                        <tr>
+                                            <td>
+                                                <div class="custom-control custom-checkbox table-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" name="ordersSelect">
+                                                    <label class="custom-control-label" for="ordersSelectOne">&nbsp;</label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                 </div>
                 <div class="card-footer"></div>
             </div>
         </div>
     </div>
 </div>
- <!-- Modal: Members -->
- <div class="modal fade" id="modalMembers" tabindex="-1" role="dialog" aria-hidden="true">
+<!-- Modal: Members -->
+<div class="modal fade" id="modalMembers" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-card card">

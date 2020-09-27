@@ -1,6 +1,5 @@
 @charset "utf-8";
 
-/**Style Reset**/
 ul,
 li a {
 	font: 12px/20px "Microsoft Yahei", Tahoma, Arial, "Helvetica Neue", "Hiragino Sans GB", Simsun, sans-self;
@@ -35,7 +34,7 @@ a {
 }
 
 /*主体部分*/
-.contains {
+.sf-category-contains {
 	margin: 0 auto;
 }
 
@@ -71,7 +70,7 @@ a {
 }
 
 .wareSort .category-list {
-	display: inline-flex;
+	display: inline-block;
 	height: 340px;
 	width: 220px;
 	border: 1px solid #ddd;
@@ -93,6 +92,8 @@ a {
 	line-height: 28px;
 	width: 100%;
 }
+
+.wareSort .category-list .category-list-content {}
 
 .wareSort .search-input input {
 	font-size: 12px;
