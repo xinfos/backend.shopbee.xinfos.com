@@ -247,4 +247,11 @@ class CategoryController extends BaseController
         }
         return ['code' => 200, 'msg' => 'suceess', 'data' => $item[0]];
     }
+
+    public function select(Request $request)
+    {
+        $data['method'] = "attrsgroupadd";
+
+        return view('category.select', ['data' => $data]);
+    }
 }

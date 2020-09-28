@@ -1,5 +1,9 @@
 var crumbs = [];
+var _M = "";
 var sort = {
+	_method: {
+		attrsgroupadd: "/setting/product/attrsgroup/add",
+	},
 	_api: {
 		list: '/product/category/sub',
 		search: '/product/category/search'
@@ -64,7 +68,7 @@ var sort = {
 		}
 		var htm = "";
 		for (var i = 0; i < resp.data.length; i++) {
-			htm += '<li class="li-' + resp.data[i].cat_id + '"onClick="sort.selected(' + resp.data[i].cat_id + ', ' + level + ',' + i + ');"><a href="javascript:void(0)">' + resp.data[i].name + '</a></li>';
+			htm += '<li class="li-' + resp.data[i].cat_id + '" data-value="' + resp.data[i].cat_id + '" onClick="sort.selected(' + resp.data[i].cat_id + ', ' + level + ',' + i + ');"><a href="javascript:void(0)">' + resp.data[i].name + '</a></li>';
 		}
 		$('#sort' + level).html(htm);
 	},
@@ -85,6 +89,20 @@ var sort = {
 
 $('.sf-btn-search').on('click', function () {
 	return sort.search($('.sf-search-name').val());
+});
+
+$('#releaseBtn').on('click', function () {
+	var catId = 0;
+	$('#sort3 > li').each(function () {
+		if ($(this).hasClass("active")) {
+			catId = $(this).attr('data-value');
+			return false;
+		}
+	});
+	if (!sort._method.hasOwnProperty(_M)) {
+		return false;
+	}
+	window.location.href = sort._method[_M] + '?catid=' + catId;
 });
 
 sort.init();

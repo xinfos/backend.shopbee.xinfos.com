@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Services\Category\CategoryService;
@@ -8,12 +9,14 @@ use Illuminate\Support\Facades\View;
 
 class AttrsGroupController extends BaseController
 {
-    public function lists(Request $request) {
-        
+    public function lists(Request $request)
+    {
+
         return view('attrs.group');
     }
-    
-    public function add(Request $request) {
+
+    public function add(Request $request)
+    {
         if ($request->isMethod('post')) {
             try {
                 $input = [
@@ -40,18 +43,33 @@ class AttrsGroupController extends BaseController
                 return ['code' => 201, 'msg' => $validationException->validator->getMessageBag()->first()];
             }
         }
-        return view('attrs.groupadd');
+        $catId = $request->input('catid');
+        if ($catId <= 0) {
+            return redirect('/setting/product/category/select');
+        }
+        $categoryService = new CategoryService();
+        $res = $categoryService->get($catId);
+        // dd($res);
+        if (empty($res[0]['cat_id']) || $res[0]['cat_id'] != $catId) {
+            return redirect('/setting/product/category/select');
+        }
+        // dd($res);
+        return view('attrs.groupadd', [
+            'category' => $res[0],
+        ]);
     }
 
-    public function edit(Request $request) {
+    public function edit(Request $request)
+    {
         return view('attrs.groupedit');
     }
 
     /**
      * @name del
      * @desc 删除
-    */
-    public function del(Request $request) {
+     */
+    public function del(Request $request)
+    {
         try {
             $input = [
                 'template_id' => (int)$request->input('template_id'),
