@@ -17795,6 +17795,47 @@ button:focus {
 	box-shadow: 0 0 0 .15rem rgba(223, 226, 230, .5)
 }
 
+.sf-btn-success {
+	color: #fff;
+	background-color: #00d97e;
+	border-color: #00d97e
+}
+
+.sf-btn-success:hover {
+	color: #fff;
+	background-color: #00b368;
+	border-color: #00a660
+}
+
+.sf-btn-success.focus,
+.sf-btn-success:focus {
+	color: #fff;
+	background-color: #00b368;
+	border-color: #00a660;
+	box-shadow: 0 0 0 .15rem rgba(38, 223, 145, .5)
+}
+
+.sf-btn-success.disabled,
+.sf-btn-success:disabled {
+	color: #fff;
+	background-color: #00d97e;
+	border-color: #00d97e
+}
+
+.sf-btn-success:not(:disabled):not(.disabled).active,
+.sf-btn-success:not(:disabled):not(.disabled):active,
+.show>.sf-btn-success.dropdown-toggle {
+	color: #fff;
+	background-color: #00a660;
+	border-color: #009959
+}
+
+.sf-btn-success:not(:disabled):not(.disabled).active:focus,
+.sf-btn-success:not(:disabled):not(.disabled):active:focus,
+.show>.sf-btn-success.dropdown-toggle:focus {
+	box-shadow: 0 0 0 .15rem rgba(38, 223, 145, .5)
+}
+
 .sf-select {
 	display: inline-block;
 	line-height: 40px;
@@ -18207,4 +18248,24 @@ button:focus {
 
 .ck-editor__editable_inline {
 	min-height: 120px;
+}
+
+.sf-input-sm {
+	font-size: 13px;
+	width: 200px;
+	height: 35px;
+	line-height: 35px;
+	padding: .5rem .75rem;
+	border: 1px solid #d2ddec;
+	border-radius: .375rem;
+}
+
+.sf-input-sm:focus {
+	color: #495057;
+	background-color: #fff;
+	border-color: #0767e8;
+	outline: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	border-radius: .375rem;
 }

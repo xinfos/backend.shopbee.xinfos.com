@@ -2,12 +2,6 @@
 
 @section('content')
 
-<style type="text/css">
-    input::placeholder {
-        font-size: 13px;
-    }
-</style>
-
 <div class="row justify-content-center content" style="margin:0px;background-color:#f7f8fa;">
     <div class="sf-product-frm col-12 col-lg-10 col-xl-10">
         <div class="header mt-md-5">
@@ -26,6 +20,7 @@
                     <div class="row align-items-center">
                         <div class="col mt-2">
                             <h5 class="mb-1">商品类目：<?php echo $category['name']; ?></h5>
+                            <input type="hidden" class="sf-attrgroup-cate" name="cat_id" value="<?php echo $category['cat_id']; ?>">
                         </div>
                     </div>
                 </div>
@@ -83,13 +78,24 @@
                         <h3 class="card-header-title">模板属性组</h3>
                     </div>
                     <div class="card-body">
-                        <div class="col-12 col-md-6">
+                        <div class="col-12">
                             <div class="form-group">
                                 <label><em class="sf-required">*</em>属性组</label>
-                                <small class="form-text text-muted ml-3">
-                                    本类目下，宝贝价格必须在100.00元-999999.00元之间。
-                                </small>
-                                <div class="input-group input-group-merge  ml-3 mb-3">
+                                <button type="button" class="sf-btn sf-btn-primary sf-attrgroup-add">添加属性组</button></h5>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="table-responsive mb-0">
+                                            <table class="table table-bordered table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th>属性组名称</th>
+                                                        <th class="text-center">操作</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -100,11 +106,11 @@
     </div>
     <div class="sf-product-push">
         <div class="sf-product-push-body">
-            <a href="#" class="sf-btn sf-btn-primary sf-btn-create">保存</a>
-            <a href="#" class="sf-btn btn-info sf-btn-create">取消</a>
+            <a href="javascript:void(0);" class="sf-btn sf-btn-primary sf-btn-create">保存</a>
+            <a href="javascript:void(0);" class="sf-btn btn-info sf-btn-cancel">取消</a>
         </div>
     </div>
 </div>
-
-
+<script src="/assets/dashkit/libs/bootstrapvalidator/dist/frm.js"></script>
+<script src="/assets/dashkit/js/attrs/sf.attrsgroup.js"></script>
 @endsection

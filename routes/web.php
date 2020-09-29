@@ -121,7 +121,6 @@ $router->group(['prefix' => '/product'], function () use ($router) {
 
     //分类
     $router->group(['prefix' => '/category'], function () use ($router) {
-        $router->get('list', ['uses' => 'CategoryController@lists']);
         $router->post('add', ['uses' => 'CategoryController@add']);
         $router->post('subadd', ['uses' => 'CategoryController@subadd']);
         $router->post('del', ['uses' => 'CategoryController@del']);

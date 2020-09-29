@@ -1,128 +1,87 @@
-var JSElement = document.createElement("script");
-
-JSElement.setAttribute("type", "text/javascript");
-
-JSElement.setAttribute("src", "/assets/dashkit/libs/bootstrapvalidator/dist/frm.js");
-
-document.body.appendChild(JSElement);
-
-$(function () {
-
-    const api = {
-        "create": "/product/attrs/add",
-        "edit": "/product/attrs/edit"
-    };
-
-    const frm = {
-        create: '#fromCreateAttrs'
-    }
-
-    var sAttrsGroup = function (el, opt) {
-        this.el = el;
-        this.init();
-    }
-
-    sAttrsGroup.prototype.init = function () {
-        var self = this;
-    }
-
-
-    sAttrsGroup.prototype.vals = function () {
-
-    }
-
-    sAttrsGroup.prototype._getAttrVals = function () {
-        return $('.sf-attr-vals').val();
-    }
-
-    //表单验证
-    sAttrsGroup.prototype.verify = function (data) {
-        var rules = [{
-            'name': 'required',
-            'pid': 'required',
-        }];
-        var err = {
-            'name.required': '属性名不能为空',
+var _methods = {
+    add: {
+        api: "/product/attrsgroup/add",
+        rule: [{
+            'name,cat_id': 'required'
+        }],
+        errmsg: {
+            'name.required': '属性组名称不能为空',
+            'cat_id.required': '所属分类不能为空',
+        }
+    },
+    edit: {
+        api: "/product/category/edit",
+        rule: [{
+            'cat_id,cat_name,pid': 'required',
+        }],
+        errmsg: {
+            'cat_id.required': '没有找到对应的分类信息',
+            'cat_name.required': '分类名不能为空',
             'pid.required': '父级分类不能为空',
-        };
-        return Validator.make(data, rules, err);
-    }
-
-    //将form表单转换成JSON格式
-    sAttrsGroup.prototype.serializeJson = function () {
-        var arr = $(frm.create).serializeArray();
-        var arrJSON = {};
-        $(arr).each(function () {
-            arrJSON[this.name] = this.value;
-        });
-        return arrJSON;
-    }
-
-    //保存属性
-    sAttrsGroup.prototype.saveSubmit = function () {
-        var self = this;
-        var formValuesJSON = self.serializeJson()
-        if (!self.verify(formValuesJSON)) {
-            return false;
+        },
+        frm: $('#formEditCategory'),
+    },
+    del: {
+        api: "/product/category/del",
+        rule: [{
+            'cat_id': 'required',
+        }],
+        errmsg: {
+            'cat_id.required': '没有找到对应的分类信息',
+        },
+        tips: {
+            title: '提示',
+            content: '是否确认删除该分类?!',
+            confirmButton: '是',
+            cancelButton: '否',
+            confirmButtonClass: 'sf-btn sf-btn-primary',
+            cancelButtonClass: 'sf-btn sf-btn-white',
+            confirm: function () {},
+            cancel: function () {}
         }
-        //以下的表单类型类型，默认属性值是必填项
-        if (formValuesJSON.fill_type != 1) {
-            // vals = $('.')
-        }
-        console.log(formValuesJSON);
+    },
+}
 
-        self._ajaxPostRequest(api.create, formValuesJSON, this._parseSaveResult);
+$('.sf-attrgroup-add').on('click', function () {
+    htm = '<tr><td><input class="sf-input-sm"></td><td class="text-center"><a class="sf-btn sf-attrgroup-submit" href="javascript:void(0);">确认</a></td></tr>';
+    $('table > tbody').append(htm);
+});
+
+$(document).on('click', '.sf-attrgroup-edit', function () {
+    var that = $(this).parent().parent()
+    var Obj = that.children(':first-child');
+    template = '<td><input class="sf-input-sm" value="' + Obj.html() + '"></td><td class="text-center"><a class="sf-btn sf-attrgroup-submit" href="javascript:void(0);">确认</a></td>';
+    $(that).empty().html(template);
+});
+
+$(document).on('click', '.sf-attrgroup-submit', function () {
+    var that = $(this).parent().parent()
+    var Obj = that.children(':first-child').children();
+    if (!Obj.val()) {
+        return false
     }
-
-    //处理保存结果
-    sAttrsGroup.prototype._parseSaveResult = function (that, resp) {
-        if (resp.code != 200) {
-            return false;
-        }
-        $('.sf-tbody-attrs').empty().append();
-        console.log(resp);
-    }
-
-    //请求
-    sAttrsGroup.prototype._ajaxPostRequest = function (url, params, callbackFunc) {
-        var that = this;
-        $.ajax({
-            type: 'post',
-            url: url,
-            dataType: 'json',
-            data: params,
-            success: function (resp) {
-                callbackFunc(that, resp);
-            },
-            error: function () {}
-        });
-    }
-
-
-    $.fn.extend({
-        sAttrsGroup: function (opt) {
-            return new sAttrsGroup($(this), opt)
-        }
-    });
-    $.fn.serializeJson = function () {
-        var serializeObj = {};
-        var array = this.serializeArray();
-        var str = this.serialize();
-        $(array).each(function () {
-            if (serializeObj[this.name]) {
-                if ($.isArray(serializeObj[this.name])) {
-                    serializeObj[this.name].push(this.value);
-                } else {
-                    serializeObj[this.name] = [serializeObj[this.name], this.value];
-                }
-            } else {
-                serializeObj[this.name] = this.value;
-            }
-        });
-        return serializeObj;
+    var params = {
+        "name": Obj.val(),
+        "cat_id": $('.sf-attrgroup-cate').val(),
     };
-
-    $('.sf-btn-saveAttrs').on('click', function () {
-        $(frm.create).sAttrsGroup().saveSubmit();
+    SF.AjaxSubmit(_methods.add, params, function (obj, resp) {
+        if (resp.code == 200) {
+            // resp.data.grou_id
+            var template = '<td>' + params.name + '</td><td class="text-center"><a class="sf-btn sf-attrgroup-edit" href="javascript:void(0);">编辑</a></td>';
+            $(that).empty().html(template);
+            return;
+        }
     });
 });
+
+$('.sf-btn-create').on('click', function () {
+    SF.FrmSubmit(_methods.edit, function (that, resp) {
+        console.log(resp);
+    });
+});
+
+// window.onbeforeunload = function (e) {
+//     var dialogText = '如果重新加载页面，系统可能不会保存您所做的修改';
+//     e.returnValue = dialogText;
+//     return dialogText;
+// };

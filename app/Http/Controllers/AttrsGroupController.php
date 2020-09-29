@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Services\Category\CategoryService;
+use App\Services\Attrsgroup\AttrsgroupService;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
@@ -20,25 +22,37 @@ class AttrsGroupController extends BaseController
         if ($request->isMethod('post')) {
             try {
                 $input = [
-                    'name' => $request->input('cat_name'),
+                    'name' => $request->input('name'),
+                    'cat_id' => (int) $request->input('cat_id'),
                 ];
                 $rules = [
                     'name' => 'required|max:20',
+                    'cat_id' => 'required',
                 ];
                 $messages = [
-                    'name.required' => '分类名称不能空',
-                    'name.max' => '分类名称不能超过20个字符',
+                    'name.required' => '属性组名称不能空',
+                    'name.max' => '属性组名称不能超过20个字符',
+                    'cat_id.required' => '属性组分类不能为空',
                 ];
                 $validator = Validator::make($input, $rules, $messages);
                 if ($validator->fails()) {
                     return ['code' => 201, 'msg' => $validator->errors()->all()[0]];
                 }
-                $categoryService = new CategoryService();
-                $res = $categoryService->create($input);
+
+                $attrsGroupService = new AttrsgroupService();
+                $res = $attrsGroupService->create($input);
+
+
                 if ($res['code'] != 200) {
                     return ['code' => 201, 'msg' => $res['msg']];
                 }
-                return ['code' => 200, 'msg' => '创建成功'];
+                return [
+                    'code' => 200,
+                    'msg' => '创建成功',
+                    'data' => [
+                        'group_id' => $res['data'][0]['group_id']
+                    ]
+                ];
             } catch (ValidationException $validationException) {
                 return ['code' => 201, 'msg' => $validationException->validator->getMessageBag()->first()];
             }
