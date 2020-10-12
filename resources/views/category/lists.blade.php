@@ -29,13 +29,13 @@
                     </form>
                     <div class="mt-4"></div>
                     <div class="sf-alert-el"></div>
-                    <table class="table table-hover table-sm" id="t1">
+                    <table class="table table-hover table-sm table-bordered" id="t1">
                         <thead>
                             <tr>
                                 <th scope="col">分类名称</th>
                                 <th scope="col">分类别名</th>
-                                <th scope="col">是否显示</th>
-                                <th scope="col">是否启用</th>
+                                <th class="text-center">是否显示</th>
+                                <th class="text-center">是否启用</th>
                                 <th class="text-right" scope="col">操作</th>
                             </tr>
                         </thead>

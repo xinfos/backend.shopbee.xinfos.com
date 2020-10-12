@@ -1,5 +1,5 @@
 var _methods = {
-    add: {
+    addAttrsGroup: {
         api: "/product/attrsgroup/add",
         rule: [{
             'name,cat_id': 'required'
@@ -8,6 +8,17 @@ var _methods = {
             'name.required': '属性组名称不能为空',
             'cat_id.required': '所属分类不能为空',
         }
+    },
+    addAttrsTemplate: {
+        api: "/product/attrs/template/add",
+        rule: [{
+            'name,cat_id': 'required'
+        }],
+        errmsg: {
+            'name.required': '模板名称不能为空',
+            'cat_id.required': '所属分类不能为空',
+        },
+        frm: $('#formAttrsTemplate'),
     },
     edit: {
         api: "/product/category/edit",
@@ -64,10 +75,10 @@ $(document).on('click', '.sf-attrgroup-submit', function () {
         "name": Obj.val(),
         "cat_id": $('.sf-attrgroup-cate').val(),
     };
-    SF.AjaxSubmit(_methods.add, params, function (obj, resp) {
+    SF.AjaxSubmit(_methods.addAttrsGroup, params, function (obj, resp) {
         if (resp.code == 200) {
-            // resp.data.grou_id
-            var template = '<td>' + params.name + '</td><td class="text-center"><a class="sf-btn sf-attrgroup-edit" href="javascript:void(0);">编辑</a></td>';
+            var dHtml = '<input type="hidden" name="attrgroups" value="' + resp.data.group_id + '" />';
+            var template = '<td>' + params.name + '</td><td class="text-center">' + dHtml + '<a class="sf-btn sf-attrgroup-edit" href="javascript:void(0);">编辑</a></td>';
             $(that).empty().html(template);
             return;
         }
@@ -75,13 +86,7 @@ $(document).on('click', '.sf-attrgroup-submit', function () {
 });
 
 $('.sf-btn-create').on('click', function () {
-    SF.FrmSubmit(_methods.edit, function (that, resp) {
+    SF.FrmSubmit(_methods.addAttrsTemplate, function (that, resp) {
         console.log(resp);
     });
 });
-
-// window.onbeforeunload = function (e) {
-//     var dialogText = '如果重新加载页面，系统可能不会保存您所做的修改';
-//     e.returnValue = dialogText;
-//     return dialogText;
-// };

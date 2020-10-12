@@ -160,4 +160,9 @@ $router->group(['prefix' => '/product'], function () use ($router) {
     $router->group(['prefix' => '/attrs/value'], function () use ($router) {
         $router->post('create', ['uses' => 'AttrsValueController@create']);
     });
+
+    //商品属性模板
+    $router->group(['prefix' => '/attrs/template'], function () use ($router) {
+        $router->post('add', ['uses' => 'AttrTemplateController@add']);
+    });
 });

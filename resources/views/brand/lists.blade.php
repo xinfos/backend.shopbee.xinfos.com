@@ -29,8 +29,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php if (!empty($data['list'])) {?>
-                                <?php foreach ($data['list'] as $v) {?>
+                            <?php if (!empty($data['list'])) { ?>
+                                <?php foreach ($data['list'] as $v) { ?>
                                     <tr class="li-<?php echo $v['brand_id']; ?>" data-value="<?php echo $v['brand_id']; ?>">
                                         <td>
                                             <div class="avatar">
@@ -48,12 +48,12 @@
                                             <a href="javascript:void(0);" class="sf-btn-del">删除</a>
                                         </td>
                                     </tr>
-                                <?php }?>
-                            <?php } else {?>
+                                <?php } ?>
+                            <?php } else { ?>
                                 <tr>
                                     <td colspan="7" class="text-center" scope="col"> - 暂无数据 -</td>
                                 </tr>
-                            <?php }?>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>

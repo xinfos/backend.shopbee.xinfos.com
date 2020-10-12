@@ -78,6 +78,18 @@ var Validator = {
 		}
 		return true;
 	},
+	clacLength(v) {
+		var len = 0;
+		for (var i = 0; i < v.length; i++) {
+			var a = v.charAt(i);
+			if (a.match(/[^\x00-\xff]/ig) != null) {
+				len += 2;
+			} else {
+				len += 1;
+			}
+		}
+		return len;
+	},
 	make: function (data, rule, errMsg) {
 		if (Validator.required(data)) {
 			for (var i = 0; i < rule.length; i++) {
@@ -158,6 +170,19 @@ var SF = {
 			callback: null,
 		}
 	},
+	_displayErr: function (that, msg) {
+		var m = '<div class="invalid-feedback">' + msg + '</div>';
+		var isExists = false;
+		$(that).siblings().each(function () {
+			if ($(this).hasClass('invalid-feedback')) {
+				isExists = true;
+				return false;
+			}
+		});
+		if (!isExists) {
+			$(that).parent().append(m);
+		}
+	},
 	_showSucc: function (msg) {
 		var template = '<div class="alert alert-primary alert-dismissible fade show" role="alert">' +
 			msg +
@@ -184,11 +209,24 @@ var SF = {
 			$(this).empty();
 		});
 	},
+	_getType: function (obj) {
+		return Object.prototype.toString.call(obj).slice(8, -1);
+	},
 	_serializeFormJSON: function (that) {
 		var arr = that.serializeArray();
 		var arrJSON = {};
+
 		$(arr).each(function () {
-			arrJSON[this.name] = this.value;
+			if (arrJSON.hasOwnProperty(this.name)) {
+				if (SF._getType(arrJSON[this.name]) != 'Array') {
+					var firstItem = arrJSON[this.name];
+					arrJSON[this.name] = new Array();
+					arrJSON[this.name].push(firstItem);
+				}
+				arrJSON[this.name].push(this.value);
+			} else {
+				arrJSON[this.name] = this.value;
+			}
 		});
 		return arrJSON;
 	},
@@ -281,6 +319,40 @@ var SF = {
 	}
 };
 
+
 $(document).on("input", "input", function (e) {
 	$(this).removeClass('is-invalid');
+
+
+	if ($(this).attr('maxlength') > 0) {
+		var props = {
+			name: $(this).attr('name'),
+			maxVallength: $(this).attr('maxlength'),
+			currentVallength: Validator.clacLength($(this).val()),
+		};
+
+		var tipsObj = $('.' + props.name + '-length');
+		if (props.currentVallength > props.maxVallength) {
+			$(this).addClass("is-invalid");
+			tipsObj.empty().html('<span class="text-danger">' + props.currentVallength + "</span>");
+			var errmsg = '最多填写' + props.maxVallength + '个汉字（' + props.currentVallength + '个字符）';
+			SF._displayErr(this, errmsg);
+			return false;
+		}
+		tipsObj.empty().html(props.currentVallength);
+	}
+
 });
+
+// window.onbeforeunload = function (e) {
+//     var dialogText = '如果重新加载页面，系统可能不会保存您所做的修改';
+//     e.returnValue = dialogText;
+//     return dialogText;
+// };
+
+// 禁用enter键
+document.onkeydown = function () {
+	if (window.event && window.event.keyCode == 13) {
+		window.event.returnValue = false;
+	}
+};

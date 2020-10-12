@@ -14,7 +14,8 @@
     <!-- Theme CSS -->
     <link rel="stylesheet" href="/assets/dashkit/css/app.css">
     <link rel="stylesheet" href="/assets/dashkit/css/theme.min.css" id="stylesheetLight">
-    <link rel="stylesheet" href="/assets/dashkit/css/theme-dark.min.css" id="stylesheetDark">
+    <link rel="stylesheet" href="/assets/dashkit/css/theme.min.css" id="stylesheetDark">
+    <!-- <link rel="stylesheet" href="/assets/dashkit/css/theme-dark.min.css" id="stylesheetDark"> -->
     <link rel="stylesheet" href="/assets/dashkit/css/boxicons.min.css" id="boxicons">
 
     <!-- Libs JS -->
