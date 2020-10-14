@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Services\Category\CategoryService;
@@ -42,7 +43,8 @@ class AttrsController extends BaseController
         return view('attrs.create');
     }
 
-    public function add(Request $request) {
+    public function add(Request $request)
+    {
         try {
             $input = [
                 'alias' => $request->input('cat_alias'),
@@ -70,7 +72,7 @@ class AttrsController extends BaseController
             // if ($res['code'] != 200) {
             //     return ['code' => 201, 'msg' => $res['msg']];
             // }
-            return ['code' => 200, 'msg' => '创建成功', 'data'=> $input];
+            return ['code' => 200, 'msg' => '创建成功', 'data' => $input];
         } catch (ValidationException $validationException) {
             return ['code' => 201, 'msg' => $validationException->validator->getMessageBag()->first()];
         }
@@ -85,17 +87,40 @@ class AttrsController extends BaseController
                     'page' => $request->input('page', 1),
                     'pageSize' => $request->input('pageSize', 30),
                 ];
-                $input['cat_id'] = 10003;
-                $categoryService = new CategoryService();
-                $res = $categoryService->getAttrsMaps($input['cat_id']);
-                echo "<pre>";
-                print_r($res);
-                exit;
-                return ['code' => 200, 'msg' => '创建成功'];
+                $data = [
+                    [
+                        "attr_id" => 11,
+                        "attr_name" => "颜色",
+                    ]
+                ];
+                return ['code' => 200, 'msg' => '创建成功', 'data' => $data];
             } catch (ValidationException $validationException) {
                 return ['code' => 201, 'msg' => $validationException->validator->getMessageBag()->first()];
             }
         }
         return view('attrs.lists');
+    }
+
+    public function query(Request $request)
+    {
+        try {
+            $input = [
+                'cat_id' => $request->input('cat_id'),
+                'page' => $request->input('page', 1),
+                'pageSize' => $request->input('pageSize', 30),
+            ];
+            $data = [
+                [
+                    "attr_id" => 11,
+                    "attr_name" => "颜色",
+                ], [
+                    "attr_id" => 12,
+                    "attr_name" => "尺码",
+                ],
+            ];
+            return ['code' => 200, 'msg' => '创建成功', 'data' => $data];
+        } catch (ValidationException $validationException) {
+            return ['code' => 201, 'msg' => $validationException->validator->getMessageBag()->first()];
+        }
     }
 }

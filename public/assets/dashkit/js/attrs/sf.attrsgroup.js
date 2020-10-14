@@ -51,6 +51,15 @@ var _methods = {
             cancel: function () {}
         }
     },
+    searchSpecAttr: {
+        api: "/product/attrs/query",
+        rule: [{
+            'search': 'required',
+        }],
+        errmsg: {
+            'search.required': '搜索内容不能为空',
+        }
+    },
 }
 
 $('.sf-attrgroup-add').on('click', function () {
@@ -82,6 +91,27 @@ $(document).on('click', '.sf-attrgroup-submit', function () {
             $(that).empty().html(template);
             return;
         }
+    });
+});
+
+$(document).on('click', '.sf-attrgroup-spec-search', function () {
+    var specAttrName = $('.sf-attrgroup-spec-search').val();
+    var params = {
+        "search": specAttrName
+    };
+    SF.AjaxSubmit(_methods.searchSpecAttr, params, function (obj, resp) {
+        console.log(resp);
+        if (resp.code != 200) {
+
+            return false;
+        }
+        var htm = "";
+        for (var i = 0; i < resp.data.length; i++) {
+            var idTag = 'sepc-' + resp.data[i].attr_id;
+            htm += '<input type="checkbox" id="' + idTag + '"/><label for="' + idTag + '">' + resp.data[i].attr_name + '</label>'
+        }
+        $('.sf-spec-attr-checklist').empty().append(htm);
+        console.log(htm);
     });
 });
 
