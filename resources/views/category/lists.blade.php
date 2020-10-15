@@ -1,8 +1,6 @@
 @extends('layouts.dashkit.app')
 
 @section('content')
-<link rel="stylesheet" href="/assets/dashkit/libs/jquery-confirm/jquery-confirm.css">
-
 <div class="header"></div>
 <div class="container-fluid">
     <div class="row justify-content-center" style="margin:0px;">
@@ -34,13 +32,12 @@
                             <tr>
                                 <th scope="col">分类名称</th>
                                 <th scope="col">分类别名</th>
-                                <th class="text-center">是否显示</th>
-                                <th class="text-center">是否启用</th>
+                                <th>是否显示</th>
+                                <th>是否启用</th>
                                 <th class="text-right" scope="col">操作</th>
                             </tr>
                         </thead>
-                        <tbody>
-                        </tbody>
+                        <tbody></tbody>
                     </table>
                 </div>
             </div>

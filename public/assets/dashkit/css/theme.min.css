@@ -12854,7 +12854,7 @@ a.text-white:hover {
 .btn .badge {
 	top: -2px
 }
-
+/* .badge-soft-dark */
 .badge-soft-primary {
 	color: #2c7be5;
 	background-color: #d5e5fa
@@ -12940,8 +12940,8 @@ a.text-white:hover {
 }
 
 .badge-soft-dark {
-	color: #12263f;
-	background-color: #d0d4d9
+	color: #333333;
+	background-color: #e6e7e8
 }
 
 .badge-soft-dark[href]:focus,

@@ -92,6 +92,7 @@ $router->group(['prefix' => '/setting/product'], function () use ($router) {
     $router->group(['prefix' => '/attrs'], function () use ($router) {
         $router->any('list', ['uses' => 'AttrsController@lists']);
         $router->any('add', ['uses' => 'AttrsController@create']);
+        $router->any('edit', ['uses' => 'AttrsController@edit']);
         $router->any('get', ['uses' => 'AttrsController@get']);
     });
 

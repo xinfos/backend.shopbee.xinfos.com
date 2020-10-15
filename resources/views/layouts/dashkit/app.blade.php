@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="/assets/dashkit/css/app.css">
     <link rel="stylesheet" href="/assets/dashkit/css/theme.min.css" id="stylesheetLight">
     <link rel="stylesheet" href="/assets/dashkit/css/theme.min.css" id="stylesheetDark">
-    <!-- <link rel="stylesheet" href="/assets/dashkit/css/theme-dark.min.css" id="stylesheetDark"> -->
     <link rel="stylesheet" href="/assets/dashkit/css/boxicons.min.css" id="boxicons">
+    <link rel="stylesheet" href="/assets/dashkit/libs/jquery-confirm/jquery-confirm.css">
 
     <!-- Libs JS -->
     <script src="/assets/js/jquery-3.4.1.min.js"></script>
@@ -43,7 +43,8 @@
     </div>
     <!-- Theme JS -->
     <script type="text/javascript" src="/assets/dashkit/js/theme.min.js"></script>
-
+    <!-- Lib JS -->
+    <script src="/assets/dashkit/libs/jquery-confirm/dist/jquery-confirm.js"></script>
 </body>
 
 </html>

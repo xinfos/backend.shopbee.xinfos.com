@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\Category\CategoryService;
-use App\Services\Attrs\AttrService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
+
+use App\Services\Attrs\AttrService;
 
 class AttrsController extends BaseController
 {
@@ -44,64 +43,65 @@ class AttrsController extends BaseController
         return view('attrs.create');
     }
 
-    public function add(Request $request)
-    {
+    public function del(Request $request) {
         try {
-            $input = [
-                'alias' => $request->input('cat_alias'),
-                'desc' => $request->input('cat_desc'),
-                'name' => $request->input('name'),
-                'unit' => $request->input('unit'),
-                'is_required' => (int) $request->input('is_required'),
-                'is_search' => (int) $request->input('is_search'),
-                'fill_type' => (int) $request->input('fill_type'),
-                'state' => (int) $request->input('state'),
-            ];
-            $rules = [
-                'name' => 'required|max:20',
-            ];
-            $messages = [
-                'name.required' => '分类名称不能空',
-                'name.max' => '分类名称不能超过20个字符',
-            ];
-            $validator = Validator::make($input, $rules, $messages);
-            if ($validator->fails()) {
-                return ['code' => 201, 'msg' => $validator->errors()->all()[0]];
+            $attrId = (int) $request->input('id');
+            if (empty($attrId)) {
+                return ['code' => 201, 'msg' => 'fail', 'data' => []];
             }
-            // $categoryService = new CategoryService();
-            // $res = $categoryService->create($input);
-            // if ($res['code'] != 200) {
-            //     return ['code' => 201, 'msg' => $res['msg']];
-            // }
-            return ['code' => 200, 'msg' => '创建成功', 'data' => $input];
-        } catch (ValidationException $validationException) {
-            return ['code' => 201, 'msg' => $validationException->validator->getMessageBag()->first()];
+            $attrService = new AttrService();
+            return $attrService->delete($attrId);
+        } catch (\Exception $exception) {
+            return ['code' => 201, 'msg' => "fail"];
         }
     }
 
+    /**
+     * @name 编辑单个属性信息
+     * @author Alex Pan <psj474@163.com>
+     * @param $name string 属性名称
+     * @return array
+     */
+    public function edit(Request $request) {
+        $attrId = (int) $request->input('id');
+        if($attrId <= 0 ){
+            return false;
+        }
+        $attrService = new AttrService();
+        $attrInfo = $attrService->get($attrId);
+        // dd($attrInfo);
+        if(empty($attrInfo)) {
+            return false;
+        }
+
+        //如果 {POST-请求} 直接编辑相关属性
+        if ($request->isMethod('post')) {
+            return ['code' => 200, 'msg' => 'succ', 'data' => []];
+        }
+
+        return view('attrs.edit', [
+            'data' => $attrInfo,
+        ]);
+    }
+
+    /**
+     * @name 获取属性列表
+     * @author Alex Pan <psj474@163.com>
+     * @param $name string 属性名称
+     * @return array
+     */
     public function lists(Request $request)
     {
-        if ($request->isMethod('post')) {
-            try {
-                $input = [
-                    'cat_id' => $request->input('cat_id'),
-                    'page' => $request->input('page', 1),
-                    'pageSize' => $request->input('pageSize', 30),
-                ];
-                $data = [
-                    [
-                        "attr_id" => 11,
-                        "attr_name" => "颜色",
-                    ]
-                ];
-                return ['code' => 200, 'msg' => '创建成功', 'data' => $data];
-            } catch (ValidationException $validationException) {
-                return ['code' => 201, 'msg' => $validationException->validator->getMessageBag()->first()];
-            }
-        }
-        return view('attrs.lists');
+        $input = [
+            'attr_name' => $request->input('name'),
+            'page_no' => (int) $request->input('page'),
+            'page_size' => 10,
+        ];
+        $attrService = new AttrService();
+        return view('attrs.lists', [
+            'data' => $attrService->lists($input),
+        ]);
     }
-
 
     public function query(Request $request)
     {

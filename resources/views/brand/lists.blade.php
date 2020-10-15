@@ -2,7 +2,6 @@
 
 @section('content')
 <link rel="stylesheet" type="text/css" href="/assets/dashkit/js/page/sf.page.css">
-<link rel="stylesheet" href="/assets/dashkit/libs/jquery-confirm/jquery-confirm.css">
 <div class="header"></div>
 <div class="container-fluid">
     <div class="row justify-content-center">
@@ -69,7 +68,6 @@
 
 <script type="text/javascript" src="/assets/dashkit/js/brand/sf.brand.js"></script>
 <script type="text/javascript" src="/assets/dashkit/js/page/sf.page.js"></script>
-<script type="text/javascript" src="/assets/dashkit/libs/jquery-confirm/dist/jquery-confirm.js"></script>
 <script>
     window.onload = function() {
         new Page({
