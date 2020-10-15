@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\Category\CategoryService;
+use App\Services\Attrs\AttrService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
@@ -101,26 +102,20 @@ class AttrsController extends BaseController
         return view('attrs.lists');
     }
 
+
     public function query(Request $request)
     {
         try {
             $input = [
-                'cat_id' => $request->input('cat_id'),
-                'page' => $request->input('page', 1),
-                'pageSize' => $request->input('pageSize', 30),
+                'search' => $request->input('search'),
             ];
-            $data = [
-                [
-                    "attr_id" => 11,
-                    "attr_name" => "颜色",
-                ], [
-                    "attr_id" => 12,
-                    "attr_name" => "尺码",
-                ],
-            ];
-            return ['code' => 200, 'msg' => '创建成功', 'data' => $data];
-        } catch (ValidationException $validationException) {
-            return ['code' => 201, 'msg' => $validationException->validator->getMessageBag()->first()];
+            if (empty($input['search'])) {
+                return ['code' => 200, 'msg' => 'succ', 'data' => []];
+            }
+            $attrService = new AttrService();
+            return ['code' => 200, 'msg' => 'succ', 'data' => $attrService->query($input)];
+        } catch (\Exception $exception) {
+            return ['code' => 201, 'msg' => $exception->getMessage()];
         }
     }
 }

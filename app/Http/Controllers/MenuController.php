@@ -205,7 +205,7 @@ class MenuController extends BaseController
                                 [
                                     'menu_id' => 13014,
                                     'menu_pid' => 1301,
-                                    'title' => '商品属性',
+                                    'title' => '属性库',
                                     'menu_icon' => 'fe fe-shopping-bag',
                                     'menu_addr' => '/setting/product/attrs/list',
                                     'is_menu' => 1,

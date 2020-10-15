@@ -91,9 +91,8 @@ $router->group(['prefix' => '/setting/product'], function () use ($router) {
     //商品属性
     $router->group(['prefix' => '/attrs'], function () use ($router) {
         $router->any('list', ['uses' => 'AttrsController@lists']);
-        $router->any('create', ['uses' => 'AttrsController@create']);
+        $router->any('add', ['uses' => 'AttrsController@create']);
         $router->any('get', ['uses' => 'AttrsController@get']);
-        $router->post('add', ['uses' => 'AttrsController@add']);
     });
 
     //商品属性组

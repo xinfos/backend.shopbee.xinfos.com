@@ -1,34 +1,6 @@
 @extends('layouts.dashkit.app')
 
 @section('content')
-<style type="text/css">
-    .RadioStyle input {
-        display: none
-    }
-
-    .RadioStyle label {
-        border: 1px solid #e3ebf6;
-        color: #13273f;
-        line-height: 35px;
-        min-width: 80px;
-        text-align: center;
-        float: left;
-        margin: 3px;
-        font-size: 13px;
-        border-radius: 2px
-    }
-
-    .RadioStyle input:checked+label {
-        /* background: url(/assets/images/ico_checkon.svg) no-repeat right bottom; */
-        border: 1px solid #0767e8;
-        background-size: 21px 21px;
-        color: #0767e8
-    }
-
-    .RadioStyle input:disabled+label {
-        opacity: 0.7;
-    }
-</style>
 <div class="row justify-content-center" style="margin:0px;margin-bottom: 100px;background-color:#f7f8fa;">
     <div class="col-12 col-lg-10 col-xl-10">
         <div class="header mt-md-5">
@@ -101,7 +73,7 @@
             <!-- spec-info -->
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-header-title">模板 - 规格信息</h3>
+                    <h3 class="card-header-title">规格信息</h3>
                 </div>
                 <div class="card-body">
                     <div class="col-5">
@@ -114,12 +86,21 @@
                             <small class="form-text text-muted ml-3">
                                 标题和描述关键词是否违规自检工具：商品合规工具。
                             </small>
+                            <div class="input-group RadioStyle ml-3">
+                                <div class="sf-spec-attr-checklist"></div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-10">
                         <div class="form-group">
-                            <div class="RadioStyle ml-3">
-                                <div class="Block PaddingL sf-spec-attr-checklist"></div>
+                            <label><em class="sf-required">*</em>已选规格属性：</label>
+                            <small class="form-text text-muted ml-3">
+                                可点击 <a href="javascript:void(0);" class="sf-spec-all-remove"> 清除已选属性</a>，重新选择相应的规格属性。
+                            </small>
+                            <div class="input-group ml-3">
+                                <div class="sf-filter-list">
+                                    <ul></ul>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -129,7 +110,7 @@
             <!-- common-info -->
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-header-title">模板 - 公共信息</h3>
+                    <h3 class="card-header-title">关键属性</h3>
                 </div>
                 <div class="card-body">
                     <div class="col-12">

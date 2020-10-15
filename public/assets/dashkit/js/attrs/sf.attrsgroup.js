@@ -108,11 +108,35 @@ $(document).on('click', '.sf-attrgroup-spec-search', function () {
         var htm = "";
         for (var i = 0; i < resp.data.length; i++) {
             var idTag = 'sepc-' + resp.data[i].attr_id;
-            htm += '<input type="checkbox" id="' + idTag + '"/><label for="' + idTag + '">' + resp.data[i].attr_name + '</label>'
+            htm += '<span><input type="checkbox" value="' + resp.data[i].attr_id + '" class="sf-spec-attr-checkbox" id="' + idTag + '"/><label for="' + idTag + '">' + resp.data[i].attr_name + '</label></span>'
         }
         $('.sf-spec-attr-checklist').empty().append(htm);
         console.log(htm);
     });
+});
+
+
+$(document).on('click', '.sf-spec-attr-checkbox', function () {
+    var attrId = $(this).val();
+    var clsActive = 'active-' + attrId;
+    if ($(this).prop('checked')) {
+        if ($('.sf-filter-list > ul > li').hasClass(clsActive)) {
+            return false;
+        }
+        var attrName = $(this).siblings().html();
+        var htm = '<li class="active ' + clsActive + '">' + attrName + '<i class="fe fe-x sf-remove"></i></li>';
+        $('.sf-filter-list > ul').append(htm);
+        return false;
+    }
+
+});
+
+$(document).on('click', '.sf-remove', function () {
+    $(this).parent().remove();
+});
+
+$(document).on('click', '.sf-spec-all-remove', function () {
+    $('.sf-filter-list > ul').empty();
 });
 
 $('.sf-btn-create').on('click', function () {
