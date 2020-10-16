@@ -96,7 +96,7 @@ class AttrService
     {
         try {
             $apiUrl = $this->appService . '/list';
-            if(empty($data['page_no'])) {
+            if (empty($data['page_no'])) {
                 $data['page_no'] = 1;
             }
             $rst = ClientRequest::post($apiUrl, $data);

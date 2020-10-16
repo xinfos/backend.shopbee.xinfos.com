@@ -43,7 +43,8 @@ class AttrsController extends BaseController
         return view('attrs.create');
     }
 
-    public function del(Request $request) {
+    public function del(Request $request)
+    {
         try {
             $attrId = (int) $request->input('id');
             if (empty($attrId)) {
@@ -62,15 +63,16 @@ class AttrsController extends BaseController
      * @param $name string 属性名称
      * @return array
      */
-    public function edit(Request $request) {
+    public function edit(Request $request)
+    {
         $attrId = (int) $request->input('id');
-        if($attrId <= 0 ){
+        if ($attrId <= 0) {
             return false;
         }
         $attrService = new AttrService();
         $attrInfo = $attrService->get($attrId);
         // dd($attrInfo);
-        if(empty($attrInfo)) {
+        if (empty($attrInfo)) {
             return false;
         }
 

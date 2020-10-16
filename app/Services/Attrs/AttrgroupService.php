@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Attrsgroup;
+namespace App\Services\Attrs;
 
 use App\Common\Library\ClientRequest;
 use Exception;

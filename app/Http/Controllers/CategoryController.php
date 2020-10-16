@@ -2,38 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\Category\CategoryService;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 
+use App\Services\Category\CategoryService;
+
 class CategoryController extends BaseController
 {
     /**
-     * @name 获取分类列表
+     * @name 创建分类
+     * @author Alex Pan <psj474@163.com>
+     * @param $name string 属性名称
+     * @return array
      */
-    public function lists(Request $request)
-    {
-        $name = trim($request->input('name'));
-        $categoryService = new CategoryService();
-        $data = [];
-        if (!empty($name)) {
-            $res = $categoryService->query(['name' => $name, 'page_no' => 1]);
-            if (!empty($res[0]['list'])) {
-                $data = $res[0]['list'];
-            }
-        } else {
-            $res = $categoryService->sub(10000);
-            if (!empty($res[0])) {
-                $data = $res[0];
-            }
-        }
-        return view('category.lists', [
-            'data' => $data,
-        ]);
-    }
-
     public function add(Request $request)
     {
         try {
@@ -61,17 +44,14 @@ class CategoryController extends BaseController
 
             $validator = Validator::make($input, $rules, $messages);
             if ($validator->fails()) {
-                return ['code' => 201, 'msg' => $validator->errors()->all()[0]];
+                Log::error($validator->errors()->all()[0]);
+                return ['code' => 201, 'msg' => '提交参数有错误'];
             }
             $categoryService = new CategoryService();
-            $res = $categoryService->create($input);
-            if ($res['code'] != 200) {
-                return ['code' => 201, 'msg' => $res['msg']];
-            }
-
-            return ['code' => 200, 'msg' => '创建成功'];
-        } catch (ValidationException $validationException) {
-            return ['code' => 201, 'msg' => $validationException->validator->getMessageBag()->first()];
+            return $categoryService->create($input);
+        } catch (Exception $e) {
+            Log::error($e->getMessage());
+            return ['code' => 201, 'msg' => '抱歉，分类创建失败'];
         }
     }
 
@@ -112,6 +92,55 @@ class CategoryController extends BaseController
             return ['code' => 201, 'msg' => $validationException->validator->getMessageBag()->first()];
         }
     }
+
+    /**
+     * @name 获取分类列表
+     * @author Alex Pan <psj474@163.com>
+     * @param $name string 分类名称
+     * @return array
+     */
+    public function lists(Request $request)
+    {
+        $input = [
+            'name' => trim($request->input('name')),
+            'page_no' => 1
+        ];
+        $categoryService = new CategoryService();
+        $data = [];
+        if (!empty($input['name'])) {
+            $rst = $categoryService->query($input);
+            if (!empty($rst['list'])) {
+                $data = $rst['list'];
+            }
+        } else {
+            $data = $categoryService->sub(10000);
+        }
+
+        return view('category.lists', [
+            'data' => $data,
+        ]);
+    }
+
+    /**
+     * @name 根据分类ID，获取当个分类详情
+     * @author Alex Pan <psj474@163.com>
+     * @param $cat_id int 分类ID
+     * @return array
+     */
+    public function get(Request $request)
+    {
+        $catId = (int) $request->input('cat_id');
+        if ($catId <= 0) {
+            return ['code' => 201, 'msg' => '提交参数有错误', 'data' => []];
+        }
+        $data = (new CategoryService())->get($catId);
+        if (empty($data)) {
+            return ['code' => 201, 'msg' => '没有找到相应的数据', 'data' => []];
+        }
+        return ['code' => 200, 'msg' => '请求成功', 'data' => $data];
+    }
+
+
 
     public function del(Request $request)
     {
@@ -183,20 +212,7 @@ class CategoryController extends BaseController
         return view('category.edit', ['data' => $data[0]]);
     }
 
-    public function get(Request $request)
-    {
-        $catId = (int) $request->input('cat_id');
-        if ($catId <= 0) {
-            return ['code' => 201, 'msg' => '提交参数有错误', 'data' => []];
-        }
-        $categoryService = new CategoryService();
-        $info = $categoryService->get($catId);
-        if (empty($info)) {
-            return ['code' => 201, 'msg' => '没有找到相应的数据', 'data' => []];
-        }
 
-        return ['code' => 200, 'msg' => 'suceess', 'data' => $info];
-    }
 
     public function sub(Request $request)
     {
