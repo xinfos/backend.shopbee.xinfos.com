@@ -401,12 +401,12 @@ h6 {
 
 .h1,
 h1 {
-	font-size: 1.625rem
+	font-size:24px;
 }
 
 .h2,
 h2 {
-	font-size: 1.25rem
+	font-size:24px;
 }
 
 .h3,
@@ -18344,4 +18344,51 @@ button:focus {
 
 .sf-filter-list li i:hover {
 	color: red;
+}
+
+.sf-form-control-readonly {
+	display: block;
+	width: 100%;
+	height: calc(1.5em + 1rem + 2px);
+	padding: .75rem .45rem;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #12263f;
+	background-color: #fff;
+	background-clip: padding-box;
+	border-bottom: 1px solid #d2ddec;;
+}
+
+@media (prefers-reduced-motion:reduce) {
+	.sf-form-control-readonly {
+		-webkit-transition: none;
+		transition: none
+	}
+}
+
+.sf-logo-lg {
+	position: relative;
+    display: inline-block;
+	font-size: 1.33333rem;
+}
+
+.sf-bordered{
+	/* border: 1px solid #edf2f9; */
+	border-radius: 1px;
+	color:black;
+	/* box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px; */
+	outline: 0px;
+	margin-bottom:0px;
+	cursor: pointer;
+}
+.sf-col-xl{
+	padding:0px;
+}
+.sf-h3{
+	font-size:14px;
+}
+
+.sf-bordered:hover{
+	cursor: pointer;
+	color:#0767e8;
 }

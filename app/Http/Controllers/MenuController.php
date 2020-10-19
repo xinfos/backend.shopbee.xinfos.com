@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
+use App\User;
 
-class MenuController extends BaseController
+class MenuController extends Controller
 {
     public function Get(Request $request)
     {
         try {
-            if (!\Auth::Check()) {
+            if (!Auth::Check()) {
                 return ['code' => 201, 'msg' => "请重新登录"];
             }
 

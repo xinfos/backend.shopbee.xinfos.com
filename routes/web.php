@@ -37,7 +37,7 @@ $router->group(['prefix' => '/wizard', 'middleware' => ['checkauth']], function 
 });
 
 //店铺管理
-$router->group(['prefix' => '/shop', 'middleware' => 'CheckAuth'], function () use ($router) {
+$router->group(['prefix' => '/shop', 'middleware' => 'checkauth'], function () use ($router) {
 
     $router->get('dashboard', ['uses' => 'ShopController@dashboard']);
     $router->get('list', ['uses' => 'ShopController@lists']);

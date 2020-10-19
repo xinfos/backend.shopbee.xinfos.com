@@ -96,6 +96,4 @@ class ClientRequest
         $cost = round(($endTime - $startTime) * 1000);
         Log::debug('Call Service Cost: ' . $cost . ' ms');
     }
-
-
 }
