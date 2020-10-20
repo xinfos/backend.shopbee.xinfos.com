@@ -1,24 +1,29 @@
 <?php
+
 namespace App\Http\Controllers;
 
 
 use App\Models\Seller;
 use App\Http\Controllers\Controller;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 
 
-class SellerController extends BaseController {
-    
-    public function register(Request $request) {
+class SellerController extends Controller
+{
+
+    public function register(Request $request)
+    {
         if (!\Auth::Check()) {
             return view('auth.register');
         }
         return redirect('/shop/list');
     }
 
-    public function doRegister(Request $request) {
+    public function doRegister(Request $request)
+    {
         if (\Auth::Check()) {
             return json_encode(['code' => 200, 'msg' => 'success']);
         }
@@ -53,31 +58,33 @@ class SellerController extends BaseController {
             $seller->seller_name = $input['sellername'];
             $seller->mobile = $input['mobile'];
             $seller->password = bcrypt($input['password']);
-            
+
             $seller->save();
 
             return json_encode(['code' => 200, 'msg' => 'success']);
-
         } catch (ValidationException $validationException) {
             return json_encode(['code' => 201, 'msg' => $validationException->validator->getMessageBag()->first()]);
         }
     }
 
-    public function registerSuccess(Request $request) {
+    public function registerSuccess(Request $request)
+    {
         if (!\Auth::Check()) {
             return view('auth.register_succ');
         }
         return redirect('/shop/dashboard');
     }
-    
-    public function login(Request $request) {
+
+    public function login(Request $request)
+    {
         if (!\Auth::Check()) {
             return view('auth.login');
         }
         return redirect('/shop/dashboard');
     }
 
-    public function doLogin(Request $request) {
+    public function doLogin(Request $request)
+    {
         if (\Auth::Check()) {
             return json_encode(['code' => 200, 'msg' => 'success']);
         }
@@ -111,13 +118,15 @@ class SellerController extends BaseController {
         return json_encode(['code' => 201, 'msg' => '当前账号不存在']);
     }
 
-    public function forget(Request $request) {
-        if($request->isMethod('get')) {
+    public function forget(Request $request)
+    {
+        if ($request->isMethod('get')) {
             return view('auth.forget');
         }
     }
 
-    public function logout(Request $request) {
+    public function logout(Request $request)
+    {
         \Auth::logout();
         return redirect('/seller/login');
     }

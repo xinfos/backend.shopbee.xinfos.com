@@ -1,10 +1,9 @@
 @extends('layouts.dashkit.app')
 
 @section('content')
-<?php var_dump($data);exit;?>
 <link rel="stylesheet" href="/assets/dashkit/css/staff/app.css">
 <div class="header"></div>
-<div class="container-fluid" >
+<div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
@@ -19,7 +18,7 @@
                                 <label class="sf-label">
                                     员工姓名或手机号:
                                 </label>
-                                <input class="sf-form-control" name=""  placeholder="员工姓名或手机号" value="">
+                                <input class="sf-form-control" name="" placeholder="员工姓名或手机号" value="">
                             </div>
                             <div class="sf-form-group">
                                 <label class="sf-label">状态:</label>
@@ -53,14 +52,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php if (!empty($data)) {?>
-                                        <?php foreach ($data as $k => $v) {?>
+                                    <?php if (!empty($data)) { ?>
+                                        <?php foreach ($data as $k => $v) { ?>
                                             <tr>
                                                 <td></td>
                                                 <td></td>
                                             </tr>
-                                        <?php }?>
-                                    <?php }?>
+                                        <?php } ?>
+                                    <?php } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -76,14 +75,14 @@
 
 <script src="/assets/dashkit/js/modalfrm.sf.js"></script>
 <script type="text/javascript">
-$(function() {
+    $(function() {
 
-});
-var treetable = $('#treetable').BootstrapTreeTable({
-    expandlevel: 1,
-    expandAll: false,
-    collapseAll: false,
-    maxResult: ''
-});
+    });
+    var treetable = $('#treetable').BootstrapTreeTable({
+        expandlevel: 1,
+        expandAll: false,
+        collapseAll: false,
+        maxResult: ''
+    });
 </script>
 @endsection

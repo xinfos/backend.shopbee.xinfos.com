@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Services\Brand\BrandService;
 use App\Services\Category\CategoryService;
-use Exception;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 
-class BrandController extends BaseController
+use Exception;
+
+class BrandController extends Controller
 {
     /**
      * @name 获取分类列表

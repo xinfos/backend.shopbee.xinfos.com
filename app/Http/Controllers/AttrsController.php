@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\View;
 
 use App\Services\Attrs\AttrService;
 
-class AttrsController extends BaseController
+class AttrsController extends Controller
 {
 
     public function create(Request $request)

@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Exception;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 
 use App\Services\Category\CategoryService;
 
-class CategoryController extends BaseController
+use Exception;
+
+class CategoryController extends Controller
 {
     /**
      * @name 创建分类

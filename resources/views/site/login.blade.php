@@ -51,8 +51,6 @@
 </div>
 
 
-<script src="/assets/js/jquery-3.4.1.min.js"></script>
 <script src="/assets/dashkit/libs/spop/dist/spop.min.js"></script>
 <script src="/assets/dashkit/js/site/dist/login.js"></script>
 @endsection
-

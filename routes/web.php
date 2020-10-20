@@ -30,9 +30,7 @@ $router->group(['prefix' => '/seller'], function () use ($router) {
 //开店向导
 $router->group(['prefix' => '/wizard', 'middleware' => ['checkauth']], function () use ($router) {
     $router->get('choose', 'WizardController@choose');
-    $router->get('version', 'WizardController@version');
-    $router->get('category', 'WizardController@category');
-    $router->get('create', 'WizardController@create');
+    $router->get('info', 'WizardController@info');
     $router->get('success', 'WizardController@success');
 });
 

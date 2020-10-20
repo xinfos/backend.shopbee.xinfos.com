@@ -1,9 +1,11 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Seller;
 use App\Services\User\UserService;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -54,7 +56,6 @@ class SiteController extends Controller
                 $seller->save();
 
                 return ['code' => 200, 'msg' => '注册成功'];
-
             } catch (ValidationException $validationException) {
                 return ['code' => 201, 'msg' => "服务异常"];
             }
@@ -90,7 +91,6 @@ class SiteController extends Controller
                 }
 
                 return ['code' => 201, 'msg' => "当前账号不存在"];
-
             } catch (ValidationException $validationException) {
                 return ['code' => 201, 'msg' => "服务异常"];
             }

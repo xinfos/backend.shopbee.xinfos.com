@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\User;
@@ -9,59 +10,44 @@ use Illuminate\Http\Request;
 
 use Exception;
 
-class WizardController extends BaseController {
-    
-    public function choose(Request $request) {
+class WizardController extends Controller
+{
+
+    /**
+     * @name 选择店铺类型
+     */
+    public function choose(Request $request)
+    {
         return view('wizard.choose');
     }
 
-    public function version(Request $request) {
-        //店铺类型
-        $shopType = (int) $request->input('t');
-        if ($shopType <= 0) {
-            $shopType = 1;
-        }
-        return view('wizard.version', [
-            'shopType' => $shopType,
-        ]);
-    }
-
-    public function category(Request $request) {
-        $shopType = (int) $request->input('t');
-        $shopVersion = (int) $request->input('v');
-        
-        if ($shopType <= 0) {
-            $shopType = 1;
-        }
-
-        if ($shopVersion <= 0) {
-            $shopVersion = 1;
-        }
-
-        return view('wizard.category', [
-            'shopType' => $shopType,
-            'shopVersion' => $shopVersion,
-        ]);
-    }
-
-    public function create(Request $request) {
+    /**
+     * @name 填写店铺信息
+     */
+    public function info(Request $request)
+    {
         $input = [
             "type"    => (int) $request->input('type'),
             "version" => (int) $request->input('version'),
             "cat_id"  => (int) $request->input('cat'),
         ];
 
-        return view('wizard.create', $input); 
+        //判断当前店铺是否正确
+        if (empty(ShopService::$availableTypeOfShop[$input['type']])) {
+            throw new Exception("抱歉，您选择的店铺，不正确");
+        }
+
+        return view('wizard.info', [
+            'data' => $input
+        ]);
     }
 
-    public function success(Request $request) {
-        $input = [
-            "type"    => (int) $request->input('type'),
-            "version" => (int) $request->input('version'),
-            "cat_id"  => (int) $request->input('cat'),
-            "address" => $request->input('address'),
-        ];
-
-        return view('wizard.success'); 
+    /**
+     * @name 店铺创建成功页
+     * 
+     */
+    public function success(Request $request)
+    {
+        return view('wizard.success');
     }
 }

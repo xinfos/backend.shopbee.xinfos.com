@@ -401,12 +401,12 @@ h6 {
 
 .h1,
 h1 {
-	font-size:24px;
+	font-size: 24px;
 }
 
 .h2,
 h2 {
-	font-size:24px;
+	font-size: 24px;
 }
 
 .h3,
@@ -5824,7 +5824,7 @@ a.badge-secondary:focus {
 
 .badge-success {
 	color: #fff;
-	background-color: #00d97e
+	background-color: #11b570
 }
 
 a.badge-success:focus,
@@ -12854,6 +12854,7 @@ a.text-white:hover {
 .btn .badge {
 	top: -2px
 }
+
 /* .badge-soft-dark */
 .badge-soft-primary {
 	color: #2c7be5;
@@ -16373,7 +16374,7 @@ button:focus {
 	position: absolute;
 	width: 0;
 	height: 0;
-	/* background-image: url(../img/masks/avatar-status.svg), url(../img/masks/avatar-group.svg), url(../img/masks/avatar-group-hover.svg), url(../img/masks/avatar-group-hover-last.svg) */
+	/* background-image: url(/assets/dashkit/images/avatar-status.svg), url(../img/masks/avatar-group.svg), url(../img/masks/avatar-group-hover.svg), url(../img/masks/avatar-group-hover-last.svg) */
 }
 
 .avatar-img {
@@ -16410,8 +16411,8 @@ button:focus {
 
 .avatar-offline .avatar-img,
 .avatar-online .avatar-img {
-	-webkit-mask-image: url(../img/masks/avatar-status.svg);
-	mask-image: url(../img/masks/avatar-status.svg);
+	-webkit-mask-image: url(/assets/dashkit/images/avatar-status.svg);
+	mask-image: url(/assets/dashkit/images/avatar-status.svg);
 	-webkit-mask-size: 100% 100%;
 	mask-size: 100% 100%
 }
@@ -16733,8 +16734,8 @@ button:focus {
 }
 
 .icon.active>.fe {
-	-webkit-mask-image: url(../img/masks/icon-status.svg);
-	mask-image: url(../img/masks/icon-status.svg);
+	-webkit-mask-image: url(/assets/dashkit/images/masks/icon-status.svg);
+	mask-image: url(/assets/dashkit/images/icon-status.svg);
 	-webkit-mask-size: 100% 100%;
 	mask-size: 100% 100%
 }
@@ -18356,7 +18357,8 @@ button:focus {
 	color: #12263f;
 	background-color: #fff;
 	background-clip: padding-box;
-	border-bottom: 1px solid #d2ddec;;
+	border-bottom: 1px solid #d2ddec;
+	;
 }
 
 @media (prefers-reduced-motion:reduce) {
@@ -18368,27 +18370,59 @@ button:focus {
 
 .sf-logo-lg {
 	position: relative;
-    display: inline-block;
+	display: inline-block;
 	font-size: 1.33333rem;
 }
 
-.sf-bordered{
+.sf-bordered {
 	/* border: 1px solid #edf2f9; */
 	border-radius: 1px;
-	color:black;
+	color: black;
 	/* box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px; */
 	outline: 0px;
-	margin-bottom:0px;
+	margin-bottom: 0px;
 	cursor: pointer;
-}
-.sf-col-xl{
-	padding:0px;
-}
-.sf-h3{
-	font-size:14px;
 }
 
-.sf-bordered:hover{
+.sf-col-xl {
+	padding: 0px;
+}
+
+.sf-h3 {
+	font-size: 14px;
+}
+
+.sf-bordered:hover {
 	cursor: pointer;
-	color:#0767e8;
+	color: #0767e8;
+}
+
+.sf-navbar-second {
+	margin-left: 56px;
+	width: 144px;
+	padding-left: 0px;
+	padding-right: 0px;
+	z-index: 0
+}
+
+.sf-navbar-heading {
+	padding-left: 24px;
+	font-size: 16px;
+	color: #000000c9
+}
+
+.card-shop-list-header {
+	background: #f1f1f1;
+	border-bottom-width: 0px
+}
+
+.card-shop-list {
+	background: #fafbfe;
+	border: 5px solid #f1f1f1;
+	border-top-width: 0px;
+}
+
+.badge-sm {
+	font-size: 13px;
+	border-radius: 0;
 }

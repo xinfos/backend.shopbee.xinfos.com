@@ -1,10 +1,11 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class AttrsValueController extends BaseController
+class AttrsValueController extends Controller
 {
 
     public function create(Request $request)

@@ -1,45 +1,47 @@
-@extends('layouts.base')
+@extends('layouts.dashkit.top_app')
 
 @section('content')
-
-<link rel="stylesheet" type="text/css" href="/assets/css/wizard.css">
-
-<div class="row">
-    <div class="col-1"></div>
-    <div class="col-lg-10 shop">
-        <div class="card d-block">
-            <div class="card-header" style="background:#f1f1f1;border-bottom-width: 0px">
-                <a href="/wizard/choose" class="btn btn-sm btn-info float-right">创建店铺</a>
-                <h4 class="card-title">店铺列表</h4>
-                <h6 class="card-subtitle text-muted">Your shop List</h6>
-            </div>
-            <div class="card-body" style="background:#fafbfe;border:5px solid #f1f1f1;border-top-width: 0px">
-                <div class="row">
-                    <?php if(!empty($lists['list'])) { ?>
-                            <?php foreach($lists['list'] as $v) {?>
-                                <div class="col-lg-4">
-                                    <div class="card d-block">
-                                        <div class="card-body" style="border-top: 2px solid red;">
-                                            <h4 class="mt-0">
-                                                <a href="apps-projects-details.html" class="text-title"><?php echo $v['name'];?> </a>
-                                            </h4>
-                                            <?php if($v['state'] == 1) { ?>
-                                                <div class="badge badge-success mb-2">营业中</div>
-                                            <?php } else { ?>
-                                                <div class="badge badge-danger mb-2">打烊</div>
-                                            <?php } ?>
-                                                <div class="badge badge-danger mb-2">商城</div>
-                                            <p class="text-muted font-3 mb-2"><?php echo $v['desc'];?></p>
-                                            <br>
-                                            <a href="/shop/dashboard" class="card-link text-custom">管理</a>
-                                            <a href="javascript: void(0);" class="card-link text-custom">删除</a>
+<div class="header"></div>
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-xl-8 mt-4">
+            <div class="card d-block">
+                <div class="card-header card-shop-list-header">
+                    <h4 class="card-title">店铺列表</h4>
+                    <a href="/wizard/choose" class="sf-btn sf-btn-primary">创建店铺</a>
+                </div>
+                <div class="card-body card-shop-list">
+                    <div class="col-12 col-md-4 col-xl-4 mt-3 ml-3 mr-3">
+                        <?php if (!empty($lists['list'])) { ?>
+                            <?php foreach ($lists['list'] as $v) { ?>
+                                <div class="card">
+                                    <a href="javascript:void(0);">
+                                        <img src="/assets/dashkit/images/store/project-4.jpg" alt="..." class="card-img-top">
+                                    </a>
+                                    <div class="card-body" style="border: 1px solid #eee;">
+                                        <div class="row align-items-center">
+                                            <div class="col">
+                                                <h4 class="mt-2 mb-2 name">
+                                                    <?php echo $v['name']; ?>
+                                                </h4>
+                                                <p class="text-muted font-3 mb-2"><?php echo $v['desc']; ?></p>
+                                                <p class="card-text small text-muted">
+                                                    <div class="badge badge-sm badge-success mb-2">营业中</div>
+                                                    <div class="badge badge-sm badge-danger ml-1 mb-2">商城</div>
+                                                </p>
+                                            </div>
+                                            <div class="col">
+                                                <a href="/shop/dashboard" class="card-link text-custom">管理</a>
+                                                <a href="javascript: void(0);" class="card-link text-custom">删除</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             <?php } ?>
-                    <?php } ?>
+                        <?php } ?>
+                    </div>
                 </div>
-            </div> 
+            </div>
         </div>
     </div>
 </div>

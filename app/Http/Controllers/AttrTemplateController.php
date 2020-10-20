@@ -7,7 +7,7 @@ use App\Services\Attrs\AttrTemplateService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class AttrTemplateController extends BaseController
+class AttrTemplateController extends Controller
 {
     public function add(Request $request)
     {

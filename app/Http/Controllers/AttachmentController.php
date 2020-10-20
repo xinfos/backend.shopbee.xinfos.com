@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\User;
@@ -10,9 +11,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 
-class AttachmentController extends BaseController {
+class AttachmentController extends Controller
+{
 
-    public function lists(Request $request) {
+    public function lists(Request $request)
+    {
         try {
             // if (\Auth::Check()) {
             //     return ['code' => 200, 'msg' => "登录成功"];
@@ -23,19 +26,17 @@ class AttachmentController extends BaseController {
                 'page' => (int) $request->input('page'),
             ];
 
-        
+
 
             $brandService = new BrandService();
             $res = $brandService->lists($input);
             if ($res['code'] != 200) {
-                return ['code' => 201, 'msg'=> $res['msg']];
+                return ['code' => 201, 'msg' => $res['msg']];
             }
-            
-            return ['code' => 200, 'msg' => "succ", 'data' => $res['data']];
 
+            return ['code' => 200, 'msg' => "succ", 'data' => $res['data']];
         } catch (ValidationException $validationException) {
             return ['code' => 201, 'msg' => "服务异常"];
         }
     }
 }
-

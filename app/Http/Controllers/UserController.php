@@ -1,9 +1,10 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\User;
 
-class UserController extends BaseController
+class UserController extends Controller
 {
     /**
      * 显示给用户的概要文件.
@@ -13,7 +14,8 @@ class UserController extends BaseController
      */
     public function index()
     {
-        var_dump(11);exit;
+        var_dump(11);
+        exit;
         return view('user.profile', ['user' => User::findOrFail($id)]);
     }
 }

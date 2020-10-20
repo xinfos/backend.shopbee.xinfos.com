@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 
-class AttrsGroupController extends BaseController
+class AttrsGroupController extends Controller
 {
     public function lists(Request $request)
     {
