@@ -9,54 +9,36 @@ $router->group(['prefix' => '/'], function () use ($router) {
     $router->any('menu', 'MenuController@get');
 });
 
-$router->group(['prefix' => '/seller'], function () use ($router) {
-    // 注册
-    $router->get('register', 'SellerController@register');
-    $router->post('doRegister', 'SellerController@doRegister');
-    $router->get('registerSuccess', 'SellerController@registerSuccess');
-
-    // 登陆页面
-    $router->get('login', 'SellerController@login');
-    $router->post('doLogin', 'SellerController@doLogin');
-
-    // 忘记密码
-    $router->get('forget', 'SellerController@forget');
-    $router->post('forget', 'SellerController@forget');
-
-    // 退出登陆
-    $router->get('logout', 'SellerController@logout');
-});
-
-//开店向导
-$router->group(['prefix' => '/wizard', 'middleware' => ['checkauth']], function () use ($router) {
-    $router->get('choose', 'WizardController@choose');
-    $router->get('info', 'WizardController@info');
-    $router->get('success', 'WizardController@success');
-});
-
 //店铺管理
 $router->group(['prefix' => '/shop', 'middleware' => 'checkauth'], function () use ($router) {
 
-    $router->get('dashboard', ['uses' => 'ShopController@dashboard']);
-    $router->get('list', ['uses' => 'ShopController@lists']);
-    $router->get('info', ['uses' => 'ShopController@info']);
-    $router->get('infoedit', ['uses' => 'ShopController@infoEdit']);
-    $router->get('wizard', ['uses' => 'ShopController@wizard']);
+    $router->get('dashboard', ['uses' => 'ShopController@dashboard']);  //[Page] - 店铺管理首页
+    $router->get('list', ['uses' => 'ShopController@lists']);           //[Page] - 卖家店铺列表页
+    $router->get('info', ['uses' => 'ShopController@info']);            //[Page] - 店铺详情页
+    $router->get('edit', ['uses' => 'ShopController@edit']);            //[Api]  - 编辑店铺接口
+    $router->post('create', ['uses' => 'ShopController@create']);          //[Api]  - 创建店铺接口
 
-    //商家地址库管理
+    //店铺创建向导
+    $router->group(['prefix' => '/wizard'], function () use ($router) {
+        $router->get('choose', 'WizardController@choose');      //[Page] - 选择店铺类型页
+        $router->get('info', 'WizardController@info');          //[Page] - 填写店铺基本信息表单页
+        $router->get('success', 'WizardController@success');    //[Page] - 店铺创建成功页面
+    });
+
+    //店铺发货地址库管理
     $router->group(['prefix' => '/address'], function () use ($router) {
         $router->get('list', ['uses' => 'AddressController@lists']);
         $router->get('add', ['uses' => 'AddressController@add']);
     });
 
-    //员工管理
+    //店铺员工管理
     $router->group(['prefix' => '/staff'], function () use ($router) {
         $router->any('list', ['uses' => 'StaffController@lists']);
         $router->get('getlist', ['uses' => 'StaffController@getStaffList']);
         $router->get('add', ['uses' => 'StaffController@add']);
     });
 
-    //门店管理
+    //店铺关联线下门店管理
     $router->group(['prefix' => '/store', 'middleware' => 'checkauth'], function () use ($router) {
         $router->get('list', ['uses' => 'StoreController@lists']);
         $router->get('add', ['uses' => 'StoreController@add']);

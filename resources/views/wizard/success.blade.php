@@ -37,7 +37,7 @@
 												<p class="text-muted mb-4">
 													您的店铺已经初始化成功，赶紧进入吧 !~
 												</p>
-												<a href="javascript:void(0);" class="sf-btn btn-lg sf-btn-primary">快速进入店铺内，进行管理</a>
+												<a href="/shop/dashboard" class="sf-btn btn-lg sf-btn-primary">快速进入店铺内，进行管理</a>
 											</div>
 										</div>
 									</div>

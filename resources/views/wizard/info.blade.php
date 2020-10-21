@@ -22,7 +22,7 @@
 					<div>
 						<div class="zent-steps zent-steps-breadcrumb step-block">
 							<div class="zent-steps-item is-clicked" style="width: 33%;">
-								<a href="/wizard/choose?type=<?php echo !empty($data['type']) ? $data['type'] : 1; ?>">
+								<a href="/shop/wizard/choose?type=<?php echo !empty($data['type']) ? $data['type'] : 1; ?>">
 									<div class="zent-steps-step">1. 选择店铺类型</div>
 								</a>
 							</div>
@@ -36,9 +36,10 @@
 					</div>
 					<div class="create-shop">
 						<div class="create">
-							<h1 style="padding-top: 0px;">请填写店铺基本信息</h1>
+							<h1>请填写店铺基本信息</h1>
 						</div>
-						<form class="zent-form zent-form--horizontal" style="padding-left: 60px;">
+						<div class="sf-alert-el mb-5"></div>
+						<form id="formCreateShop" class="zent-form zent-form--horizontal" style="padding-left: 60px;">
 							<div class="zent-form__control-group ">
 								<label class="zent-form__control-label">
 									店铺名称：
@@ -47,6 +48,7 @@
 									<div>
 										<div class="zent-input-wrapper">
 											<input type="text" class="zent-input" name="name" value="" placeholder="请输入店铺名称，建议15字以内">
+											<input type="hidden" class="zent-input" name="type" value="<?php echo $data['type']; ?>" />
 										</div>
 										<p class="zent-form__error-desc"></p>
 									</div>
@@ -96,7 +98,7 @@
 										<span class="zent-checkbox">
 											<span class="zent-checkbox-inner">
 											</span>
-											<input type="checkbox" value="on">
+											<input type="checkbox" name="is_agree" value="1">
 										</span>
 										<span>
 											我已阅读并同意
@@ -118,6 +120,7 @@
 	</div>
 </div>
 
+<script src="/assets/dashkit/libs/bootstrapvalidator/dist/frm.js"></script>
 <script src="/assets/dashkit/js/wizard/sf.wizard.js"></script>
 
 @endsection

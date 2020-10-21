@@ -20,15 +20,45 @@ class ShopService
         try {
             $apiUrl = $this->appService . '/create';
             $rst = ClientRequest::post($apiUrl, $params);
+            if (empty($rst['code'])) {
+                return ['code' => 201, 'msg' => '抱歉，服务内部错误.'];
+            }
+            return $rst;
+        } catch (Exception $e) {
+            Log::error("创建店铺异常:[" . $e->getMessage() . "]");
+            return [];
+        }
+    }
+
+    /**
+     * 删除注销/店铺信息
+     * 
+     * @author Alex Pan <psj474@163.com>
+     * @param $shopId int 店铺ID
+     * @param $sellerId int 卖家ID
+     * 
+     * @return array
+     */
+    public function delete($shopId, $sellerId)
+    {
+        try {
+            $params = [
+                'seller_id' => (int) $sellerId,
+                'shop_id' => (int) $shopId,
+            ];
+            $apiUrl = $this->appService . '/delete';
+            $rst = ClientRequest::post($apiUrl, $params);
             if (empty($rst['code']) || $rst['code'] != 200) {
                 return [];
             }
             return $rst['data'];
         } catch (Exception $e) {
-            \Log::error("创建店铺异常:[" . $e->getMessage() . "]");
+            Log::error("创建店铺异常:[" . $e->getMessage() . "]");
             return [];
         }
     }
+
+
 
     /**
      * 根据卖家ID、店铺ID获取单店详情
@@ -51,7 +81,7 @@ class ShopService
             }
             return $rst['data'];
         } catch (Exception $e) {
-            \Log::error("获取店铺详情异常:[" . $e->getMessage() . "]");
+            Log::error("获取店铺详情异常:[" . $e->getMessage() . "]");
             return [];
         }
     }
@@ -93,7 +123,7 @@ class ShopService
      * 
      * @return array
      */
-    public function info($sellerId)
+    public function getShopInfoBySellerID($sellerId)
     {
         try {
             $params = [

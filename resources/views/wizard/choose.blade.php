@@ -26,11 +26,11 @@
 							</div>
 						</div>
 						<div class="create-shop">
+							<div class="create">
+								<h1>请选择店铺类型</h1>
+							</div>
 							<div class="wizard">
 								<div class="box">
-									<div class="wizard-nav">
-										<h4 style="margin-top:55px;margin-bottom: 40px;">请选择需要创建的店铺类型</h4>
-									</div>
 									<div class="sep">
 										<div class="item wsc_item">
 											<div class="item-title clearfix wsc_bg">
@@ -42,7 +42,7 @@
 													<p>适用于</p>
 													<p>需要搭建线上商城的个人</p>
 												</div>
-												<a href="/wizard/info?type=1" class="sf-btn btn-outline-primary btn-sm">立即开店</a>
+												<a href="/shop/wizard/info?type=1" class="sf-btn btn-outline-primary btn-sm">立即开店</a>
 											</div>
 										</div>
 									</div>

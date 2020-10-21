@@ -198,6 +198,7 @@ var SF = {
 	},
 	_showFail: function (msg) {
 		var template = '<div class="alert alert-danger alert-dismissible fade show" role="alert">' +
+			'<strong>错误提示：</strong>' +
 			msg +
 			'<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
 			'<span aria-hidden="true">×</span>' +
@@ -205,7 +206,7 @@ var SF = {
 			'</div>';
 		$(".sf-alert-el").fadeIn("fast", function () {
 			$(this).empty().append(template);
-		}).delay(1500).fadeOut("slow", function () {
+		}).delay(3000).fadeOut("slow", function () {
 			$(this).empty();
 		});
 	},
@@ -283,6 +284,7 @@ var SF = {
 	},
 	FrmSubmit: function (method, callback) {
 		var formValuesJSON = this._serializeFormJSON(method.frm);
+		console.log(formValuesJSON);
 		if (!Validator.make(formValuesJSON, method.rule, method.errmsg)) {
 			return false;
 		}

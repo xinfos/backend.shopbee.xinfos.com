@@ -8,7 +8,7 @@
             <div class="card d-block">
                 <div class="card-header card-shop-list-header">
                     <h4 class="card-title">店铺列表</h4>
-                    <a href="/wizard/choose" class="sf-btn sf-btn-primary">创建店铺</a>
+                    <a href="/shop/wizard/choose" class="sf-btn sf-btn-primary">创建店铺</a>
                 </div>
                 <div class="card-body card-shop-list">
                     <div class="col-12 col-md-4 col-xl-4 mt-3 ml-3 mr-3">
