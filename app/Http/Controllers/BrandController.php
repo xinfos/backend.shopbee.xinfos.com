@@ -2,17 +2,75 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\Brand\BrandService;
-use App\Services\Category\CategoryService;
-
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\View;
-
 use Exception;
 
+
+use App\Services\Brand\BrandService;
+use App\Services\Category\CategoryService;
+use App\Common\ErrorDef;
+
+/**
+ * 品牌管理
+ */
 class BrandController extends Controller
 {
+    public $service = null;
+
+    public function __construct()
+    {
+        $this->service = new BrandService();
+    }
+
+    /**
+     * @name 创建品牌
+     * 
+     * @author Alex Pan <psj474@163.com>
+     * 
+     * @access public
+     * @param int $pid         父级分类ID
+     * @param string $name     分类名称
+     * @param string $alias    分类别名名称
+     * @param string $desc     分类描述
+     * @param int $is_show     分类是否展示
+     * @param int $state       分类状态
+     * @param int $is_parent   分类是否为父级分类
+     * @param int $show_in_nav 分类是否需要在前台展示
+     * 
+     * @return array
+     */
+    public function add(Request $request)
+    {
+        try {
+            $input = [
+                'name' => $request->input('cat_name'),
+                'alias' => $request->input('cat_alias'),
+                'desc' => $request->input('cat_desc'),
+            ];
+            $validator = Validator::make(
+                $input,
+                [
+                    'name' => 'required|max:20'
+                ],
+                [
+                    'name.required' => '分类名称不能空',
+                    'name.max' => '分类名称不能超过20个字符',
+                ]
+            );
+            if ($validator->fails()) {
+                Log::error($validator->errors()->all()[0]);
+                return ['code' => 201, 'msg' => $validator->errors()->all()[0]];
+            }
+            return $this->service->create($input);
+        } catch (Exception $e) {
+            Log::error($e->getMessage());
+            return ErrorDef::retErr(ErrorDef::ERR_SERVER);
+        }
+    }
+
     /**
      * @name 获取分类列表
      */
@@ -36,40 +94,7 @@ class BrandController extends Controller
         return view('brand.lists', ['data' => $data]);
     }
 
-    public function add(Request $request)
-    {
-        try {
-            $input = [
-                'name' => $request->input('cat_name'),
-                'alias' => $request->input('cat_alias'),
-                'desc' => $request->input('cat_desc'),
-            ];
 
-            $rules = [
-                'name' => 'required|max:20',
-            ];
-
-            $messages = [
-                'name.required' => '分类名称不能空',
-                'name.max' => '分类名称不能超过20个字符',
-            ];
-
-            $validator = Validator::make($input, $rules, $messages);
-            if ($validator->fails()) {
-                return ['code' => 201, 'msg' => $validator->errors()->all()[0]];
-            }
-
-            $categoryService = new CategoryService();
-            $res = $categoryService->create($input);
-            if ($res['code'] != 200) {
-                return ['code' => 201, 'msg' => $res['msg']];
-            }
-
-            return ['code' => 200, 'msg' => '创建成功'];
-        } catch (ValidationException $validationException) {
-            return ['code' => 201, 'msg' => $validationException->validator->getMessageBag()->first()];
-        }
-    }
 
     public function del(Request $request)
     {

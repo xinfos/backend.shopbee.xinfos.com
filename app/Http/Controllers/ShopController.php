@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use Exception;
 
+use App\Exceptions\RenderException;
+
 use App\Services\Shop\ShopService;
 
 class ShopController extends Controller
@@ -65,6 +67,7 @@ class ShopController extends Controller
                 'address.required' => '请填写具体详细地址',
                 'is_agree.required' => '请阅读并同意相关条例',
             ];
+
             // dd($input);
             $validator = Validator::make($input, $rules, $messages);
             if ($validator->fails()) {
@@ -72,10 +75,10 @@ class ShopController extends Controller
                 return ['code' => 201, 'msg' => $validator->errors()->all()[0]];
             }
 
-            $rst = $this->service->create($input);
-
-            return $rst;
+            return $this->service->create($input);
         } catch (Exception $e) {
+            Log::error($e->getMessage());
+            return ['code' => 201, 'msg' => '内部服务错误'];
         }
     }
 
@@ -111,6 +114,7 @@ class ShopController extends Controller
      */
     public function dashboard()
     {
+        throw new RenderException("抱歉，我们并没有找到相应的店铺信息，请重新选择~.", 404);
         try {
             //获取店铺基本信息
             $data = $this->service->dashboard(Auth::id());

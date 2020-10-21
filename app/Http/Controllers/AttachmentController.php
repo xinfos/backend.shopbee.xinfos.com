@@ -17,10 +17,6 @@ class AttachmentController extends Controller
     public function lists(Request $request)
     {
         try {
-            // if (\Auth::Check()) {
-            //     return ['code' => 200, 'msg' => "登录成功"];
-            // }
-
             $input = [
                 'g_id' => (int) $request->input('g_id'),
                 'page' => (int) $request->input('page'),
