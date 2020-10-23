@@ -16288,9 +16288,9 @@ button:focus {
     width: 0;
     height: 0;
     background-image: url(/assets/dashkit/images/avatar-status.svg),
-    url(../img/masks/avatar-group.svg),
-    url(../img/masks/avatar-group-hover.svg),
-    url(../img/masks/avatar-group-hover-last.svg)
+        url(../img/masks/avatar-group.svg),
+        url(../img/masks/avatar-group-hover.svg),
+        url(../img/masks/avatar-group-hover-last.svg)
 }
 
 .avatar-img {

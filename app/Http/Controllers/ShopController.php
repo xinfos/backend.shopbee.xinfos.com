@@ -153,7 +153,7 @@ class ShopController extends Controller
     }
 
     /**
-     * 店铺详情
+     * 店铺基本信息
      * 
      * @author Alex Pan <psj474@163.com>
      * 
@@ -170,6 +170,31 @@ class ShopController extends Controller
                 throw new Exception("抱歉，我们并没有找到相应的店铺信息，请重新选择~.", 404);
             }
             return view('shop.info', [
+                'data' => $data,
+            ]);
+        } catch (Exception $e) {
+            Log::error("shop.info, exception: " . $e->getMessage());
+        }
+    }
+
+    /**
+     * 店铺联系方式
+     * 
+     * @author Alex Pan <psj474@163.com>
+     * 
+     * @access public
+     * 
+     */
+    public function contact()
+    {
+        try {
+            //获取店铺基本信息
+            $data = $this->service->getShopInfoBySellerID(Auth::id());
+            // dd($data);
+            if (empty($data)) {
+                throw new Exception("抱歉，我们并没有找到相应的店铺信息，请重新选择~.", 404);
+            }
+            return view('shop.contact', [
                 'data' => $data,
             ]);
         } catch (Exception $e) {

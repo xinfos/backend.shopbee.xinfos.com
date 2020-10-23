@@ -33,7 +33,6 @@ $(function () {
             return v[1];
         },
         _renderFirstMenu: function (menu) {
-            console.log(menu);
             var menuJSON = JSON.stringify(menu);
             localStorage.setItem("menu", menuJSON);
 
@@ -82,6 +81,8 @@ $(function () {
 
                 var m2 = m1[i].sub_menu;
                 for (var j = 0; j < m2.length; j++) {
+                    console.log(m2[j].is_show);
+
                     var isActive = '';
                     if (window.location.pathname == m2[j].menu_addr) {
                         isActive = 'sf-active';

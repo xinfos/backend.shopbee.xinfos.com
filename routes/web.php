@@ -14,9 +14,10 @@ $router->group(['prefix' => '/shop', 'middleware' => 'checkauth'], function () u
 
     $router->get('dashboard', ['uses' => 'ShopController@dashboard']);  //[Page] - 店铺管理首页
     $router->get('list', ['uses' => 'ShopController@lists']);           //[Page] - 卖家店铺列表页
-    $router->get('info', ['uses' => 'ShopController@info']);            //[Page] - 店铺详情页
+    $router->get('info', ['uses' => 'ShopController@info']);            //[Page] - 店铺基本详情页
+    $router->get('contact', ['uses' => 'ShopController@contact']);      //[Page] - 店铺联系方式页
     $router->get('edit', ['uses' => 'ShopController@edit']);            //[Api]  - 编辑店铺接口
-    $router->post('create', ['uses' => 'ShopController@create']);          //[Api]  - 创建店铺接口
+    $router->post('create', ['uses' => 'ShopController@create']);       //[Api]  - 创建店铺接口
 
     //店铺创建向导
     $router->group(['prefix' => '/wizard'], function () use ($router) {

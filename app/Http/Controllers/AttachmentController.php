@@ -41,7 +41,6 @@ class AttachmentController extends Controller
     public function lists(Request $request)
     {
         try {
-            Auth::user()->id;
         } catch (Exception $e) {
         }
     }

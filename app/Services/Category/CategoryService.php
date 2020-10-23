@@ -40,7 +40,7 @@ class CategoryService
             }
             return $rst;
         } catch (Exception $e) {
-            log::error('Exception Error: ' . $e->getFile() . '] [' . $e->getLine() . '] [' . $e->getMessage() . "]");
+            Log::error('Exception Error: ' . $e->getFile() . '] [' . $e->getLine() . '] [' . $e->getMessage() . "]");
             return ErrorDef::retErr(ErrorDef::ERR_SERVER);
         }
     }
@@ -68,7 +68,7 @@ class CategoryService
             }
             return $rst;
         } catch (Exception $e) {
-            log::error('Exception Error: ' . $e->getFile() . '] [' . $e->getLine() . '] [' . $e->getMessage() . "]");
+            Log::error('Exception Error: ' . $e->getFile() . '] [' . $e->getLine() . '] [' . $e->getMessage() . "]");
             return ErrorDef::retErr(ErrorDef::ERR_SERVER);
         }
     }
@@ -84,7 +84,7 @@ class CategoryService
             }
             return $rst;
         } catch (Exception $e) {
-            log::error('Exception Error: ' . $e->getFile() . '] [' . $e->getLine() . '] [' . $e->getMessage() . "]");
+            Log::error('Exception Error: ' . $e->getFile() . '] [' . $e->getLine() . '] [' . $e->getMessage() . "]");
             return ErrorDef::retErr(ErrorDef::ERR_SERVER);
         }
     }
@@ -102,7 +102,7 @@ class CategoryService
             }
             return [];
         } catch (Exception $e) {
-            log::error('Exception Error: ' . $e->getFile() . '] [' . $e->getLine() . '] [' . $e->getMessage() . "]");
+            Log::error('Exception Error: ' . $e->getFile() . '] [' . $e->getLine() . '] [' . $e->getMessage() . "]");
             return ErrorDef::retErr(ErrorDef::ERR_SERVER);
         }
     }
@@ -120,7 +120,7 @@ class CategoryService
             }
             return [];
         } catch (Exception $e) {
-            log::error('Exception Error: ' . $e->getFile() . '] [' . $e->getLine() . '] [' . $e->getMessage() . "]");
+            Log::error('Exception Error: ' . $e->getFile() . '] [' . $e->getLine() . '] [' . $e->getMessage() . "]");
             return ErrorDef::retErr(ErrorDef::ERR_SERVER);
         }
     }
@@ -138,7 +138,7 @@ class CategoryService
             }
             return [];
         } catch (Exception $e) {
-            log::error('Exception Error: ' . $e->getFile() . '] [' . $e->getLine() . '] [' . $e->getMessage() . "]");
+            Log::error('Exception Error: ' . $e->getFile() . '] [' . $e->getLine() . '] [' . $e->getMessage() . "]");
             return ErrorDef::retErr(ErrorDef::ERR_SERVER);
         }
     }
@@ -153,7 +153,7 @@ class CategoryService
             }
             return [];
         } catch (Exception $e) {
-            log::error('Exception Error: ' . $e->getFile() . '] [' . $e->getLine() . '] [' . $e->getMessage() . "]");
+            Log::error('Exception Error: ' . $e->getFile() . '] [' . $e->getLine() . '] [' . $e->getMessage() . "]");
             return ErrorDef::retErr(ErrorDef::ERR_SERVER);
         }
     }
@@ -168,7 +168,7 @@ class CategoryService
             }
             return [];
         } catch (Exception $e) {
-            log::error('Exception Error: ' . $e->getFile() . '] [' . $e->getLine() . '] [' . $e->getMessage() . "]");
+            Log::error('Exception Error: ' . $e->getFile() . '] [' . $e->getLine() . '] [' . $e->getMessage() . "]");
             return ErrorDef::retErr(ErrorDef::ERR_SERVER);
         }
     }
