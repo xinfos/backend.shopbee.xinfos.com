@@ -4,6 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+
+use App\Common\ErrorDef;
 
 class CheckAuth
 {
@@ -16,12 +19,8 @@ class CheckAuth
      */
     public function handle($request, Closure $next)
     {
-
-        if(!Auth::check()) 
-        {
-            // // return redirect('/login')
-            // dd(11);exit;
-            // // return redirect('/login');
+        if (!Auth::check()) {
+            return Redirect::to('/login', ErrorDef::REDIRECT);
         }
         return $next($request);
     }

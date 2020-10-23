@@ -52,13 +52,13 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         if (!($exception instanceof AuthenticationException)) {
-
-            // if ($exception->getStatusCode() == 404) {
-            //     $errmsg = "哇哦，我们是不是走错路了!~";
-            // } else {
-            //     $errmsg = $exception->getMessage();
-            // }
-            // return response()->view('errors.error', ['code' => $exception->getStatusCode(), 'msg' => $errmsg]);
+            return response()->view(
+                'errors.error',
+                [
+                    'code' => $exception->getCode(),
+                    'msg' => $exception->getMessage()
+                ]
+            );
         }
         return parent::render($request, $exception);
     }

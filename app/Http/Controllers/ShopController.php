@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use Exception;
 
-use App\Exceptions\RenderException;
-
+use App\Exceptions\CustomException;
 use App\Services\Shop\ShopService;
 
 class ShopController extends Controller
@@ -114,7 +113,6 @@ class ShopController extends Controller
      */
     public function dashboard()
     {
-        throw new RenderException("抱歉，我们并没有找到相应的店铺信息，请重新选择~.", 404);
         try {
             //获取店铺基本信息
             $data = $this->service->dashboard(Auth::id());
