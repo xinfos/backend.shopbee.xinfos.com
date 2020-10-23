@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'phpDocumentor\\Reflection\\' => array($vendorDir . '/phpdocumentor/reflection-common/src', $vendorDir . '/phpdocumentor/reflection-docblock/src', $vendorDir . '/phpdocumentor/type-resolver/src'),
+    'clagiordano\\weblibs\\configmanager\\' => array($vendorDir . '/clagiordano/weblibs-configmanager/src'),
     'XdgBaseDir\\' => array($vendorDir . '/dnoegel/php-xdg-base-dir/src'),
     'Whoops\\' => array($vendorDir . '/filp/whoops/src/Whoops'),
     'Webmozart\\Assert\\' => array($vendorDir . '/webmozart/assert/src'),
@@ -34,6 +35,7 @@ return array(
     'Symfony\\Component\\Debug\\' => array($vendorDir . '/symfony/debug'),
     'Symfony\\Component\\CssSelector\\' => array($vendorDir . '/symfony/css-selector'),
     'Symfony\\Component\\Console\\' => array($vendorDir . '/symfony/console'),
+    'Stringy\\' => array($vendorDir . '/danielstjules/stringy/src'),
     'Spatie\\FlysystemDropbox\\' => array($vendorDir . '/spatie/flysystem-dropbox/src'),
     'Spatie\\Dropbox\\' => array($vendorDir . '/spatie/dropbox-api/src'),
     'Ramsey\\Uuid\\' => array($vendorDir . '/ramsey/uuid/src'),
@@ -80,4 +82,7 @@ return array(
     'CKSource\\CKFinderBridge\\' => array($vendorDir . '/ckfinder/ckfinder-laravel-package/src'),
     'Aws\\' => array($vendorDir . '/aws/aws-sdk-php/src'),
     'App\\' => array($baseDir . '/app'),
+    'AlibabaCloud\\Client\\' => array($vendorDir . '/alibabacloud/client/src'),
+    'AlibabaCloud\\' => array($vendorDir . '/alibabacloud/sdk/src'),
+    'Adbar\\' => array($vendorDir . '/adbario/php-dot-notation/src'),
 );

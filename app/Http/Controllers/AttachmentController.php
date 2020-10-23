@@ -6,33 +6,43 @@ use App\User;
 use App\Http\Controllers\Controller;
 
 use App\Services\Brand\BrandService;
-
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 
 class AttachmentController extends Controller
 {
+    /**
+     * 附件上传
+     * 
+     * @author Alex Pan <psj474@163.com>
+     * 
+     * @access public
+     * 
+     * @param string $name   店铺名称
+     * 
+     * @return array 
+     * 
+     */
+    public function upload(Request $request)
+    {
+    }
 
+    /**
+     * 获取附件列表
+     *
+     * @access public
+     * 
+     * @param string $shop_id 店铺ID
+     * 
+     * @return array 
+     */
     public function lists(Request $request)
     {
         try {
-            $input = [
-                'g_id' => (int) $request->input('g_id'),
-                'page' => (int) $request->input('page'),
-            ];
-
-
-
-            $brandService = new BrandService();
-            $res = $brandService->lists($input);
-            if ($res['code'] != 200) {
-                return ['code' => 201, 'msg' => $res['msg']];
-            }
-
-            return ['code' => 200, 'msg' => "succ", 'data' => $res['data']];
-        } catch (ValidationException $validationException) {
-            return ['code' => 201, 'msg' => "服务异常"];
+            Auth::user()->id;
+        } catch (Exception $e) {
         }
     }
 }
