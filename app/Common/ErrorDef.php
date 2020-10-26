@@ -46,9 +46,9 @@ class ErrorDef
         return $msg;
     }
 
-    public static function retErr($code, $msg = '')
+    public static function retErr($code, $msg = '', $data = [])
     {
-        $err = ['code' => $code, 'msg' => $msg, 'data' => []];
+        $err = ['code' => $code, 'msg' => $msg, 'data' => $data];
         if (empty($err['msg'])) {
             $err['msg'] = self::getErrorMsg($code);
         }

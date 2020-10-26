@@ -6,10 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
-
 use Exception;
 
 use App\Services\Category\CategoryService;
+use App\Common\ErrorDef;
+use Error;
+use Mockery\CountValidator\Exact;
 
 class CategoryController extends Controller
 {
@@ -66,13 +68,13 @@ class CategoryController extends Controller
             $validator = Validator::make($input, $rules, $messages);
             if ($validator->fails()) {
                 Log::error($validator->errors()->all()[0]);
-                return ['code' => 201, 'msg' => $validator->errors()->all()[0]];
+                return ErrorDef::retErr(ErrorDef::ERR_PARAM, $validator->errors()->all()[0]);
             }
 
             return $this->service->create($input);
         } catch (Exception $e) {
-            Log::error($e->getMessage());
-            return ['code' => 201, 'msg' => '内部服务错误'];
+            Log::error('Exception Error: ' . $e->getFile() . '] [' . $e->getLine() . '] [' . $e->getMessage() . "]");
+            return ErrorDef::retErr(ErrorDef::ERR_SERVER);
         }
     }
 
@@ -129,9 +131,8 @@ class CategoryController extends Controller
         try {
             $catId =  (int) $request->input('cat_id');
             if ($catId <= 0) {
-                return ['code' => 201, 'msg' => "抱歉，删除失败，没有找到对应的分类信息!~"];
+                return ErrorDef::retErr(ErrorDef::ERR_PARAM, '抱歉，删除失败，没有找到对应的分类信息!~');
             }
-
             return $this->service->delete($catId);
         } catch (Exception $e) {
             Log::error($e->getMessage());
@@ -162,9 +163,13 @@ class CategoryController extends Controller
             try {
                 $input = [
                     'cat_id' => (int) $request->input('cat_id'),
+                    'pid' => (int) $request->input('pid'),
                     'name' => $request->input('cat_name'),
-                    'alias' => $request->input('cat_alias'),
-                    'desc' => $request->input('cat_desc'),
+                    'alias' => $request->input('alias'),
+                    'desc' => $request->input('desc'),
+                    'show_in_nav' => 0,
+                    'is_show' => 0,
+                    'state' => (int) $request->input('state')
                 ];
 
                 $rules = [
@@ -194,45 +199,75 @@ class CategoryController extends Controller
                 return ['code' => 201, 'msg' => $validationException->validator->getMessageBag()->first()];
             }
         }
+
         $catId = (int) $request->input('id');
         if ($catId <= 0) {
-            return ['code' => 201, 'msg' => '提交参数有错误', 'data' => []];
+            throw new Exception("抱歉，没有找到对应的分类信息!~", 404);
         }
-        $categoryService = new CategoryService();
-        $data = $categoryService->get($catId);
-        if (empty($data[0])) {
-            return ['code' => 201, 'msg' => '提交参数有错误', 'data' => []];
+        $data = $this->service->get($catId);
+        if (empty($data)) {
+            throw new Exception("抱歉，没有找到对应的分类信息!~", 404);
         }
-        // dd($data[0]);
-        return view('category.edit', ['data' => $data[0]]);
+        return view('category.edit', ['data' => $data]);
     }
 
     /**
-     * @name 获取分类列表
+     * 获取分类列表
+     * 
      * @author Alex Pan <psj474@163.com>
+     * 
+     * @access public
      * @param $name string 分类名称
+     * 
      * @return array
      */
     public function lists(Request $request)
     {
-        $input = [
-            'name' => trim($request->input('name')),
-            'page_no' => 1
-        ];
-        $categoryService = new CategoryService();
-        $data = [];
-        if (!empty($input['name'])) {
-            $rst = $categoryService->query($input);
-            if (!empty($rst['list'])) {
-                $data = $rst['list'];
+        try {
+            $input = [
+                'name' => trim($request->input('name')),
+                'page_no' => 1
+            ];
+            $data = [];
+            if (!empty($input['name'])) {
+                $rst = $this->service->query($input);
+                if (!empty($rst['list'])) {
+                    $data = $rst['list'];
+                }
+            } else {
+                $data = $this->service->sub(10000);
             }
-        } else {
-            $data = $categoryService->sub(10000);
+            return view('category.lists', [
+                'data' => $data,
+            ]);
+        } catch (Exception $e) {
+            Log::error('Exception Error: ' . $e->getFile() . '] [' . $e->getLine() . '] [' . $e->getMessage() . "]");
+            return ErrorDef::retErr(ErrorDef::ERR_SERVER);
         }
+    }
 
-        return view('category.lists', [
-            'data' => $data,
-        ]);
+    /**
+     * 获取子分类列表
+     * 
+     * @author Alex Pan <psj474@163.com>
+     * 
+     * @access public
+     * @param $cat_id string 父级分类ID
+     * 
+     * @return array
+     */
+    public function sub(Request $request)
+    {
+        try {
+            $catId = (int) $request->input('cat_id');
+            if ($catId <= 0) {
+                return ErrorDef::retErr(ErrorDef::ERR_PARAM);
+            }
+            return ErrorDef::retErr(ErrorDef::SUCCESS, '', $this->service->sub($catId));
+        } catch (Exception $e) {
+            Log::error('Exception Error: ' . $e->getFile() . '] [' . $e->getLine() . '] [' . $e->getMessage() . "]");
+            return ErrorDef::retErr(ErrorDef::ERR_SERVER);
+        }
     }
 
     /**
@@ -255,20 +290,7 @@ class CategoryController extends Controller
     }
 
 
-    public function sub(Request $request)
-    {
-        $catId = (int) $request->input('cat_id');
-        if ($catId <= 0) {
-            return ['code' => 201, 'msg' => '提交参数有错误', 'data' => []];
-        }
-        //获取店铺基本信息
-        $categoryService = new CategoryService();
-        $info = $categoryService->sub($catId);
-        if (empty($info[0])) {
-            return ['code' => 201, 'msg' => '没有找到相应的数据', 'data' => []];
-        }
-        return ['code' => 200, 'msg' => 'suceess', 'data' => $info[0]];
-    }
+
 
     public function attrs(Request $request)
     {

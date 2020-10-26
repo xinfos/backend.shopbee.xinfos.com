@@ -27,7 +27,7 @@
                     </form>
                     <div class="mt-4"></div>
                     <div class="sf-alert-el"></div>
-                    <table class="table table-hover table-sm table-bordered" id="t1">
+                    <table class="table table-hover table-sm" id="t1">
                         <thead>
                             <tr>
                                 <th scope="col">分类名称</th>
@@ -59,5 +59,5 @@
         });
     });
 </script>
-<script src="/assets/dashkit/js/category/sf.category.js"></script>
+<script src="/assets/dashkit/js/category/dist/sf.category.js"></script>
 @endsection

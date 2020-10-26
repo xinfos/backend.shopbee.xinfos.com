@@ -54,8 +54,14 @@ $(function () {
     //edit category
     $('.sf-btn-save').on('click', function () {
         SF.FrmSubmit(_methods.edit, function (that, resp) {
-            console.log(resp);
+            if (resp.code == 200) {
+                return SF._showSucc(resp.msg);
+            }
+            return SF._showFail(resp.msg);
         });
+    });
+    $(document).on('click', '.sf-btn-save-cancel', function () {
+        window.location.href = "/setting/product/category/list";
     });
 
     //del category
@@ -79,5 +85,4 @@ $(function () {
         }
         window.location.href = "/setting/product/category/edit?id=" + id
     });
-
 });

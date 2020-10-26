@@ -11,6 +11,9 @@
                     <h3 class="card-header-title">编辑分类：【<?php echo $data['name']; ?>】</h3>
                 </div>
                 <div class="card-body">
+                    <div class="col-12">
+                        <div class="sf-alert-el"></div>
+                    </div>
                     <div class="col-6">
                         <div class="form-group">
                             <label><em class="sf-required">*</em>分类名称：</label>
@@ -51,12 +54,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12">
+                    <div class="col-6">
                         <div class="form-group">
                             <label><em class="sf-required">*</em>分类描述：</label>
                             <small class="form-text text-muted ml-3">对当前的分类简单描述</small>
                             <div class="input-group input-group-merge ml-3 mb-3">
-                                <textarea class="ml-2" id="editor" name="desc"><?php echo $data['desc']; ?></textarea>
+                                <textarea rows=6 class="form-control" name="desc"><?php echo $data['desc']; ?></textarea>
                             </div>
                         </div>
                     </div>
@@ -78,32 +81,23 @@
                     </div>
                 </div>
             </div>
+            <div class="mb-6"></div>
         </form>
-    </div>
-    <div class="sf-product-push">
-        <div class="sf-product-push-body">
-            <a href="javascript:void(0);" class="sf-btn sf-btn-primary sf-btn-save">保存</a>
-            <a href="javascript:history.go(-1)" class="sf-btn">取消</a>
+        <div class="sf-push-footer mt-4">
+            <div class="sf-push-content">
+                <a href="javascript:void(0);" class="sf-btn sf-btn-primary sf-btn-save">保 存</a>
+                <a href="javascript:void(0);" class="sf-btn sf-btn-save-cancel ml-2">取 消</a>
+            </div>
         </div>
     </div>
 </div>
 
-<script src="/assets/dashkit/js/ckeditor/classic/ckeditor.js"></script>
 <script src="/assets/dashkit/libs/bootstrapvalidator/dist/frm.js"></script>
 <script src="/assets/dashkit/js/category/sf.cascader.js"></script>
-<script src="/assets/dashkit/js/category/sf.category.js"></script>
+<script src="/assets/dashkit/js/category/dist/sf.category.js"></script>
 <script type="text/javascript">
     $(function() {
         $('#sf-category-pid').sFCascader();
     });
-    var EditEditor = null;
-    ClassicEditor
-        .create(document.querySelector('#editor'))
-        .then(editor => {
-            EditEditor = editor;
-        })
-        .catch(error => {
-            console.error(error);
-        });
 </script>
 @endsection

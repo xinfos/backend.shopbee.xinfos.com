@@ -58,11 +58,11 @@ class CategoryService
     public function delete($catId)
     {
         try {
-            $data = [
+            $params = [
                 'cat_id' => (int) $catId,
             ];
-            $apiUrl = $this->appService . 'category/delete';
-            $rst = ClientRequest::post($apiUrl, $data);
+            $apiUrl = $this->appService . '/delete';
+            $rst = ClientRequest::post($apiUrl, $params);
             if (empty($rst['code'])) {
                 return ErrorDef::retErr(ErrorDef::ERR_REMOTE);
             }
@@ -77,7 +77,7 @@ class CategoryService
     public function edit($data)
     {
         try {
-            $apiUrl = $this->appService . 'category/update';
+            $apiUrl = $this->appService . '/update';
             $rst = ClientRequest::post($apiUrl, $data);
             if (empty($rst['code'])) {
                 return ['code' => 201, 'msg' => '请求失败'];
@@ -95,7 +95,7 @@ class CategoryService
             $data = [
                 'cat_id' => (int) $catId,
             ];
-            $apiUrl = $this->appService . 'category/get';
+            $apiUrl = $this->appService . '/get';
             $rst = ClientRequest::post($apiUrl, $data);
             if ($rst['code'] == 200) {
                 return $rst['data'];
@@ -107,15 +107,25 @@ class CategoryService
         }
     }
 
-    public function sub($catId)
+    /**
+     * 获取子分类列表
+     * 
+     * @author Alex Pan <psj474@163.com>
+     * 
+     * @access public
+     * @param int $pid 父级分类ID
+     * 
+     * @return array
+     */
+    public function sub($pid)
     {
         try {
-            $data = [
-                'cat_id' => (int) $catId,
+            $params = [
+                'cat_id' => (int) $pid,
             ];
-            $apiUrl = $this->appService . 'category/sub';
-            $rst = ClientRequest::post($apiUrl, $data);
-            if ($rst['code'] == 200) {
+            $apiUrl = $this->appService . '/sub';
+            $rst = ClientRequest::post($apiUrl, $params);
+            if (!empty($rst['code']) && $rst['code'] == 200) {
                 return $rst['data'];
             }
             return [];
@@ -125,33 +135,30 @@ class CategoryService
         }
     }
 
-    public function getAttrsMaps($catId)
+    /**
+     * 查询分类信息
+     * 
+     * @author Alex Pan <psj474@163.com>
+     * 
+     * @access public
+     * @param int $pid 父级分类ID
+     * 
+     * @return array
+     */
+    public function Query($params)
     {
         try {
-            $data = [
-                'cat_id' => (int) $catId,
+            $apiUrl = $this->appService . '/list';
+            $rst = ClientRequest::post($apiUrl, $params);
+            if (!empty($rst['code']) && $rst['code'] == 200) {
+                return $rst['data'];
+            }
+            return [
+                'list' => [],
+                'current_page_no' => 1,
+                'current_page_size' => 20,
+                'total_count' => 0
             ];
-            $apiUrl = $this->appService . 'category/attrs/get';
-            $rst = ClientRequest::post($apiUrl, $data);
-            if ($rst['code'] == 200) {
-                return $rst['data'];
-            }
-            return [];
-        } catch (Exception $e) {
-            Log::error('Exception Error: ' . $e->getFile() . '] [' . $e->getLine() . '] [' . $e->getMessage() . "]");
-            return ErrorDef::retErr(ErrorDef::ERR_SERVER);
-        }
-    }
-
-    public function Query($data)
-    {
-        try {
-            $apiUrl = $this->appService . 'category/list';
-            $rst = ClientRequest::post($apiUrl, $data);
-            if ($rst['code'] == 200) {
-                return $rst['data'];
-            }
-            return [];
         } catch (Exception $e) {
             Log::error('Exception Error: ' . $e->getFile() . '] [' . $e->getLine() . '] [' . $e->getMessage() . "]");
             return ErrorDef::retErr(ErrorDef::ERR_SERVER);
@@ -162,6 +169,25 @@ class CategoryService
     {
         try {
             $apiUrl = $this->appService . 'category/search';
+            $rst = ClientRequest::post($apiUrl, $data);
+            if ($rst['code'] == 200) {
+                return $rst['data'];
+            }
+            return [];
+        } catch (Exception $e) {
+            Log::error('Exception Error: ' . $e->getFile() . '] [' . $e->getLine() . '] [' . $e->getMessage() . "]");
+            return ErrorDef::retErr(ErrorDef::ERR_SERVER);
+        }
+    }
+
+
+    public function getAttrsMaps($catId)
+    {
+        try {
+            $data = [
+                'cat_id' => (int) $catId,
+            ];
+            $apiUrl = $this->appService . 'category/attrs/get';
             $rst = ClientRequest::post($apiUrl, $data);
             if ($rst['code'] == 200) {
                 return $rst['data'];
