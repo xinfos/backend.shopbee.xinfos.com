@@ -2,22 +2,67 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\Category\CategoryService;
-use App\Services\Attrsgroup\AttrsgroupService;
-
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\View;
+use Exception;
+
+use App\Services\Attrs\AttrsgroupService;
+use App\Services\Category\CategoryService;
+use App\Common\ErrorDef;
+
 
 class AttrsGroupController extends Controller
 {
-    public function lists(Request $request)
-    {
+    public $service = null;
 
-        return view('attrs.group');
+    public function __construct()
+    {
+        $this->service = new AttrsgroupService();
     }
 
+    /**
+     * 渲染创建属性组页面
+     * 
+     * @author Alex Pan <psj474@163.com>
+     * 
+     * @access public
+     * @param int $cat_id 父级分类ID
+     * 
+     * @return
+     */
     public function add(Request $request)
+    {
+        // $catId = $request->input('cat_id');
+        // if ($catId <= 0) {
+        //     throw new Exception('11', 404);
+        //     return redirect('/setting/product/category/select?md=attrsgroupadd');
+        // };
+        // $categoryService = new CategoryService();
+        // $res = $categoryService->get($catId);
+        // // dd($res);
+        // if (empty($res[0]['cat_id']) || $res[0]['cat_id'] != $catId) {
+        //     return redirect('/setting/product/category/select');
+        // }
+        // // dd($res);
+        return view('attrs.groupadd', [
+            // 'category' => $res[0],
+        ]);
+    }
+
+    /**
+     * 创建属性组
+     * 
+     * @author Alex Pan <psj474@163.com>
+     * 
+     * @access public
+     * @param int $pid         父级分类ID
+     * @param string $name     分类名称
+     * 
+     * @return array
+     */
+    public function create(Request $request)
     {
         if ($request->isMethod('post')) {
             try {
@@ -57,21 +102,16 @@ class AttrsGroupController extends Controller
                 return ['code' => 201, 'msg' => $validationException->validator->getMessageBag()->first()];
             }
         }
-        $catId = $request->input('catid');
-        if ($catId <= 0) {
-            return redirect('/setting/product/category/select');
-        }
-        $categoryService = new CategoryService();
-        $res = $categoryService->get($catId);
-        // dd($res);
-        if (empty($res[0]['cat_id']) || $res[0]['cat_id'] != $catId) {
-            return redirect('/setting/product/category/select');
-        }
-        // dd($res);
-        return view('attrs.groupadd', [
-            'category' => $res[0],
-        ]);
     }
+
+
+
+    public function lists(Request $request)
+    {
+        return view('attrs.group');
+    }
+
+
 
     public function edit(Request $request)
     {

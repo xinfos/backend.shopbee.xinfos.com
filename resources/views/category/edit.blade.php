@@ -50,7 +50,7 @@
                             <label><em class="sf-required">*</em>当前父类：</label>
                             <small class="form-text text-muted ml-3">当前品牌主营的商品分类</small>
                             <div class="input-group input-group-merge ml-3 mb-3">
-                                <input type="text" name="pid" class="form-control sf-cascader" readonly="true" id="sf-category-pid" value="<?php echo $data['pid']; ?>">
+                                <input type="text" class="form-control sf-cascader" readonly="true" id="sf-category-pid" value="<?php echo $data['pid']; ?>" sf-data="<?php echo $data['pid']; ?>">
                             </div>
                         </div>
                     </div>

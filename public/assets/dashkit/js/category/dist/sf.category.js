@@ -11,7 +11,7 @@ var _methods = {
         frm: $('#formCreateCategory'),
     },
     edit: {
-        api: "/product/category/edit",
+        api: "/product/category/update",
         rule: [{
             'cat_id,cat_name,pid': 'required',
         }],
@@ -46,20 +46,39 @@ var _methods = {
 $(function () {
     //add category
     $('.sf-btn-add').on('click', function () {
-        SF.FrmSubmit(_methods.add, function (that, resp) {
-            console.log(resp);
+        var formValuesJSON = SF._serializeFormJSON(_methods.add.frm);
+        formValuesJSON['pid'] = $('#sf-category-pid').attr('sf-data');
+        SF.AjaxSubmit(_methods.add, formValuesJSON, function (obj, resp) {
+            if (resp.code == 200) {
+                $('#modalCreateCategory').modal('hide');
+                return SF._showSucc(resp.msg);
+            }
+            return SF._showFail(resp.msg);
         });
     });
 
     //edit category
+    $(document).on('click', '.sf-btn-edit', function () {
+        var id = $(this).parent().parent().children(':first-child').children().attr("data-value");
+        if (id <= 0) {
+            return false
+        }
+        window.location.href = "/setting/product/category/edit?id=" + id
+    });
+
+    //edit category
     $('.sf-btn-save').on('click', function () {
-        SF.FrmSubmit(_methods.edit, function (that, resp) {
+        var formValuesJSON = SF._serializeFormJSON(_methods.edit.frm);
+        formValuesJSON['pid'] =  $('#sf-category-pid').attr('sf-data');
+        SF.AjaxSubmit(_methods.edit, formValuesJSON, function (obj, resp) {
             if (resp.code == 200) {
                 return SF._showSucc(resp.msg);
             }
             return SF._showFail(resp.msg);
         });
     });
+
+    //cancel edit category
     $(document).on('click', '.sf-btn-save-cancel', function () {
         window.location.href = "/setting/product/category/list";
     });
@@ -76,13 +95,5 @@ $(function () {
             }
             return SF._showFail(resp.msg);
         });
-    });
-
-    $(document).on('click', '.sf-btn-edit', function () {
-        var id = $(this).parent().parent().children(':first-child').children().attr("data-value");
-        if (id <= 0) {
-            return false
-        }
-        window.location.href = "/setting/product/category/edit?id=" + id
     });
 });

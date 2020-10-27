@@ -46,7 +46,7 @@ $router->group(['prefix' => '/shop', 'middleware' => 'checkauth'], function () u
     });
 });
 
-$router->group(['prefix' => '/setting/product'], function () use ($router) {
+$router->group(['prefix' => '/setting/product', 'middleware' => 'checkauth'], function () use ($router) {
     //分类
     $router->group(['prefix' => '/category'], function () use ($router) {
         $router->get('list', ['uses' => 'CategoryController@lists']);
@@ -72,8 +72,8 @@ $router->group(['prefix' => '/setting/product'], function () use ($router) {
     //商品属性
     $router->group(['prefix' => '/attrs'], function () use ($router) {
         $router->any('list', ['uses' => 'AttrsController@lists']);
-        $router->any('add', ['uses' => 'AttrsController@create']);
-        $router->any('edit', ['uses' => 'AttrsController@edit']);
+        $router->get('add', ['uses' => 'AttrsController@add']);
+        $router->get('edit', ['uses' => 'AttrsController@edit']);
         $router->any('get', ['uses' => 'AttrsController@get']);
     });
 
@@ -82,6 +82,12 @@ $router->group(['prefix' => '/setting/product'], function () use ($router) {
         $router->any('list', ['uses' => 'AttrsGroupController@lists']);
         $router->any('add', ['uses' => 'AttrsGroupController@add']);
         $router->any('edit', ['uses' => 'AttrsGroupController@edit']);
+    });
+
+    //商品属性模板
+    $router->group(['prefix' => '/attrstemplate'], function () use ($router) {
+        $router->get('list', ['uses' => 'AttrTemplateController@lists']);
+        $router->get('add', ['uses' => 'AttrTemplateController@add']);
     });
 
     //商品属性值
@@ -105,7 +111,7 @@ $router->group(['prefix' => '/product'], function () use ($router) {
         $router->post('add', ['uses' => 'CategoryController@add']);
         $router->post('subadd', ['uses' => 'CategoryController@subadd']);
         $router->post('del', ['uses' => 'CategoryController@delete']);
-        $router->post('edit', ['uses' => 'CategoryController@edit']);
+        $router->post('update', ['uses' => 'CategoryController@update']);
         $router->post('get', ['uses' => 'CategoryController@get']);
         $router->post('sub', ['uses' => 'CategoryController@sub']);
         $router->post('attrs', ['uses' => 'CategoryController@attrs']);
@@ -121,13 +127,15 @@ $router->group(['prefix' => '/product'], function () use ($router) {
         $router->post('edit', ['uses' => 'BrandController@edit']);
         $router->post('get', ['uses' => 'BrandController@get']);
     });
+
     //商品属性
     $router->group(['prefix' => '/attrs'], function () use ($router) {
         $router->any('list', ['uses' => 'AttrsController@lists']);
         $router->any('query', ['uses' => 'AttrsController@query']);
-        $router->any('create', ['uses' => 'AttrsController@create']);
+        $router->post('create', ['uses' => 'AttrsController@create']);
+        $router->post('del', ['uses' => 'AttrsController@delete']);
+        $router->post('update', ['uses' => 'AttrsController@update']);
         $router->any('get', ['uses' => 'AttrsController@get']);
-        $router->post('add', ['uses' => 'AttrsController@add']);
     });
 
     //商品属性组

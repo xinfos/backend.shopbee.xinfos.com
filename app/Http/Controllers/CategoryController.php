@@ -10,8 +10,6 @@ use Exception;
 
 use App\Services\Category\CategoryService;
 use App\Common\ErrorDef;
-use Error;
-use Mockery\CountValidator\Exact;
 
 class CategoryController extends Controller
 {
@@ -23,7 +21,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * @name 创建分类
+     * 创建分类
      * 
      * @author Alex Pan <psj474@163.com>
      * 
@@ -53,19 +51,18 @@ class CategoryController extends Controller
                 'is_parent' => 0,
                 'show_in_nav' => 0,
             ];
-
-            $rules = [
-                'name' => 'required|max:20',
-                'pid' => 'required',
-            ];
-
-            $messages = [
-                'name.required' => '分类名称不能空',
-                'name.max' => '分类名称不能超过20个字符',
-                'pid.required' => '没有选择父级分类',
-            ];
-
-            $validator = Validator::make($input, $rules, $messages);
+            $validator = Validator::make(
+                $input,
+                [
+                    'name' => 'required|max:20',
+                    'pid' => 'required',
+                ],
+                [
+                    'name.required' => '分类名称不能空',
+                    'name.max' => '分类名称不能超过20个字符',
+                    'pid.required' => '没有选择父级分类',
+                ]
+            );
             if ($validator->fails()) {
                 Log::error($validator->errors()->all()[0]);
                 return ErrorDef::retErr(ErrorDef::ERR_PARAM, $validator->errors()->all()[0]);
@@ -141,8 +138,34 @@ class CategoryController extends Controller
     }
 
     /**
+     * @name 渲染编辑分类信息页面
+     * 
+     * @author Alex Pan <psj474@163.com>
+     * 
+     * @access public
+     * @param int $id 分类ID
+     * 
+     * @throws Exception 常规的异常
+     * 
+     * @return array
+     */
+    public function edit(Request $request)
+    {
+        $catId = (int) $request->input('id');
+        if ($catId <= 0) {
+            throw new Exception("抱歉，没有找到对应的分类信息!~", 404);
+        }
+        $data = $this->service->get($catId);
+        if (empty($data)) {
+            throw new Exception("抱歉，没有找到对应的分类信息!~", 404);
+        }
+        return view('category.edit', ['data' => $data]);
+    }
+
+    /**
      * @name 编辑分类信息
      * 
+     * @method POST 
      * @author Alex Pan <psj474@163.com>
      * 
      * @access public
@@ -157,58 +180,41 @@ class CategoryController extends Controller
      * 
      * @return array
      */
-    public function edit(Request $request)
+    public function update(Request $request)
     {
-        if ($request->isMethod('post')) {
-            try {
-                $input = [
-                    'cat_id' => (int) $request->input('cat_id'),
-                    'pid' => (int) $request->input('pid'),
-                    'name' => $request->input('cat_name'),
-                    'alias' => $request->input('alias'),
-                    'desc' => $request->input('desc'),
-                    'show_in_nav' => 0,
-                    'is_show' => 0,
-                    'state' => (int) $request->input('state')
-                ];
+        try {
+            $input = [
+                'cat_id' => (int) $request->input('cat_id'),
+                'pid' => (int) $request->input('pid'),
+                'name' => $request->input('cat_name'),
+                'alias' => $request->input('alias'),
+                'desc' => $request->input('desc'),
+                'show_in_nav' => 0,
+                'is_show' => 0,
+                'state' => (int) $request->input('state')
+            ];
 
-                $rules = [
+            $validator = Validator::make(
+                $input,
+                [
                     'cat_id' => 'required',
                     'name' => 'required|max:20',
-                ];
-
-                $messages = [
+                ],
+                [
                     'cat_id.required' => '分类数据异常',
                     'name.required' => '分类名称不能空',
                     'name.max' => '分类名称不能超过20个字符',
-                ];
-
-                $validator = Validator::make($input, $rules, $messages);
-                if ($validator->fails()) {
-                    return ['code' => 201, 'msg' => $validator->errors()->all()[0]];
-                }
-
-                $categoryService = new CategoryService();
-                $res = $categoryService->edit($input);
-                if ($res['code'] != 200) {
-                    return ['code' => 201, 'msg' => $res['msg']];
-                }
-
-                return ['code' => 200, 'msg' => '更新成功'];
-            } catch (Exception $validationException) {
-                return ['code' => 201, 'msg' => $validationException->validator->getMessageBag()->first()];
+                ]
+            );
+            if ($validator->fails()) {
+                Log::error($validator->errors()->all()[0]);
+                return ErrorDef::retErr(ErrorDef::ERR_PARAM, $validator->errors()->all()[0]);
             }
+            return $this->service->edit($input);
+        } catch (Exception $e) {
+            Log::error('Exception Error: ' . $e->getFile() . '] [' . $e->getLine() . '] [' . $e->getMessage() . "]");
+            return ErrorDef::retErr(ErrorDef::ERR_SERVER);
         }
-
-        $catId = (int) $request->input('id');
-        if ($catId <= 0) {
-            throw new Exception("抱歉，没有找到对应的分类信息!~", 404);
-        }
-        $data = $this->service->get($catId);
-        if (empty($data)) {
-            throw new Exception("抱歉，没有找到对应的分类信息!~", 404);
-        }
-        return view('category.edit', ['data' => $data]);
     }
 
     /**
@@ -219,6 +225,7 @@ class CategoryController extends Controller
      * @access public
      * @param $name string 分类名称
      * 
+     * @throws Exception 常规的异常
      * @return array
      */
     public function lists(Request $request)
@@ -271,44 +278,39 @@ class CategoryController extends Controller
     }
 
     /**
-     * @name 根据分类ID，获取当个分类详情
+     * 根据分类ID，获取当个分类详情
+     * 
      * @author Alex Pan <psj474@163.com>
+     *
+     * @access public
      * @param $cat_id int 分类ID
+     * 
      * @return array
      */
     public function get(Request $request)
     {
-        $catId = (int) $request->input('cat_id');
-        if ($catId <= 0) {
-            return ['code' => 201, 'msg' => '提交参数有错误', 'data' => []];
+        try {
+            $catId = (int) $request->input('cat_id');
+            if ($catId <= 0) {
+                return ['code' => 201, 'msg' => '提交参数有错误', 'data' => []];
+            }
+            return $this->service->get($catId);
+        } catch (Exception $e) {
+            Log::error('Exception Error: ' . $e->getFile() . '] [' . $e->getLine() . '] [' . $e->getMessage() . "]");
+            return ErrorDef::retErr(ErrorDef::ERR_SERVER);
         }
-        $data = (new CategoryService())->get($catId);
-        if (empty($data)) {
-            return ['code' => 201, 'msg' => '没有找到相应的数据', 'data' => []];
-        }
-        return ['code' => 200, 'msg' => '请求成功', 'data' => $data];
     }
 
-
-
-
-    public function attrs(Request $request)
-    {
-        $catId = (int) $request->input('cat_id');
-        if ($catId <= 0) {
-            return ['code' => 201, 'msg' => '提交参数有错误', 'data' => []];
-        }
-        //获取店铺基本信息
-        $categoryService = new CategoryService();
-
-        $item = $categoryService->getAttrsMaps($catId);
-
-        if (empty($item[0])) {
-            return ['code' => 201, 'msg' => '没有找到相应的数据', 'data' => []];
-        }
-        return ['code' => 200, 'msg' => 'suceess', 'data' => $item[0]];
-    }
-
+    /**
+     * 分类选择器
+     * 
+     * @author Alex Pan <psj474@163.com>
+     *
+     * @access public
+     * @param $method int 分类ID
+     * 
+     * @return array
+     */
     public function search(Request $request)
     {
         $input = [
@@ -327,10 +329,36 @@ class CategoryController extends Controller
         return ['code' => 200, 'msg' => 'suceess', 'data' => $item[0]];
     }
 
+    /**
+     * 分类选择器
+     * 
+     * @author Alex Pan <psj474@163.com>
+     *
+     * @access public
+     * @param $method int 分类ID
+     * 
+     * @return array
+     */
     public function select(Request $request)
     {
-        $data['method'] = "attrsgroupadd";
+        $m = trim($request->input('md'));
+        $referSupportMethods = [
+            'attrstemplateadd' => [
+                'title' => '新建属性模板',
+                'redirect_url' => '/setting/product/attrstemplate/add'
+            ],
+            'attrstemplateedit' => [
+                'title' => '编辑属性模板',
+                'redirect_url' => '/setting/product/attrstemplate/edit'
+            ],
+        ];
 
-        return view('category.select', ['data' => $data]);
+        if (empty($referSupportMethods[$m])) {
+            throw new Exception("抱歉，您访问的页面不见了", 404);
+        }
+
+        return view('category.select', [
+            'data' => $referSupportMethods[$m]
+        ]);
     }
 }

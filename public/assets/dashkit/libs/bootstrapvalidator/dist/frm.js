@@ -170,6 +170,11 @@ var SF = {
 			callback: null,
 		}
 	},
+	_displayInputErr: function (inputName, msg) {
+		$('input[name="' + inputName + '"]').addClass('is-invalid');
+		$('.invalid-feedback').remove();
+		$('input[name="' + inputName + '"]').parent().append('<div class="invalid-feedback">' + msg + '</div>');
+	},
 	_displayErr: function (that, msg) {
 		var m = '<div class="invalid-feedback">' + msg + '</div>';
 		var isExists = false;
@@ -284,7 +289,6 @@ var SF = {
 	},
 	FrmSubmit: function (method, callback) {
 		var formValuesJSON = this._serializeFormJSON(method.frm);
-		console.log(formValuesJSON);
 		if (!Validator.make(formValuesJSON, method.rule, method.errmsg)) {
 			return false;
 		}

@@ -5,17 +5,15 @@
 
 <div class="header"></div>
 <div class="container-fluid">
-    <div class="row justify-content-center" style="margin:0px;background-color:#f7f8fa;">
+    <div class="row justify-content-center" style="margin:0px;">
         <div class="col-12" style="padding: 0px;">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-header-title">
+                    <h4 class="card-header-title">
                         <div class="crumbNav">
-                            <a href="demo.html">首页</a>
-                            <font>&gt;</font>发布商品
-                            <font>&gt;</font>选择商品所在分类
+                            <?php echo $data['title']; ?> <font>&gt;</font> 选择分类
                         </div>
-                    </h3>
+                    </h4>
                 </div>
                 <div class="card-body">
                     <div class="col-12 mb-3">
@@ -24,21 +22,7 @@
                                 <input type="text" name="cat_name" class="sf-form-control-sm sf-search-name col-6" value="" placeholder="类目搜索：可输入产品名称">
                                 <a href="javascript:void(0);" class="sf-btn sf-btn-white sf-btn-search ml-3" style="height:38px;line-height:36px;">搜 索</a>
                             </div>
-                            <div class="sf-search-content">
-                                <!-- <ul>
-                                    <li>分1 > 分类2 > 分类2 </li>
-                                    <li>分1 > 分类2 > 分类2 </li>
-                                    <li>分1 > 分类2 > 分类2 </li>
-                                    <li>分1 > 分类2 > 分类2 </li>
-                                    <li>分1 > 分类2 > 分类2 </li>
-                                    <li>分1 > 分类2 > 分类2 </li>
-                                    <li>分1 > 分类2 > 分类2 </li>
-                                    <li>分1 > 分类2 > 分类2 </li>
-                                    <li>分1 > 分类2 > 分类2 </li>
-                                    <li>分1 > 分类2 > 分类2 </li>
-                                    <li>分1 > 分类2 > 分类2 </li>
-                                </ul> -->
-                            </div>
+                            <div class="sf-search-content"></div>
                         </div>
                     </div>
                     <div class="col-12">
@@ -89,10 +73,10 @@
         </div>
     </div>
 </div>
-<script src="/assets/dashkit/js/category/dist/sf.sort.js"></script>
 <script>
     $(function() {
-        _M = '<?php echo !empty($data['method']) ? $data['method'] : 'productadd'; ?>';
+        _M = '<?php echo $data['redirect_url']; ?>';
     });
 </script>
+<script src="/assets/dashkit/js/category/dist/sf.sort.js"></script>
 @endsection

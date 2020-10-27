@@ -61,7 +61,7 @@
                             </a>
                         </div>
                     </div>
-                    
+
                     <div class="tab-pane fade" id="modalActivityUser">
                         <!-- List group -->
                         <div class="list-group list-group-flush list-group-activity my-n3">
@@ -95,7 +95,7 @@
     <div class="container-fluid">
         <div class="dropdown navbar-brand">
             <a href="#" class="navbar-user-link" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img src="/assets/dashkit/images/logo.svg" class="navbar-brand-img mx-auto" alt="...">
+                <img src="/assets/dashkit/images/logo.svg" class="navbar-brand-img" alt="...">
             </a>
             <div class="dropdown-menu dropdown-menu-left dropdown-menu-card" style="margin-top:-13px;">
                 <div class="card-header" style="background-color: #f7f8fa;">
@@ -128,7 +128,7 @@
                                 </div>
                                 <div class="col-auto">
                                     <a href="#!" class="btn btn-sm btn-white">管理账号</a>
-                  
+
                                 </div>
                             </div>
                         </li>

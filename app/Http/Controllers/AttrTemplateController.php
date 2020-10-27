@@ -2,14 +2,54 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\Attrs\AttrTemplateService;
-
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use Exception;
+
+use App\Services\Attrs\AttrTemplateService;
+use App\Services\Category\CategoryService;
+use App\Common\ErrorDef;
 
 class AttrTemplateController extends Controller
 {
+    public $service = null;
+
+    public function __construct()
+    {
+        $this->service = new AttrTemplateService();
+    }
+
+    /**
+     * 渲染新建属性模板页
+     * 
+     * @author Alex Pan <psj474@163.com>
+     *
+     * @access public
+     * 
+     * @return array
+     */
     public function add(Request $request)
+    {
+        $catId = $request->input('cat_id');
+        if ($catId <= 0) {
+            return redirect('/setting/product/category/select?md=attrstemplateadd');
+        };
+
+        $categoryService = new CategoryService();
+        $rst = $categoryService->get($catId);
+        dd($rst);
+        if (empty($res[0]['cat_id']) || $res[0]['cat_id'] != $catId) {
+            return redirect('/setting/product/category/select');
+        }
+        // dd($res);
+        return view('attrstemplate.create', [
+            // 'category' => $res[0],
+        ]);
+    }
+
+    public function create(Request $request)
     {
         try {
             $input = [
@@ -48,5 +88,20 @@ class AttrTemplateController extends Controller
         } catch (\Exception $exception) {
             return ['code' => 201, 'msg' => $exception->getMessage()];
         }
+    }
+
+    /**
+     * 渲染属性模板列表页
+     * 
+     * @author Alex Pan <psj474@163.com>
+     *
+     * @access public
+     * @param $method int 分类ID
+     * 
+     * @return array
+     */
+    public function lists()
+    {
+        return view('attrstemplate.lists', []);
     }
 }

@@ -1,9 +1,6 @@
 var crumbs = [];
 var _M = "";
 var sort = {
-	_method: {
-		attrsgroupadd: "/setting/product/attrsgroup/add",
-	},
 	_api: {
 		list: '/product/category/sub',
 		search: '/product/category/search'
@@ -99,10 +96,10 @@ $('#releaseBtn').on('click', function () {
 			return false;
 		}
 	});
-	if (!sort._method.hasOwnProperty(_M)) {
-		return false;
-	}
-	window.location.href = sort._method[_M] + '?catid=' + catId;
+	var url = _M + "?catid=" + catId;
+	console.log(url);
+	// return false;
+	window.location.href = url;
 });
 
 sort.init();
