@@ -14,6 +14,20 @@
                     </button>
                 </div>
                 <div class="card-body">
+                    <form>
+                        <section class="sf-search">
+                            <div class="sf-form-group-1">
+                                <label class="sf-label">属性名称:</label>
+                                <input class="sf-form-control" name="name" value="<?php echo empty($_GET['name']) ? '' :  $_GET['name']; ?>">
+                            </div>
+                            <div class="sf-form-group-1">
+                                <label class="sf-label">&nbsp;</label>
+                                <button class="sf-btn sf-btn-primary sf-btn-search mr-2" data-type="reload">搜索</button>
+                                <a href="/setting/product/brand/list" class="sf-btn sf-btn-white">重置</a>
+                            </div>
+                        </section>
+                    </form>
+                    <div class="mt-4"></div>
                     <div class="sf-alert-el"></div>
                     <table class="table table-hover table-sm">
                         <thead>
@@ -65,16 +79,19 @@
 </div>
 
 @include('brand.modal.create')
-
+<script src="/assets/dashkit/libs/bootstrapvalidator/dist/frm.js"></script>
 <script type="text/javascript" src="/assets/dashkit/js/brand/sf.brand.js"></script>
 <script type="text/javascript" src="/assets/dashkit/js/page/sf.page.js"></script>
 <script>
+    var dataTotal = <?php echo empty($data['total_count']) ? 0 : $data['total_count']; ?>;
+    var pageAmount = <?php echo empty($data['current_page_size']) ? 1 : $data['current_page_size']; ?>;
+    var pageSize = 10;
     window.onload = function() {
         new Page({
             id: 'pagination',
-            pageTotal: <?php echo ceil($data['total_count'] / $data['current_page_size']); ?>,
-            pageAmount: <?php echo $data['current_page_size']; ?>,
-            dataTotal: <?php echo $data['total_count']; ?>,
+            pageTotal: Math.ceil(dataTotal / pageAmount),
+            pageAmount: pageSize,
+            dataTotal: dataTotal,
             curPage: <?php echo empty($_GET['page']) ? 1 : (int) $_GET['page']; ?>,
             showPageTotalFlag: true,
             showSkipInputFlag: true,

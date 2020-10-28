@@ -204,7 +204,9 @@ class UploadedFile extends File
 
             $target = $this->getTargetFile($directory, $name);
 
-            set_error_handler(function ($type, $msg) use (&$error) { $error = $msg; });
+            set_error_handler(function ($type, $msg) use (&$error) {
+                $error = $msg;
+            });
             $moved = move_uploaded_file($this->getPathname(), $target);
             restore_error_handler();
             if (!$moved) {
@@ -270,13 +272,17 @@ class UploadedFile extends File
         }
 
         switch (substr($size, -1)) {
-            case 't': $max *= 1024;
-            // no break
-            case 'g': $max *= 1024;
-            // no break
-            case 'm': $max *= 1024;
-            // no break
-            case 'k': $max *= 1024;
+            case 't':
+                $max *= 1024;
+                // no break
+            case 'g':
+                $max *= 1024;
+                // no break
+            case 'm':
+                $max *= 1024;
+                // no break
+            case 'k':
+                $max *= 1024;
         }
 
         return $max;

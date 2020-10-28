@@ -156,3 +156,9 @@ $router->group(['prefix' => '/product'], function () use ($router) {
         $router->post('add', ['uses' => 'AttrTemplateController@add']);
     });
 });
+
+//店铺管理
+$router->group(['prefix' => '/attachment', 'middleware' => 'checkauth'], function () use ($router) {
+    $router->post('/upload/image', ['uses' => 'AttachmentController@uploadeImageBase64']);
+    $router->get('/upload', ['uses' => 'AttachmentController@upload']);
+});

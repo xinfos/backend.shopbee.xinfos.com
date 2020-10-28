@@ -12,6 +12,9 @@
 					<h3 class="card-header-title">基础信息</h3>
 				</div>
 				<div class="card-body">
+					<div class="col-12">
+						<div class="sf-alert-el"></div>
+					</div>
 					<div class="col-5">
 						<div class="form-group">
 							<label><em class="sf-required">*</em>属性名称：</label>

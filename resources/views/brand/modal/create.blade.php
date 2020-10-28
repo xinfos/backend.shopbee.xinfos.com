@@ -42,7 +42,7 @@
                                         <div class="col-12 col-md-12">
                                             <div class="form-group">
                                                 <label><em class="sf-required">*</em>品牌全称：</label>
-                                                <input type="text" name="full_name" class="form-control" value="">
+                                                <input type="text" name="brand_name" class="form-control" value="">
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6">
@@ -74,7 +74,7 @@
                                             <div class="form-group">
                                                 <label class="mb-1"><em class="sf-required">*</em>品牌简介</label>
                                                 <small class="form-text text-muted">分类层级关联，默认新建为顶级分类。</small>
-                                                <div id="editor"></div>
+                                                <textarea type="text" name="brand_desc" class="form-control"></textarea>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6">
@@ -94,8 +94,8 @@
                                     </div>
                                     <div class="row mt-6">
                                         <div class="col-12">
-                                            <button type="button" class="sf-btn sf-btn-primary sf-btn-save mr-2">保 存</button>
-                                            <button type="button" class="sf-btn btn-white" data-dismiss="modal" aria-label="Close">取 消</button>
+                                            <button type="button" class="sf-btn sf-btn-primary sf-btn-create">保 存</button>
+                                            <button type="button" class="sf-btn btn-white ml-2" data-dismiss="modal" aria-label="Close">取 消</button>
                                         </div>
                                     </div>
                                 </form>
@@ -107,14 +107,14 @@
         </div>
     </div>
 </div>
-<script src="/assets/dashkit/libs/bootstrapvalidator/dist/frm.js"></script>
-<script src="/assets/dashkit/js/ckeditor/classic/ckeditor.js"></script>
 <script src="/assets/dashkit/libs/cupload/cupload.js"></script>
 <script src="/assets/dashkit/js/category/sf.cascader.js"></script>
 <script>
     $(function() {
         var cuploadCreate = new Cupload({
             ele: '#cupload-create',
+            url: '/attachment/upload/image',
+            maxSize: 1024,
             num: 1,
         });
     });

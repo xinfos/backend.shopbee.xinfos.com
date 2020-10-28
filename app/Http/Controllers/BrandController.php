@@ -31,70 +31,57 @@ class BrandController extends Controller
      * @author Alex Pan <psj474@163.com>
      * 
      * @access public
-     * @param int $pid         父级分类ID
-     * @param string $name     分类名称
-     * @param string $alias    分类别名名称
-     * @param string $desc     分类描述
-     * @param int $is_show     分类是否展示
-     * @param int $state       分类状态
-     * @param int $is_parent   分类是否为父级分类
-     * @param int $show_in_nav 分类是否需要在前台展示
+     * @param string $brand_name  品牌名称
+     * @param string $cn_name     品牌中文名称
+     * @param string $en_name     品牌英文名称
+     * @param string $brand_logo  品牌Logo
+     * @param string $brand_desc  品牌描述
+     * @param int $displayorder   品牌在前台页面的显示顺序
+     * @param int $is_show        品牌是否显示
      * 
      * @return array
      */
-    public function add(Request $request)
+    public function create(Request $request)
     {
         try {
             $input = [
-                'name' => $request->input('cat_name'),
-                'alias' => $request->input('cat_alias'),
-                'desc' => $request->input('cat_desc'),
+                'brand_name' => $request->input('brand_name'),
+                'cn_name' => $request->input('cn_name'),
+                'en_name' => $request->input('en_name'),
+                'brand_logo' => $request->input('brand_logo'),
+                'brand_desc' => $request->input('brand_desc'),
+                'displayorder' => $request->input('displayorder'),
+                'is_show' => $request->input('is_show'),
+
             ];
             $validator = Validator::make(
                 $input,
                 [
-                    'name' => 'required|max:20'
+                    'brand_name,cn_name,en_name' => 'required|max:20',
+                    'brand_logo' => 'required|max:225'
                 ],
                 [
-                    'name.required' => '分类名称不能空',
-                    'name.max' => '分类名称不能超过20个字符',
+                    'brand_name.required' => '品牌名称不能空',
+                    'brand_name.max' => '品牌名称不能超过20个字符',
+                    'cn_name.required' => '品牌中文名称不能空',
+                    'cn_name.max' => '品牌中文名称不能超过20个字符',
+                    'en_name.required' => '品牌英文名称不能空',
+                    'en_name.max' => '品牌英文名称不能超过20个字符',
+                    'brand_logo.required' => '品牌Logo不能空',
+                    'brand_logo.max' => '品牌Logo地址非法',
                 ]
             );
+            dd($input);
             if ($validator->fails()) {
                 Log::error($validator->errors()->all()[0]);
-                return ['code' => 201, 'msg' => $validator->errors()->all()[0]];
+                return ErrorDef::retErr(ErrorDef::ERR_PARAM, $validator->errors()->all()[0]);
             }
             return $this->service->create($input);
         } catch (Exception $e) {
-            Log::error($e->getMessage());
+            Log::error('Exception Error: ' . $e->getFile() . '] [' . $e->getLine() . '] [' . $e->getMessage() . "]");
             return ErrorDef::retErr(ErrorDef::ERR_SERVER);
         }
     }
-
-    /**
-     * @name 获取分类列表
-     */
-    public function lists(Request $request)
-    {
-        $data = [];
-        try {
-            $input = [
-                "page_no" => (int) $request->input('page'),
-                "page_size" => 8,
-            ];
-
-            $brandService = new BrandService();
-            $res = $brandService->lists($input);
-            if ($res['code'] == 200) {
-                $data = $res['data'][0];
-            }
-        } catch (Exception $e) {
-        }
-        // dd($data);
-        return view('brand.lists', ['data' => $data]);
-    }
-
-
 
     public function del(Request $request)
     {
@@ -143,6 +130,35 @@ class BrandController extends Controller
             throw new Exception("没有找到", 404);
         }
         return view('brand.edit', ['data' => $data[0]]);
+    }
+
+    /**
+     * 获取品牌列表
+     * 
+     * @author Alex Pan <psj474@163.com>
+     * 
+     * @access public
+     * @param int $page 页数
+     * @param string $name 品牌名称
+     * 
+     * @return array
+     */
+    public function lists(Request $request)
+    {
+        $data = [];
+        $rst = $this->service->lists(
+            [
+                "page_no" => (int) $request->input('page'),
+                "page_size" => 10,
+            ]
+        );
+        if ($rst['code'] == 200) {
+            $data = $rst['data'];
+        }
+
+        return view('brand.lists', [
+            'data' => $data
+        ]);
     }
 
     public function get(Request $request)
