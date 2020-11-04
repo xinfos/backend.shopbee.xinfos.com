@@ -1,0 +1,129 @@
+.sf-upload-header {
+    margin: 3px;
+    height: 60px;
+    padding: 10px;
+}
+
+.sf-upload-header div {
+    display: inline;
+}
+
+.sf-upload-tab {
+    height: 40px;
+}
+
+.sf-upload-tab i {
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.sf-upload-tab .i-active {
+    color: #0767e8;
+}
+
+.sf-upload-header .sf-upload-search-btn {
+    height: 32px;
+}
+
+.sf-btn-upload {
+    height: 34px;
+    float: right;
+}
+
+.sf-btn-upload:hover {
+    color: #0767e8;
+    border-color: #0767e8;
+}
+
+.sf-upload-header .sf-upload-fresh {
+    padding: 5px;
+}
+
+.sf-upload-fresh {
+    font-size: 12px;
+}
+
+.sf-upload-body {
+    padding: 10px;
+}
+
+.sf-upload-folder {
+    display: inline-block;
+    float: left;
+    width: 240px;
+    height: 500px;
+    padding: 5px;
+}
+
+.sf-upload-folder-list {
+    height: 100%;
+    border: 1px solid #ebebeb;
+}
+
+.sf-upload-folder-list ul {
+    list-style-type: none;
+}
+
+.sf-upload-images {
+    display: inline-block;
+    float: left;
+    width: 709px;
+    height: 500px;
+    padding: 5px;
+}
+
+.sf-upload-attach-list {
+    width: 100%;
+    height: 100%;
+    background-color: azure;
+}
+
+.sf-upload-attach-list .none {
+    text-align: center;
+    height: 100%;
+    background: rgb(249, 249, 249);
+    line-height: 340px;
+}
+
+.sf-upload-folder-list {
+    padding: 4px;
+    line-height: 25px;
+}
+
+.tree-node {
+    cursor: pointer;
+}
+
+.tree-node div {
+    align-items: center;
+    padding: 1px;
+    display: inline-block;
+}
+
+
+.tree-node-active {
+    background-color: #e6f9ff;
+
+}
+
+.tree-node-active .node-icon {
+    content: "\e92e";
+}
+
+.node-icon i {
+    color: inherit;
+    cursor: pointer;
+    position: relative;
+    font-size: inherit;
+    transition: transform 0.3s;
+    transform: rotate(90deg);
+}
+
+.node-folder-name {
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.tree-node-1 {
+    padding-left: 20px;
+}
